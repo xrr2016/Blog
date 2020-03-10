@@ -15,8 +15,8 @@
 	var leon
 	var canvas = document.getElementById('prelude')
 
-	var ANIMATE_TIME = 2 // seconds
-	var THREE_MINUTE = 3 * 60 * 1000
+	var ANIMATE_TIME = 1.5 // seconds
+	var ONE_HOUR = 60 * 60 * 1000
 
 	var sw = window.innerWidth
 	var sh = window.innerHeight
@@ -72,7 +72,7 @@
 		}, ANIMATE_TIME * 1000)
 	}
 
-	if (!animatedTime || Date.now() > parseInt(animatedTime) + THREE_MINUTE) {
+	if (!animatedTime || Date.now() > parseInt(animatedTime) + ONE_HOUR) {
 		init()
 		animate()
 	} else {

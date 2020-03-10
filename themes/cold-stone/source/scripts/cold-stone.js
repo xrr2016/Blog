@@ -138,11 +138,8 @@ if (backTop) {
 
 // toggle theme
 const toggle = document.querySelector('.footer-toggle')
-
 const darkBtn = document.querySelector('.dark-btn')
 const lightBtn = document.querySelector('.light-btn')
-
-
 
 if (localTheme === themes.dark) {
   document.body.classList.add('dark')
