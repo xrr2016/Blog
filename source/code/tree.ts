@@ -1,7 +1,7 @@
-class Node {
+class TreeNode {
   data: number
-  left: Node = null
-  right: Node = null
+  left: TreeNode = null
+  right: TreeNode = null
   count: number = 0
 
   constructor(data: number) {
@@ -9,38 +9,47 @@ class Node {
   }
 
   show() {
-    console.log('Node: ', this.data)
     return this.data
   }
 }
 
 class BST {
-  root: Node = null
+  root: TreeNode = null
   length: number = 0
 
   // 插入节点
   insert(data: number) {
-    const node = new Node(data)
+    // 先创建新的节点
+    const node = new TreeNode(data)
 
     if (this.root === null) {
       this.root = node
+      return;
     } else {
+      let originNode
+      // 将当前节点设为树根节点
       let currentNode = this.root
-      let parentNode
 
+      // 开始循环
       while (true) {
-        parentNode = currentNode
-        console.log('currentNode :', currentNode)
+        // 保存原节点引用
+        originNode = currentNode
+
+        //  如果插入节点的数据小于当前节点的数据
         if (data < currentNode.data) {
+          // 将新当前节点设为原当前节点的左节点
           currentNode = currentNode.left
+          // 如果当前节点的左节点为 `null` ，就将新的节点插入这个位置，退出循环；否则执行下一次循环
           if (currentNode === null) {
-            parentNode.left = node
+            originNode.left = node
             break
           }
         } else {
+          // 将新当前节点设为原当前节点的右节点
           currentNode = currentNode.right
+          // 如果当前节点的右节点为 `null` ，就将新的节点插入这个位置，退出循环；否则执行下一次循环
           if (currentNode === null) {
-            parentNode.right = node
+            originNode.right = node
             break
           }
         }
@@ -49,7 +58,7 @@ class BST {
   }
 
   // 中序遍历
-  inOrder(node: Node) {
+  inOrder(node: TreeNode) {
     if (node !== null) {
       this.inOrder(node.left)
       node.show()
@@ -58,7 +67,7 @@ class BST {
   }
 
   // 先序遍历
-  preOrder(node: Node) {
+  preOrder(node: TreeNode) {
     if (node !== null) {
       node.show()
       this.preOrder(node.left)
@@ -67,7 +76,7 @@ class BST {
   }
 
   // 后序遍历
-  postOrder(node: Node) {
+  postOrder(node: TreeNode) {
     if (node !== null) {
       this.postOrder(node.left)
       this.postOrder(node.right)
@@ -76,7 +85,7 @@ class BST {
   }
 
   // 最小值节点
-  min(node: Node = this.root): Node {
+  min(node: TreeNode = this.root): TreeNode {
     let currentNode = node
     while (currentNode.left !== null) {
       currentNode = currentNode.left
@@ -85,7 +94,7 @@ class BST {
   }
 
   // 最大值节点
-  max(node: Node = this.root): Node {
+  max(node: TreeNode = this.root): TreeNode {
     let currentNode = node
     while (currentNode.right !== null) {
       currentNode = currentNode.right
@@ -114,7 +123,7 @@ class BST {
     this.root = this.removeNode(this.root, data)
   }
 
-  removeNode(node: Node, data: number): Node {
+  removeNode(node: TreeNode, data: number): TreeNode {
     if (node === null) {
       return null
     }
@@ -146,19 +155,26 @@ class BST {
   }
 
   // 更新节点
-  update(data: number) {
+  update(data: number): TreeNode {
     const node = this.find(data)
+    node.data = data
     node.count++
     return node
   }
 }
 
+const random = (num: number) => Math.ceil(Math.random() * num);
 const bst = new BST()
 
-bst.insert(10)
-bst.insert(12)
-bst.insert(56)
-bst.insert(7)
-bst.insert(9)
+for (let index = 0; index < 99; index++) {
+  const num = random(99)
+
+  if (bst.find(num)) {
+    bst.update(num);
+  } else {
+    bst.insert(num)
+  }
+}
 
 bst.inOrder(bst.root)
+
