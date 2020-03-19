@@ -128,6 +128,38 @@ git push --tag
 
 ![var](./images/gitlib-release.jpg)
 
+## 上传
+
+[蒲公英](https://www.pgyer.com/) 平台可以对应用进行内测分发，使用蒲公英提供的上传应用包的接口，将 `CI/CD` 构建出来的应用 `apk` 直接上传，免去手动去网页上上传的麻烦
+
+添加一个 `upload` 任务，依赖于 `build` 任务，向蒲公英的上传接口发送一个请求，`$APK_PATH` 是应用打包出来的路径，定义为一个变量方便使用;
+
+```yml
+stages:
+  - build
+  - release
+  - upload
+......
+upload:
+  stage: upload
+  only:
+    - tags
+  dependencies:
+    - build
+  script:
+    - curl -S "http://www.pgyer.com/apiv2/app/upload" -F "file=@$APK_PATH" -F "_api_key=$PGY_API_KEY"
+    - echo uploaded
+```
+
+`$PGY_API_KEY` 是蒲公英平台的 `API Key`，需要添加到 `CI/CD` 的环境变量中
+
+![api-key](./images/pgy-api-key.png)
+
+在仓库的设置那里添加新的环境变量
+
+![variable](./images/gitlab-pgy-variable.png)
+
+
 
 ## 总结
 
@@ -141,4 +173,6 @@ git push --tag
 [Gitlab Release](https://github.com/inetprocess/gitlab-release)
 
 [Getting started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/README.html)
+
+[使用 Travis CI 实现持续集成 (Android)](https://www.pgyer.com/doc/view/travis_android)
 
