@@ -79,57 +79,62 @@
 		document.body.removeChild(canvas)
 	}
 
+
+
 	const articleTheDay = document.getElementById('article-the-day')
-	const articleTitle = articleTheDay.querySelector('.title')
-	const articleDigest = articleTheDay.querySelector('.digest')
-	const articleContent = articleTheDay.querySelector('.content')
-	const articleTime = articleTheDay.querySelector('.time')
-	const articleAuthor = articleTheDay.querySelector('.author')
-	const articleWordcount = articleTheDay.querySelector('.wordcount')
-	const ARTICLE_API = 'https://interface.meiriyiwen.com/article/random?dev=1'
 
-	function getDayArticle() {
-		fetch(ARTICLE_API).then(function (res) {
-			return res.json()
-		}).then(function (json) {
-			const data = json.data
-			const {
-				wc,
-				title,
-				content,
-				digest,
-				author,
-				date: {
-					curr
-				}
-			} = data
+	if (articleTheDay) {
+		const articleTitle = articleTheDay.querySelector('.title')
+		const articleDigest = articleTheDay.querySelector('.digest')
+		const articleContent = articleTheDay.querySelector('.content')
+		const articleTime = articleTheDay.querySelector('.time')
+		const articleAuthor = articleTheDay.querySelector('.author')
+		const articleWordcount = articleTheDay.querySelector('.wordcount')
+		const ARTICLE_API = 'https://interface.meiriyiwen.com/article/random?dev=1'
 
-			articleTitle.innerText = title
-			articleDigest.innerText = digest
-			articleContent.innerHTML = content
-			articleTime.innerText = curr
-			articleTime.datetime = curr
-			articleAuthor.innerText = author
-			articleWordcount.innerText = wc
-		}).catch(function (err) {
-			console.log(err)
-			articleTheDay.remove()
+		function getDayArticle() {
+			fetch(ARTICLE_API).then(function (res) {
+				return res.json()
+			}).then(function (json) {
+				const data = json.data
+				const {
+					wc,
+					title,
+					content,
+					digest,
+					author,
+					date: {
+						curr
+					}
+				} = data
+
+				articleTitle.innerText = title
+				articleDigest.innerText = digest
+				articleContent.innerHTML = content
+				articleTime.innerText = curr
+				articleTime.datetime = curr
+				articleAuthor.innerText = author
+				articleWordcount.innerText = wc
+			}).catch(function (err) {
+				console.log(err)
+				articleTheDay.remove()
+			})
+		}
+
+		if (Math.random() >= 0.5) {
+			getDayArticle()
+		} else {
+			articleTheDay.classList.add('hide')
+		}
+
+		articleTitle.addEventListener('click', function () {
+			if (articleContent.getAttribute('hidden') === '') {
+				articleDigest.classList.add('hide')
+			} else {
+				articleDigest.classList.remove('hide')
+			}
 		})
 	}
-
-	if (Math.random() >= 0.5) {
-		getDayArticle()
-	} else {
-		articleTheDay.classList.add('hide')
-	}
-
-	articleTitle.addEventListener('click', function () {
-		if (articleContent.getAttribute('hidden') === '') {
-			articleDigest.classList.add('hide')
-		} else {
-			articleDigest.classList.remove('hide')
-		}
-	})
 
 </script>
 <% } %>
