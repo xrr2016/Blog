@@ -1,5 +1,5 @@
 ---
-title: 记录使用 DropdownButton 的问题
+title: 记录两个使用 Flutter 的 DropdownButton 问题
 categories:
   - 技术
 tags:
@@ -8,14 +8,6 @@ date: 2020-03-24 16:08:27
 ---
 
 这几天在使用 `Flutter` 开发应用过程中遇到关于 `DropdownButton` 两个问题，记录一下。
-
-<!--more-->
-
-## 前言
-
-这几天在使用 `Flutter` 开发应用过程中遇到关于 `DropdownButton` 两个问题，记录一下。
-
-## 问题
 
 问题一：在 `showModalBottomSheet` 里面使用 `DropdownButton` 改变选择后界面不变化。
 
@@ -150,4 +142,4 @@ DropdownButton<int>(
 );
 ```
 
-ps：这两个问题卡了我两天吧...😔
+ps：这两个问题卡了我两天😔
