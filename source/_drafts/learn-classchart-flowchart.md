@@ -1,11 +1,11 @@
 ---
-title: 学习绘制类图，流程图
+title: 学习绘制类图和流程图
 categories:
   - 学习
 tags:
   - PlantUML
   - Flowchart
-date: 2020-03-22 16:23:01
+date: 2020-03-26 10:00:00
 ---
 
 学习绘制类图，流程图
@@ -99,8 +99,7 @@ Persion *-- "Food" : eat
 
 ## 流程图
 
-流程图使用 [Flowchart](http://flowchart.js.org/) 绘制，它语法比较简单
-
+流程图使用 [Flowchart](http://flowchart.js.org/) 绘制，语法比较简单
 
 
 ## 参考

@@ -10,8 +10,13 @@ layout: resume
 
 ## 能力清单
 
-- Web，Vue 技术栈
-- Node.js egg.js/nest.js
+- 前端
+  - html/css/scss
+  - Vue 技术栈/组件
+  - Typescript
+- Node.js
+  - command line
+  - egg.js/nest.js
 - Flutter
    - Google play
    - Apple store
