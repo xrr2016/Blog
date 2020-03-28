@@ -27,8 +27,8 @@ layout: layout
             uk-scrollspy="target: > li; cls: uk-animation-slide-top-small;">
             <% page.posts.each(function(post) { %>
             <li class="animate-list__item card card-hover">
-                <a class="index-post-link" href="<%- config.root %><%- post.path %>">
-                    <span><%- post.title %></span>
+                <a class="index-post-link uk-link-reset" href="<%- config.root %><%- post.path %>">
+                    <span class="uk-text-lead"><%- post.title %></span>
                     <p class="index-post-excerpt"><%- post.excerpt %></p>
                 </a>
                 <p class="animate-list__desc">
