@@ -27,14 +27,10 @@ layout: layout
             uk-scrollspy="target: > li; cls: uk-animation-slide-top-small;">
             <% page.posts.each(function(post) { %>
             <li class="animate-list__item card card-hover">
-                <h2 class="animate-list__title">
-                    <a class="index-post-link" href="<%- config.root %><%- post.path %>">
-                        <%- (post.title || "Untitled").replace(/[<>&"]/g,function(c){
-                            return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];
-                        }) %>
-                    </a>
-                </h2>
-                <p class="index-post-excerpt"><%- post.excerpt %></p>
+                <a class="index-post-link" href="<%- config.root %><%- post.path %>">
+                    <span><%- post.title %></span>
+                    <p class="index-post-excerpt"><%- post.excerpt %></p>
+                </a>
                 <p class="animate-list__desc">
                     <span class="post-info">
                         <span><%= __('post.postTime') %>&#58;</span>
@@ -53,7 +49,7 @@ layout: layout
                     </span>
                 </p>
             </li>
-            <% }); _%>
+            <% }); %>
         </ul>
 
         <% if(page.total > 2) { %>
