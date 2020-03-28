@@ -76,12 +76,12 @@ footer This is footer
 
 | 关系  | 意思 | 标记 |
 | :- | :- | :- |
-| Association 关系 | 两个类之间有相互关系 | <code><--</code> |
-| Inheritance 继承 | 子类继承父类 | <code><\|--</code> |
-| Composition 组合 | 两个类之间相互依赖 | <code>*--</code> |
-| Aggregation 聚合 | 一个类属于另一个类 | <code>o--</code> |
-| Implementation 实现 | 一个类实现另一个类的方法 | <code><\|..</code> |
-| Dependency 依赖 | 一个类依赖于另一个类 | <code><..</code> |
+| Association 关系 | 两个类之间有相互关系 | `<--` |
+| Inheritance 继承 | 子类继承父类 | `<\|--` |
+| Composition 组合 | 两个类之间相互依赖 | `*--` |
+| Aggregation 聚合 | 一个类属于另一个类 | `o--` |
+| Implementation 实现 | 一个类实现另一个类的方法 | `<\|..` |
+| Dependency 依赖 | 一个类依赖于另一个类 | `<..` |
 
 ![关系图](https://miro.medium.com/max/1180/1*EUvDMA1vr0DiucONPzK9kA.png)
 
