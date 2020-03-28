@@ -26,7 +26,7 @@ tag_dir: tags
 archive_dir: archives
 category_dir: categories
 music_dir: music
-friends_dir: friends
+# friends_dir: friends
 project_dir: projects
 code_dir: code
 i18n_dir: :lang
@@ -108,7 +108,7 @@ track:
   gaid: UA-119658292-2
 
 # RSS
-rss: true
+# rss: true
 feed:
   type: atom
   path: atom.xml
