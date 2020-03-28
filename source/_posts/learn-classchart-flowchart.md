@@ -72,7 +72,7 @@ footer This is footer
 
 ### 类图
 
-类与类之间有几种不同的关系
+画类图需要了解类与类之间的几种不同的关系
 
 | 关系  | 意思 | 标记 |
 | :- | :- | :- |
@@ -139,11 +139,9 @@ Comment --> Visitor : 游客可以浏览评论
 
 ## Flowchart
 
-流程图使用 [Flowchart](http://flowchart.js.org/) 绘制，语法比较简单
+流程图使用 [Flowchart](http://flowchart.js.org/) 绘制，语法比较简单。
 
-定义流程图元素
-
-`name=>type: content:>url`
+定义一个流程图元素 `name=>type: content:>url`
 
 - name: 元素的名称
 - type：类型，包括如下类别：
@@ -187,8 +185,9 @@ handsome(no)->be
 
 ## 参考
 
-[PlantUML Docs](https://plantuml.com/zh/)
+[PlantUML](https://plantuml.com/zh/)
+
+[Flowchart](https://github.com/adrai/flowchart.js)
 
 [UML Class Diagrams Tutorial, Step by Step](https://medium.com/@smagid_allThings/uml-class-diagrams-tutorial-step-by-step-520fd83b300b)
 
-[Flowchart](https://github.com/adrai/flowchart.js)
