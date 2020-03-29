@@ -3,10 +3,6 @@
 <%- partial('_partial/head') %>
 
 <body>
-  <% if (config.author && is_home()) { %>
-  <%- partial('_partial/prelude', null, {cache: false}) %>
-  <% } %>
-
   <%- partial('_partial/header', null, {cache: false}) %>
 
   <main class="main wrapper"><%- body %></main>

@@ -31,20 +31,20 @@ enum Level {
 ## 能力清单
 
 - 前端
-  - html/css/scss/es6/pwa
-  - Vue 技术栈/Vue 组件/element-ui
-  - Typescript/
+  - html/css/scss/es6/pwa 熟练
+  - Vue 技术栈/Vue 组件/element-ui 熟练
+  - Typescript/ 熟练
 - Node.js
-  - crud
-  - oauth
-  - commandline
-  - egg.js/nest.js
-  - redis/mysql
+  - crud 熟练
+  - oauth 熟练
+  - commandline 入门
+  - egg.js/nest.js 熟练
+  - redis/mysql 入门
 - Flutter
-   - 开发/测试/分发
-   - Google play
-   - Apple store
-   - Plugin
+   - 开发/测试/分发 熟练
+   - Google play 熟练
+   - Apple store 熟练
+   - Plugin 熟练
 - Git, Docker, Adobe XD, SQL, UML, Linux
 - shell
 - gitlab ci/github action
