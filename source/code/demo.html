@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Demo</title>
+
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .parent {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .first {
+      flex: 1;
+      background-color: blue;
+    }
+
+    .second {
+      height: 200px;
+      background-color: yellow;
+    }
+
+    .box {
+      overflow: hidden;
+
+    }
+
+    .item {
+      float: left;
+      height: 100px;
+      width: calc(25% - 10px);
+      margin-right: 10px;
+      box-sizing: border-box;
+      border: 1px solid grey;
+      background-color: bisque;
+    }
+
+    .item:last-of-type {
+      margin-right: 0;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+
+</body>
+
+</html>

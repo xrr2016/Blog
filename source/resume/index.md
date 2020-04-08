@@ -1,10 +1,8 @@
 ---
-title: resume
+title: 个人简历
 date: 2020-03-24 12:33:53
 layout: resume
 ---
-
-## resume
 
 **个人信息**
 
