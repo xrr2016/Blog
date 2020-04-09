@@ -146,7 +146,7 @@ abstract class RenderObject extends AbstractNode with DiagnosticableTreeMixin im
 
 ## 为什么需要三棵树
 
-使用三棵树是为了尽可能的复用 `Element`。
+使用三棵树的目的是尽可能复用 `Element`。
 
 复用 `Element` 对性能非常重要，因为 `Element` 拥有两份关键数据：`Stateful widget` 的状态对象及底层的
 `RenderObject`。
