@@ -6,53 +6,48 @@ layout: resume
 
 **个人信息**
 
-肖然然/27/男/前端工程师
+姓名：肖然然
+年龄：27
+性别：男
+职业：前端工程师
+学历：本科
 
-本科/河北工程大学
+**联系方式**
 
-Phone: 18675621747
-Blog: https://coldstone.fun
-Email: xiaoranran1993@outlook.com
+手机: 18675621747
+邮箱: xiaoranran1993@outlook.com
+博客: https://coldstone.fun
 Github: https://github.com/xrr2016
 
-## 能力分级
+**能力分级**
 
-```ts
-enum Level {
-  入门
-  熟练
-  精通
-  专家
-}
-```
+{% include_code lang:typescript skill.ts %}
 
-## 能力清单
+**能力清单**
 
-- 前端
-  - html/css/scss/es6/pwa 熟练
-  - Vue 技术栈/Vue 组件/element-ui 熟练
-  - Typescript/ 熟练
-- Node.js
-  - crud 熟练
-  - oauth 熟练
-  - commandline 入门
-  - egg.js/nest.js 熟练
-  - redis/mysql 入门
-- Flutter
+1. 前端
+  - html/css/es6/scss/pwa 熟练
+  - Vue 技术栈/写 Vue 组件/Element-ui 熟练
+  - Typescript 熟练
+2. Node.js
+  - 基础的 CRUD 接口 熟练
+  - Egg.js/Nest.js 框架使用 熟练
+  - 数据表设计/规范 入门
+  - Mysql 数据库 入门
+3. Flutter
    - 开发/测试/分发 熟练
-   - Google play 熟练
-   - Apple store 熟练
-   - Plugin 熟练
-- Git, Docker, Adobe XD, SQL, UML, Linux
-- shell
-- gitlab ci/github action
-
-- ls
-- cat
-- ps
-- kill
-- killall
-
+   - 上架 Google play 熟练
+   - 上架 Apple store 熟练
+   - 编写 Dart 插件 熟练
+4. 其他技能
+  - Git 版本控制 熟练
+  - Gitlab ci/cd 配置 熟练
+  - Github action 配置 熟练
+  - Docker 入门
+  - Adobe XD 入门
+  - PlantUML 类图 入门
+  - Flowchart 流程图 入门
+  - Linux 入门
 
 **工作经历**
 滴普科技 2019/5 - 2020/5
