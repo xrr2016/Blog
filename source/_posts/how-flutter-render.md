@@ -7,7 +7,7 @@ tags:
 date: 2020-04-03 12:40:04
 ---
 
-![cover](./images/how-flutter-render/cover.png)
+![cover](./images/how-flutter-render/cover.jpg)
 
 使用 Flutter 开发移动端有一段时间了，总结一下关于 UI 渲染方面的知识。
 了解关于 Flutter 渲染方面的知识还是有必要的，可以帮助你开发更稳定，性能更高的应用。
