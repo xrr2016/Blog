@@ -1,6 +1,74 @@
-enum SkillLevel {
-  入门 = '了解该技术，能够使用该技术的基本功能，解决基本需求',
-  熟练 = '熟悉该技术的各项功能，能够使用该技术解决大部分的业务问题，对该技术有较长的使用时间',
-  精通 = '能够使用该技术实现绝大部分业务需求，知道如何进行改进和优化，有长时间的使用经验',
-  专家 = '对这项技术有全面认识，知道它的优劣势及替代方案，能够贡献代码解决问题或创造优化方案'
+class Skill {
+  Flutter = {
+    level: Level.精通,
+  }
+
+  Frontend = [
+    {
+      skill: "html/css/javascript/scss",
+      level: Level.熟练,
+    },
+    {
+      skill: "Vue.js",
+      level: Level.熟练,
+    },
+    {
+      skill: "Element-ui",
+      level: Level.熟练,
+    },
+    {
+      skill: "Typescript",
+      level: Level.熟练,
+    },
+  ]
+
+  Node = [
+    {
+      skill: "CRUD",
+      level: Level.熟练,
+    },
+    {
+      skill: "Egg.js",
+      level: Level.熟练,
+    },
+    {
+      skill: "Nest.js",
+      level: Level.入门,
+    },
+  ]
+
+  Other = [
+    {
+      skill: "Git",
+      level: Level.熟练,
+    },
+    {
+      skill: "SQL/Mysql",
+      level: Level.入门,
+    },
+    {
+      skill: "Gitlab CI/CD",
+      level: Level.熟练,
+    },
+    {
+      skill: "Github Actions",
+      level: Level.熟练,
+    },
+    {
+      skill: "Docker",
+      level: Level.入门,
+    },
+    {
+      skill: "PlantUML/Flowchart",
+      level: Level.入门,
+    },
+    {
+      skill: "Adobe XD/Sketch",
+      level: Level.入门,
+    },
+    {
+      skill: "Shell",
+      level: Level.入门,
+    },
+  ]
 }
