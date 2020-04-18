@@ -7,18 +7,20 @@ tags:
 date: 2020-04-13 12:07:56
 ---
 
-![cover](./images/flutter-stream/stream-cover.jpg)
+![stream](./images/flutter-stream/stream.png)
 
 <!--more-->
 
 ## 前言
 
-在 Dart 中有两种表示异步操作的概念，`Future` 和 `Stream`，`Future` 用于表示单个异步运算的结果，而 `Stream` 则表示多个异步操作结果的序列。
-举个例子说明，往水杯里面倒水，将一个水杯倒满水为一个为一个 `Future`，连续的将多个水杯倒满水就是 `Stream` 了。
+在 Flutter 中有两种处理异步操作的方式 `Future` 和 `Stream`，`Future` 用于处理单个异步操作，`Stream` 用来处理连续的异步操作。比如往水杯倒水，将一个水杯倒满水为一个 `Future`，连续的将多个水杯倒满水就是 `Stream`。
 
-## [Stream](https://api.flutter-io.cn/flutter/dart-async/Stream-class.html) 详解
+![water-fill](./images/flutter-stream/water-fill.png)
 
-`Stream` 是一个抽象类，用于表示一系列异步数据事件的源。它是一种接受连续事件的方式，数据事件或者错误事件，当 `Stream` 中的事件全部接受完成那么它会发送一个完成事件。
+
+## Stream 详解
+
+`Stream` 是一个抽象类，用于表示一序列异步数据的源。它是一种产生连续事件的方式，可以生成数据事件或者错误事件，以及流结束时的完成事件。
 
 ```dart
 abstract class Stream<T> {
@@ -28,76 +30,158 @@ abstract class Stream<T> {
 
 `Stream` 分单订阅流和广播流。
 
-单订阅流在完成事件之前只允许一个监听器，只有在流上设置监听器后才开始产生事件，并且取消订阅后将停止发送事件，即使取消了第一个订阅，也不允许在单订阅流上收听两次。
+单订阅流在发送完成事件之前只允许设置一个监听器，并且只有在流上设置监听器后才开始产生事件，取消监听器后将停止发送事件。即使取消了第一个监听器，也不允许在单订阅流上设置其他的监听器。广播流则允许设置多个监听器，也可以在取消上一个监听器后再次添加新的监听器。
 
-广播流允许多个监听器，不论是否设置了监听器，广播流都将开始产生事件，同时也可以在取消上一个订阅后再次添加监听器。
+`Stream` 有同步流和异步流之分。
 
-`Stream` 也有同步流和异步流之分
-
-默认创建的 `Stream` 是异步流，它们之间的区别在与
-
-
-## 创建 Stream
-
-在 Dart 中有中创建 `Stream` 的方式，简单的
-
-```dart
-abstract class Stream<T> {
-  ///..
-}
-```
+它们的区别在于同步流会在执行 `add`，`addError` 或 `close` 方法时立即向流的监听器 `StreamSubscription` 发送事件，而异步流总是在事件队列中的代码执行完成后在发送事件。
 
 ## `Stream` 家族
 
 `StreamController`
 
-创建一个 `Stream` 的简单方式，可以理解为带有控制方法的流。`StreamController` 可以在它的流上发送数据，错误和完成事件，也可以检查数据流是否已暂停，是否有监听器。
+带有控制流方法的流。 可以向它的流发送数据，错误和完成事件，也可以检查数据流是否已暂停，是否有监听器。`sync` 参数决定这个流是同步流还是异步流。
 
-`sync` 参数表示这个流是同步流还是异步流
+```dart
+abstract class StreamController<T> implements StreamSink<T> {
+  Stream<T> get stream;
+  /// ...
+}
+
+StreamController _streamController = StreamController(
+  onCancel: () {},
+  onListen: () {},
+  onPause: () {},
+  onResume: () {},
+  sync: false,
+);
+```
+
+`StreamSink`
+
+流事件的入口。提供 `add`，`addError`，`addStream` 方法向流发送事件。
+
+```dart
+abstract class StreamSink<S> implements EventSink<S>, StreamConsumer<S> {
+  Future close();
+  /// ...
+  Future get done;
+}
+```
+
+`StreamSubscription`
+
+流的监听器。提供 `cacenl`、`pause`, `resume` 等方法管理。
+
+```dart
+abstract class StreamSubscription<T> {
+  /// ...
+}
+
+StreamSubscription subscription = StreamController().stream.listen(print);
+subscription.onDone(() => print('done'));
+```
+
+`StreamBuilder`
+
+将流事件渲染到界面的部件。
+
+```dart
+class StreamBuilder<T> extends StreamBuilderBase<T, AsyncSnapshot<T>> {
+  const StreamBuilder({
+    Key key,
+    this.initialData,
+    Stream<T> stream,
+    @required this.builder,
+  }) : assert(builder != null),
+       super(key: key, stream: stream);
+ /// ...
+}
+```
+
+```dart
+StreamBuilder(
+  stream: _stream,
+  initialData: 'loading...',
+  builder: (context, AsyncSnapshot snapshot) {
+    // AsyncSnapshot 对象为数据快照，缓存了当前数据和状态
+    // snapshot.connectionState
+    // snapshot.data
+    if (snapshot.hasData) {
+      Map data = snapshot.data;
+      return Text(data),
+    }
+    return CircularProgressIndicator();
+  },
+)
+```
+
+`StreamController.broadcast()`
+
+广播流
+
+
+## 创建 Stream
+
+在 Dart 有几种方式创建 `Stream`
+
+1. 从现有的生成一个新的流 `Stream`，使用 `map`，`where`，`takeWhile` 等方法。
+
+```dart
+// 整数流
+Stream<int> intStream = StreamController<int>().stream;
+
+// 偶数流
+Stream<int> evenStream = intStream.where((int n) => n.isEven);
+// 两倍流
+Stream<int> doubleStream = intStream.map((int n) => n * 2);
+// 数字大于 10 的流
+Stream<int> biggerStream = intStream.takeWhile((int n) => n > 10);
+```
+
+2. 使用 `async*` 函数。
+
+```dart
+Stream<int> countStream(int to) async* {
+  for (int i = 1; i <= to; i++) {
+    yield i;
+  }
+}
+
+Stream stream = countStream(10);
+stream.listen(print);
+```
+
+3. 使用 `StreamController`。
 
 ```dart
 StreamController<Map> _streamController = StreamController(
-    onCancel: () {},
-    onListen: () {},
-    onPause: () {},
-    onResume: () {},
-  );
+  onCancel: () {},
+  onListen: () {},
+  onPause: () {},
+  onResume: () {},
+  sync: false,
+);
+
+Stream _stream = _streamController.stream;
 ```
 
-/**
- *带有其控制的流的控制器。
- *
- *此控制器允许在以下位置发送数据，错误和已完成事件
- *其[流]。
- *此类可用于创建其他人可以访问的简单流
- *可以监听，并将事件推送到该流。
- *
- *可以检查流是否已暂停以及是否已暂停
- *它是否具有订阅者，以及在有
- *这些变化。
+4. 从 `Future` 生成
 
- StreamSink
+```dart
+Future<int> _delay(int seconds) async {
+  await Future.delayed(Duration(seconds: seconds));
+  return seconds;
+}
 
-/**
- *一个对象，它可以同步和异步地接受流事件。
- *
- *[StreamSink]结合了[StreamConsumer]和[EventSink]中的方法。
- *
- *调用[addStream]时不能使用[EventSink]方法。
- *[addStream]的[Future]一旦完成一个值，
- *[EventSink]方法可以再次使用。
- *
- *如果在任何[EventSink]方法之后调用[addStream]，它将
- *延迟到基础系统消耗完由
- *[EventSink]方法。
- *
- *当使用[EventSink]方法时，[完成] [未来]可用于
- *捕获任何错误。
- *
- *当调用[关闭]时，它将返回[完成] [未来]。
+List<Future> futures = [];
+for (int i = 0; i < 10; i++) {
+  futures.add(_delay(3));
+}
 
+Stream _futuresStream = Stream.fromFutures(futures);
+```
 
-StreamSubscription
 
 ## 应用 Stream
 

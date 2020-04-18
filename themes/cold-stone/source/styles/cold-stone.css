@@ -291,6 +291,11 @@ img::selection {
   text-decoration: none;
 }
 
+.article-content ul,
+.article-content ol {
+  padding-left: 3%;
+}
+
 .article-content ol li,
 .article-content ul li {
   border-radius: 4px;
