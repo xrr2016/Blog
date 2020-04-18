@@ -84,24 +84,13 @@ subscription.onDone(() => print('done'));
 
 `StreamBuilder`
 
-将流事件渲染到界面的部件。
-
-```dart
-class StreamBuilder<T> extends StreamBuilderBase<T, AsyncSnapshot<T>> {
-  const StreamBuilder({
-    Key key,
-    this.initialData,
-    Stream<T> stream,
-    @required this.builder,
-  }) : assert(builder != null),
-       super(key: key, stream: stream);
- /// ...
-}
-```
+使用流数据渲染 UI 界面的部件。
 
 ```dart
 StreamBuilder(
-  stream: _stream,
+  // 数据流
+  stream: stream,
+  // 初始数据
   initialData: 'loading...',
   builder: (context, AsyncSnapshot snapshot) {
     // AsyncSnapshot 对象为数据快照，缓存了当前数据和状态
@@ -116,11 +105,6 @@ StreamBuilder(
 )
 ```
 
-`StreamController.broadcast()`
-
-广播流
-
-
 ## 创建 Stream
 
 在 Dart 有几种方式创建 `Stream`
@@ -130,7 +114,6 @@ StreamBuilder(
 ```dart
 // 整数流
 Stream<int> intStream = StreamController<int>().stream;
-
 // 偶数流
 Stream<int> evenStream = intStream.where((int n) => n.isEven);
 // 两倍流
@@ -166,7 +149,7 @@ StreamController<Map> _streamController = StreamController(
 Stream _stream = _streamController.stream;
 ```
 
-4. 从 `Future` 生成
+4. 使用 `Future` 对象生成
 
 ```dart
 Future<int> _delay(int seconds) async {
@@ -189,15 +172,13 @@ Stream _futuresStream = Stream.fromFutures(futures);
 
 把 Flutter 的默认项目改用 `Stream` 实现
 
+<img src="./images/flutter-stream/stream-counter.gif" width="320" style="width: 320px;">
+
 ```dart
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 class StreamCounter extends StatefulWidget {
-  final String title;
-  StreamCounter({this.title});
-
   @override
   _StreamCounterState createState() => _StreamCounterState();
 }
@@ -250,7 +231,7 @@ class _StreamCounterState extends State<StreamCounter> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Stream Counter'),
       ),
       body: Center(
         child: Column(
@@ -265,14 +246,14 @@ class _StreamCounterState extends State<StreamCounter> {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return Text(
                     'Done',
-                    style: Theme.of(context).textTheme.display1,
+                    style: Theme.of(context).textTheme.bodyText2,
                   );
                 }
 
                 int number = snapshot.data;
                 return Text(
                   '$number',
-                  style: Theme.of(context).textTheme.display1,
+                  style: Theme.of(context).textTheme.bodyText2,
                 );
               },
             ),
@@ -301,9 +282,6 @@ class _StreamCounterState extends State<StreamCounter> {
 
 ```
 
-效果如下
-
-![stream-counter](./images/flutter-stream/stream-counter.gif)
 
 *NetWork Status*
 
@@ -314,9 +292,10 @@ dependencies:
   connectivity: ^0.4.8+2
 ```
 
+<img src="./images/flutter-stream/network-status.gif" width="320" style="width: 320px;">
+
 ```dart
 import 'dart:async';
-
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 
@@ -426,13 +405,211 @@ class ResultText extends StatelessWidget {
 
 ```
 
-效果如下
+`Random Article`
 
+请求网络数据创建流
 
+```yml
+dependencies:
+  dio: ^3.0.9
+  flutter_html: ^0.11.1
+```
 
+<img src="./images/flutter-stream/random-article.gif" width="320" style="width: 320px;">
 
+```dart
+import 'dart:async';
 
-## 结语
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+
+class RandomArticle extends StatefulWidget {
+  @override
+  _RandomArticleState createState() => _RandomArticleState();
+}
+
+class _RandomArticleState extends State<RandomArticle> {
+  static Dio _dio = Dio(
+    BaseOptions(baseUrl: 'https://interface.meiriyiwen.com'),
+  );
+
+  static Future<Map> _getArticle() async {
+    Response response = await _dio.get(
+      '/article/random',
+      queryParameters: {"dev": 1},
+    );
+
+    final data = response.data['data'];
+    return data;
+  }
+
+  Stream<Map> _futuresStream;
+
+  @override
+  void initState() {
+    List<Future<Map>> futures = [];
+    for (int i = 0; i < 10; i++) {
+      // 添加 Future
+      futures.add(_getArticle());
+    }
+
+    // 创建 Stream
+    _futuresStream = Stream<Map>.fromFutures(futures);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Random Article')),
+      body: SingleChildScrollView(
+        child: Center(
+          child: StreamBuilder<Map>(
+            stream: _futuresStream,
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                Map article = snapshot.data;
+
+                return Container(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(height: 24.0),
+                      Text(
+                        article['title'],
+                        style: TextStyle(fontSize: 24.0),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 12.0,
+                          left: 12.0,
+                          right: 12.0,
+                          bottom: 60.0,
+                        ),
+                        child: Html(
+                          data: article['content'],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+              return CircularProgressIndicator();
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+`Broadcast Stream`
+
+使用广播流
+
+<img src="./images/flutter-stream/broadcast-stream.gif" width="320" style="width: 320px;">
+
+```dart
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+
+class BroadcastStream extends StatefulWidget {
+  @override
+  _BroadcastStreamState createState() => _BroadcastStreamState();
+}
+
+class _BroadcastStreamState extends State<BroadcastStream> {
+  StreamController<int> _streamController = StreamController<int>.broadcast();
+  StreamSubscription _subscription1;
+  StreamSubscription _subscription2;
+  StreamSubscription _subscription3;
+
+  int _count = 0;
+  int _s1 = 0;
+  int _s2 = 0;
+  int _s3 = 0;
+
+  @override
+  void initState() {
+    _subscription1 = _streamController.stream.listen((n) {
+      setState(() {
+        _s1 += 1;
+      });
+    });
+
+    _subscription2 = _streamController.stream.listen((n) {
+      setState(() {
+        _s2 += 2;
+      });
+    });
+
+    _subscription3 = _streamController.stream.listen((n) {
+      setState(() {
+        _s3 -= 1;
+      });
+    });
+
+    super.initState();
+  }
+
+  void _add() {
+    if (_count > 10) {
+      // 大于 10 时停止第一个订阅
+      _subscription1.cancel();
+    }
+    _count++;
+    _streamController.add(_count);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _streamController.close();
+    _subscription1.cancel();
+    _subscription2.cancel();
+    _subscription3.cancel();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Broadcast Stream'),
+      ),
+      body: Container(
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Count: $_count'),
+            SizedBox(height: 12.0),
+            Text('S1: $_s1'),
+            SizedBox(height: 12.0),
+            Text('S2: $_s2'),
+            SizedBox(height: 12.0),
+            Text('S3: $_s3'),
+            SizedBox(height: 12.0),
+            FloatingActionButton(
+              onPressed: _add,
+              child: Icon(Icons.plus_one),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+## 总结
+
+`Stream` 是处理异步编程的方式之一，它提供一个了异步的事件序列，并在你准备好接受时发送。在 Dart 中流分为同步流和异步流，以及单订阅流和广播流，有多种方式创建 `Stream`。
 
 ## 参考
 
