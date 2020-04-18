@@ -18,6 +18,9 @@
 	<a class="about-link" target="_blank" rel="noopener"
 		href="https://segmentfault.com/u/<%= config.sns.segmentfault %>/articles">思否</a>
 	<% } %>
+	<% if (config.sns.zhihu) { %>
+	<a class="about-link" target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/<%= config.sns.zhihu %>">知乎</a>
+	<% } %>
 	<% if (config.sns.twitter) { %>
 	<a class="about-link" target="_blank" rel="noopener" href="https://twitter.com/<%= config.sns.twitter %>">Twitter</a>
 	<% } %>
