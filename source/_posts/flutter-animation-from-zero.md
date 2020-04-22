@@ -8,27 +8,86 @@ tags:
 date: 2020-04-20 10:00:00
 ---
 
-本文讲解 Flutter 开发的核心之一动画
-
 <!--more-->
+
 
 ## 前言
 
-Flutter 中有多种类型的动画，合理运用动画能给应用用户带来更好的体验，下文说明这些不同种类的动画以及它们的效果。
-
-## 基本的动画概念
-
-动画可分为两类：
+动画本质是在一定时间内不断变化屏幕上显示内容，一般可分为两类：
 
 1. 补间动画
 
-补间动画是一种定义了物体运动的起点和终点，以及物体的运动方式，运动时间，时间曲线，然后由框架计算出如何从起点过渡到终点的动画。
+补间动画定义了物体运动的起点和终点，物体的运动方式，运动时间，时间曲线，然后计算出如何从起点过渡到终点的动画。
 
-2. 物理动画
+2. 基于物理的动画
 
 基于物理基础的动画是一种模拟现实世界运动的动画，通过建立物理运动模型来实现。例如一个篮球🏀从高处落下，需要根据其下落高度，重力加速度，地面反弹力等影响因素来建立运动模型。
 
 ## Flutter 中的动画
+
+Flutter 中有多种类型的动画，先从一个简单的例子开始，使用 `AnimatedContainer` 控件，设置动画时长 `duration`，然后调用 `setState` 方法改变需要变化的属性，一个动画就创建了。
+
+<img src="./images/flutter-animation-from-zero/animated-container.gif" alt="animated-container" style="width: 240px;" width="240">
+
+代码如下
+
+```dart
+import 'package:flutter/material.dart';
+
+class AnimatedContainerPage extends StatefulWidget {
+  @override
+  _AnimatedContainerPageState createState() => _AnimatedContainerPageState();
+}
+
+class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
+  double size = 100;
+  double raidus = 25;
+  Color color = Colors.yellow;
+
+  void _animate() {
+    setState(() {
+      size = size == 100 ? 200 : 100;
+      raidus = raidus == 25 ? 100 : 25;
+      color = color == Colors.yellow ? Colors.greenAccent : Colors.yellow;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Animated Container')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AnimatedContainer(
+              width: size,
+              height: size,
+              curve: Curves.easeIn,
+              padding: const EdgeInsets.all(20.0),
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(raidus),
+              ),
+              duration: Duration(seconds: 1),
+              child: FlutterLogo(),
+            )
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _animate,
+        child: Icon(Icons.refresh),
+      ),
+    );
+  }
+}
+
+```
+
+这是一个隐式动画，除此之外还有显式动画，Hreo 动画，交织动画。
+
+## 动画基本概念
 
 `Animation`
 
@@ -240,6 +299,8 @@ Future<void> main() async {
 
 ## 显式动画
 
+显式动画是需要定义 `AnimationController` 的动画
+
 ## Hero 动画
 
 Hero 动画指的是同一个部件在页面切换时从旧页面运动到新页面的动画。
@@ -249,16 +310,180 @@ Hero 动画需要使用两个 Hero widgets 来实现：一个用来在原页面�
 
 ## 交织动画
 
-动画被分解成较小的动作，其中一些动作被延迟。这些小动画可以是连续的，也可以部分或完全重叠。
+交织动画是由一系列的小动画组成的，每个小动画之间可以是连续或间断的，也可以相互重叠。其关键点在于使用 `Interval` 部件给每个小动画设置一个时间间隔和取值范围 `Tween`。使用一个 `AnimationController` 控制总体的动画状态。
+
+```dart
+class Interval extends Curve {
+  /// ...
+
+  /// 动画起始点
+  final double begin;
+  /// 动画结束点
+  final double end;
+  /// 动画缓动曲线
+  final Curve curve;
+
+  /// ...
+}
+
+```
+
+一个例子
+
+<img src="./images/flutter-animation-from-zero/staggered-animation.gif" alt="staggered-animation" style="width: 240px;" width="240">
+
+这是一个由 5 个小动画组成的交织动画，宽度，高度，颜色，圆角，边框，每个动画都有自己的动画区间。
+
+![staggered-animation-timeline](./images/flutter-animation-from-zero/staggered-animation-timeline.png)
+
+代码如下
+
+```dart
+import 'package:flutter/material.dart';
+
+class StaggeredAnimationPage extends StatefulWidget {
+  @override
+  _StaggeredAnimationPageState createState() => _StaggeredAnimationPageState();
+}
+
+class _StaggeredAnimationPageState extends State<StaggeredAnimationPage>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+  Animation<double> _width;
+  Animation<double> _height;
+  Animation<Color> _color;
+  Animation<double> _border;
+  Animation<BorderRadius> _borderRadius;
+
+  void _play() {
+    if (_controller.isCompleted) {
+      _controller.reverse();
+    } else {
+      _controller.forward();
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 5),
+    );
+
+    _width = Tween<double>(
+      begin: 100,
+      end: 300,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(
+          0.0,
+          0.2,
+          curve: Curves.ease,
+        ),
+      ),
+    );
+
+    _height = Tween<double>(
+      begin: 100,
+      end: 300,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(
+          0.2,
+          0.4,
+          curve: Curves.ease,
+        ),
+      ),
+    );
+
+    _color = ColorTween(
+      begin: Colors.blue,
+      end: Colors.yellow,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(
+          0.4,
+          0.6,
+          curve: Curves.ease,
+        ),
+      ),
+    );
+
+    _borderRadius = BorderRadiusTween(
+      begin: BorderRadius.circular(0.0),
+      end: BorderRadius.circular(150.0),
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(
+          0.6,
+          0.8,
+          curve: Curves.ease,
+        ),
+      ),
+    );
+
+    _border = Tween<double>(
+      begin: 0,
+      end: 25,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.8, 1.0),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('交织动画')),
+      body: Center(
+        child: AnimatedBuilder(
+          animation: _controller,
+          builder: (BuildContext context, Widget child) {
+            return Container(
+              width: _width.value,
+              height: _height.value,
+              decoration: BoxDecoration(
+                color: _color.value,
+                borderRadius: _borderRadius.value,
+                border: Border.all(
+                  width: _border.value,
+                  color: Colors.orange,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _play,
+        child: Icon(Icons.refresh),
+      ),
+    );
+  }
+}
+
+```
+
+
+
+
 
 ## 物理动画
 
+## 动画原理
+
+Flutter 中的动画系统基于类型化的 Animation 对象。Widgets 既可以通过读取当前值和监听状态变化直接合并动画到 build 函数，也可以作为传递给其他 widgets 的更精细动画的基础。
 
 
-## Simple animations
-
-[simple_animations](https://pub.flutter-io.cn/packages/simple_animations) 是 Flutter 社区里一个优秀的创建动画第三方库，可以简化创建自定义动画操作。
-
+Ticker run every frame
 
 SchedulerBinding 是一个暴露出 Flutter 调度原语的单例类。
 
@@ -274,13 +499,14 @@ Ticker 类挂载在调度器的 scheduleFrameCallback() 的机制上，来达到
 
 因为运行器总是会提供在自它们开始运行以来的持续时间，所以所有运行器都是同步的。如果你在两帧之间的不同时刻启动三个运行器，它们都会被同步到相同的开始时间，并随后同步运行。
 
-## 动画原理
+## 总结一下
 
-Flutter 中的动画系统基于类型化的 Animation 对象。Widgets 既可以通过读取当前值和监听状态变化直接合并动画到 build 函数，也可以作为传递给其他 widgets 的更精细动画的基础。
+Flutter 中的动画有
 
-Ticker run every frame
-
-## 结语
+- 隐式动画
+- 显式动画
+- Hero 动画
+- 交织动画
 
 ## 参考
 
