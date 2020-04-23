@@ -303,14 +303,115 @@ Future<void> main() async {
 
 ## Hero 动画
 
-Hero 动画指的是同一个部件在页面切换时从旧页面运动到新页面的动画。
+Hero 动画指的是在页面切换时一个元素从旧页面运动到新页面的动画。Hero 动画需要使用两个 `Hero` 控件实现：一个用来在旧页面中，另一个在新页面。两个 `Hero` 控件需要使用相同的 `tag` 属性，并且不能与其他`tag`重复。
 
-使用 `Hero` 部件包裹需要运动的部件，在不同页面分别使用两个 hero widgets，同时使用配对的标签来实现动画。
-Hero 动画需要使用两个 Hero widgets 来实现：一个用来在原页面中描述 widget，另一个在目标页面中描述 widget。从用户角度来说，hero 似乎是分享的，只有程序员需要了解实施细节。
+<img src="./images/flutter-animation-from-zero/hero-animation.gif" alt="hero-animation" style="width: 240px;" width="240">
+
+代码如下
+
+```dart
+// 页面 1
+import 'package:flutter/material.dart';
+
+import 'hero_animation_page2.dart';
+
+String cake1 = 'assets/images/cake01.jpg';
+String cake2 = 'assets/images/cake02.jpg';
+
+class HeroAnimationPage1 extends StatelessWidget {
+  GestureDetector buildRowItem(context, String image) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (ctx) {
+            return HeroAnimationPage2(image: image);
+          }),
+        );
+      },
+      child: Container(
+        width: 100,
+        height: 100,
+        child: Hero(
+          tag: image,
+          child: ClipOval(child: Image.asset(image)),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('页面 1')),
+      body: Column(
+        children: <Widget>[
+          SizedBox(height: 40.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              buildRowItem(context, cake1),
+              buildRowItem(context, cake2),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// 页面 2
+import 'package:flutter/material.dart';
+
+class HeroAnimationPage2 extends StatelessWidget {
+  final String image;
+
+  const HeroAnimationPage2({@required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: 400.0,
+            title: Text('页面 2'),
+            backgroundColor: Colors.grey[200],
+            flexibleSpace: FlexibleSpaceBar(
+              collapseMode: CollapseMode.parallax,
+              background: Hero(
+                tag: image,
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(image),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              <Widget>[
+                Container(height: 600.0, color: Colors.grey[200]),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+```
 
 ## 交织动画
 
-交织动画是由一系列的小动画组成的，每个小动画之间可以是连续或间断的，也可以相互重叠。其关键点在于使用 `Interval` 部件给每个小动画设置一个时间间隔和取值范围 `Tween`。使用一个 `AnimationController` 控制总体的动画状态。
+交织动画是由一系列的小动画组成的动画。每个小动画可以是连续或间断的，也可以相互重叠。其关键点在于使用 `Interval` 部件给每个小动画设置一个时间间隔，以及为每个动画的设置一个取值范围 `Tween`。最后使用一个 `AnimationController` 控制总体的动画状态。
+
+`Interval` 继承至 `Curve` 类，通过设置属性 `begin` 和 `end` 来确定
 
 ```dart
 class Interval extends Curve {
