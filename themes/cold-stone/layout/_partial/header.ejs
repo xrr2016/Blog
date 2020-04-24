@@ -10,6 +10,11 @@
       </h1>
 
       <ul class="nav-list">
+        <% if(config.activity_dir) { %>
+        <li class="nav-list-item" data-link="<%= url_for(config.activity_dir) %>/">
+          <a class="nav-list-link" href="<%= url_for(config.activity_dir) %>"><%- __('nav.activity') %></a>
+        </li>
+        <% } %>
         <% if(config.category_dir) { %>
         <li class="nav-list-item" data-link="<%= url_for(config.category_dir) %>/">
           <a class="nav-list-link" href="<%= url_for(config.category_dir) %>"><%- __('nav.categories') %></a>
