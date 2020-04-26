@@ -10,22 +10,19 @@ date: 2020-04-20 10:00:00
 
 <!--more-->
 
-
 ## 前言
 
-动画本质是在一定时间内不断变化屏幕上显示内容，一般可分为两类：
+动画本质是在一段时间内不断改变屏幕上显示的内容，从而让人产生[视觉暂留](https://zh.wikipedia.org/wiki/%E8%A6%96%E8%A6%BA%E6%9A%AB%E7%95%99) 现象。
 
-1. 补间动画
+动画一般可分为两类：
 
-补间动画定义了物体运动的起点和终点，物体的运动方式，运动时间，时间曲线，然后计算出如何从起点过渡到终点的动画。
+**补间动画**：补间动画是一种预先定义物体运动的起点和终点，物体的运动方式，运动时间，时间曲线，然后从起点过渡到终点的动画。
 
-2. 基于物理的动画
-
-基于物理基础的动画是一种模拟现实世界运动的动画，通过建立物理运动模型来实现。例如一个篮球🏀从高处落下，需要根据其下落高度，重力加速度，地面反弹力等影响因素来建立运动模型。
+**基于物理的动画**：基于物理的动画是一种模拟现实世界运动的动画，通过建立运动模型来实现。例如一个篮球🏀从高处落下，需要根据其下落高度，重力加速度，地面反弹力等影响因素来建立运动模型。
 
 ## Flutter 中的动画
 
-Flutter 中有多种类型的动画，先从一个简单的例子开始，使用 `AnimatedContainer` 控件，设置动画时长 `duration`，然后调用 `setState` 方法改变需要变化的属性，一个动画就创建了。
+Flutter 中有多种类型的动画，先从一个简单的例子开始，使用一个 `AnimatedContainer` 控件，然后设置动画时长 `duration`，最后调用 `setState` 方法改变需要动画的属性值，一个动画就创建了。
 
 <img src="./images/flutter-animation-from-zero/animated-container.gif" alt="animated-container" style="width: 240px;" width="240">
 
@@ -40,11 +37,13 @@ class AnimatedContainerPage extends StatefulWidget {
 }
 
 class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
+  // 初始的属性值
   double size = 100;
   double raidus = 25;
   Color color = Colors.yellow;
 
   void _animate() {
+    // 改变属性值
     setState(() {
       size = size == 100 ? 200 : 100;
       raidus = raidus == 25 ? 100 : 25;
@@ -60,6 +59,7 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // 在 AnimatedContainer 上应用属性值
             AnimatedContainer(
               width: size,
               height: size,
@@ -87,215 +87,130 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
 
 这是一个隐式动画，除此之外还有显式动画，Hreo 动画，交织动画。
 
-## 动画基本概念
+## Flutter 动画基本概念
 
 `Animation`
 
-Flutter 中的动画系统基于类型化的 `Animation` 对象，它保存了当前动画的状态（开始、暂停、前进、倒退）和值，但不记录屏幕上显示的内容。UI 部件通过读取 `Animation` 对象的值和监听状态变化运行 `build` 函数，然后渲染到屏幕上，形成动画效果。
+Flutter 中的动画系统基于 `Animation` 对象， 它是一个抽象类，保存了当前动画的值和状态（开始、暂停、前进、倒退），但不记录屏幕上显示的内容。UI 元素通过读取 `Animation` 对象的值和监听状态变化，然后运行 `build` 函数渲染到屏幕上形成动画效果。
 
-一个 `Animation` 对象在一段时间内会持续生成介于两个值之间的值，比较常见的动画类型是  `Animation<double>`，动画还可以插入除 `double` 以外的类型，比如 `Animation<Color>` 或者 `Animation<Size>`。
+一个 `Animation` 对象在一段时间内会持续生成介于两个值之间的值，比较常见的类型是 `Animation<double>`，除 `double` 类型之外还有 `Animation<Color>` 或者 `Animation<Size>` 等。
 
+```dart
+abstract class Animation<T> extends Listenable implements ValueListenable<T> {
+  /// ...
+}
+```
 
 `AnimationController`
 
-通过实例化一个 `controller` 来控制动画的启动，暂停，结束，设定动画运行时间等， `vsync` 参数防止后台动画消耗不必要的资源。
+带有控制方法的 `Animation` 对象，用来控制动画的启动，暂停，结束，设定动画运行时间。
 
 ```dart
-AnimationController controller = AnimationController(duration: const Duration(seconds: 2), vsync: this);
+class AnimationController extends Animation<double>
+  with AnimationEagerListenerMixin, AnimationLocalListenersMixin, AnimationLocalStatusListenersMixin {
+  /// ...
+}
 ```
 
-`CurvedAnimation`
+`Tween`
 
-动画的时间曲线默认是线性的, `CurvedAnimation` 可以将时间曲线定义为非线性曲线。
+用来生成不同类型和范围的动画值。
+
+```dart
+// double 类型
+Tween<double> tween = Tween<double>(begin: -200, end: 200);
+
+// color 类型
+ColorTween colorTween = ColorTween(begin: Colors.blue, end: Colors.yellow);
+
+// border radius 类型
+BorderRadiusTween radiusTween = BorderRadiusTween(
+  begin: BorderRadius.circular(0.0),
+  end: BorderRadius.circular(150.0),
+);
+```
+
+`Curved`
+
+Flutter 动画的默认运动过程是匀速的，线性的, 使用 `CurvedAnimation` 可以将时间曲线定义为非线性曲线。
 
 ```dart
 Animation animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
 ```
 
-`Tween`
+`Ticker`
 
-`Tween` 实例对象提供起始值和结束值， 是提供 evaluate(Animation<double> animation) 方法，将映射函数应用于动画当前值
+`Ticker` 用来添加每次屏幕刷新的回调函数 `TickerCallback`，每次屏幕刷新都会调用。类似于 Web 里面的 `requestAnimationFrame` 方法。
 
 ```dart
-tween = Tween<double>(begin: -200, end: 0);
+class Ticker {
+  /// Creates a ticker that will call the provided callback once per frame while
+  /// running.
+  ///
+  /// An optional label can be provided for debugging purposes. That label
+  /// will appear in the [toString] output in debug builds.
+  Ticker(this._onTick, { this.debugLabel }) {
+    assert(() {
+      _debugCreationStack = StackTrace.current;
+      return true;
+    }());
+  }
+  /// ...
+}
 ```
-
-动画通知
-一个 Animation 对象可以有不止一个 Listener 和 StatusListener，用 addListener() 和 addStatusListener() 来定义。当动画值改变时调用 Listener。Listener 最常用的操作是调用 setState() 进行重建。当一个动画开始，结束，前进或后退时，会调用 StatusListener，用 AnimationStatus 来定义。下一部分有关于 addListener() 方法的示例，在 监控动画过程 中也有 addStatusListener() 的示例。
-
 
 ## 隐式动画
 
-内置隐式动画指的是 Flutter 框架内置的动画部件，通过设置动画的起始值和最终值来触发，如 `PositionTransition`，
+隐式动画使用 Flutter 框架内置的动画部件创建，通过设置动画的起始值和最终值来触发。当使用 `setState` 方法改变部件的动画属性值时，框架会自动计算出一个从旧值过渡到新值的动画。
 
-[Animation and motion widgets](https://flutter.cn/docs/development/ui/widgets/animation)
+比如 `AnimatedOpacity` 部件，改变它的 `opacity` 值就可以触发动画。
 
-使用Flutter的动画库，您可以在UI中为小部件添加动作并创建视觉效果。 库中设置的一个小部件可以为您管理动画。 这些窗口小部件从它们实现的ImplicitlyAnimatedWidget 类派生而来统称为隐式动画或隐式动画小部件。 对于隐式动画，您可以通过设置目标值来设置小部件属性的动画。 每当目标值更改时，小部件就会将属性从旧值设置为新值。 通过这种方式，隐式动画为方便起见而对控件进行了交易-它们管理动画效果，因此您不必这样做。
 
-这些小部件会自动为其属性进行动画更改。当您使用新的属性值（例如StatefulWidget的setState）重建窗口小部件时，该窗口小部件会处理将动画从以前的值驱动到新值的过程。
 
-这些小部件称为隐式动画小部件。当您需要向应用程序中添加动画时，它们通常是您要做的第一件事。它们提供了一种在不增加额外复杂性的情况下添加动画的方法。
-
-AnimatedContainer是一个功能强大的隐式动画小部件，因为它具有许多会影响其外观的属性，并且所有这些属性都会自动插值。
+<img src="./images/flutter-animation-from-zero/opacity-toggle.gif" alt="opacity-toggle" style="width: 240px;" width="240">
 
 ```dart
 import 'package:flutter/material.dart';
 
-const owl_url = 'https://raw.githubusercontent.com/flutter/website/master/src/images/owl.jpg';
-
-class FadeInDemo extends StatefulWidget {
-  _FadeInDemoState createState() => _FadeInDemoState();
-}
-
-class _FadeInDemoState extends State<FadeInDemo> {
-  double opacityLevel = 0.0;
-
+class OpacityChangePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Column(children: <Widget>[
-      Image.network(owl_url),
-      MaterialButton(
-        child: Text(
-          'Show details',
-          style: TextStyle(color: Colors.blueAccent),
-        ),
-        onPressed: () => setState(() {
-          opacityLevel = 1.0;
-        }),
-      ),
-      AnimatedOpacity(
-        duration: Duration(seconds: 3),
-        opacity: opacityLevel,
-        child: Column(
-          children: <Widget>[
-            Text('Type: Owl'),
-            Text('Age: 39'),
-            Text('Employment: None'),
-          ],
-        ),
-      )
-    ]);
-  }
+  _OpacityChangePageState createState() => _OpacityChangePageState();
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: FadeInDemo(),
-        ),
-      ),
-    );
-  }
-}
+class _OpacityChangePageState extends State<OpacityChangePage> {
+  double _opacity = 1.0;
 
-Future<void> main() async {
-  runApp(
-    MyApp(),
-  );
-}
-
-
-```
-
-```dart
-import 'dart:math';
-
-import 'package:flutter/material.dart';
-
-const _duration = Duration(milliseconds: 400);
-
-double randomBorderRadius() {
-  return Random().nextDouble() * 64;
-}
-
-double randomMargin() {
-  return Random().nextDouble() * 64;
-}
-
-Color randomColor() {
-  return Color(0xFFFFFFFF & Random().nextInt(0xFFFFFFFF));
-}
-
-class AnimatedContainerDemo extends StatefulWidget {
-  _AnimatedContainerDemoState createState() => _AnimatedContainerDemoState();
-}
-
-class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
-  Color color;
-  double borderRadius;
-  double margin;
-
-  @override
-  void initState() {
-    super.initState();
-    color = Colors.deepPurple;
-    borderRadius = randomBorderRadius();
-    margin = randomMargin();
-  }
-
-  void change() {
-    setState(() {
-      color = randomColor();
-      borderRadius = randomBorderRadius();
-      margin = randomMargin();
-    });
+  void _toggle() {
+    _opacity = _opacity > 0 ? 0.0 : 1.0;
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('隐式动画')),
       body: Center(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              width: 128,
-              height: 128,
-              child: AnimatedContainer(
-                margin: EdgeInsets.all(margin),
-                decoration: BoxDecoration(
-                  color: color,
-                  borderRadius: BorderRadius.circular(borderRadius),
-                ),
-                duration: _duration,
-              ),
-            ),
-            MaterialButton(
-              color: Theme.of(context).primaryColor,
-              child: Text(
-                'change',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () => change(),
-            ),
-          ],
+        child: AnimatedOpacity(
+          opacity: _opacity,
+          duration: Duration(seconds: 1),
+          child: Container(
+            width: 200,
+            height: 200,
+            color: Colors.blue,
+          ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _toggle,
+        child: Icon(Icons.play_arrow),
       ),
     );
   }
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AnimatedContainerDemo(),
-    );
-  }
-}
-
-Future<void> main() async {
-  runApp(
-    MyApp(),
-  );
-}
-
 ```
 
+除了 `AnimatedOpacity` 外，还有其他的内置隐式动画部件如：`AnimatedContainer`, `AnimatedPadding`, `AnimatedPositioned`, `AnimatedSwitcher`， `AnimatedAlign` 等。
 
 ## 显式动画
 
@@ -578,6 +493,94 @@ class _StaggeredAnimationPageState extends State<StaggeredAnimationPage>
 
 
 ## 物理动画
+
+物理动画是模拟现实世界物体运动的动画。需要建立物体的运动模型，以一个物体下落为例，这个运动受到物体的下落高度，重力加速度，地面的反作用力等因素的影响。
+
+<img src="./images/flutter-animation-from-zero/throw-animation.gif" alt="throw-animation" style="width: 240px;" width="240">
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+
+class ThrowAnimationPage extends StatefulWidget {
+  @override
+  _ThrowAnimationPageState createState() => _ThrowAnimationPageState();
+}
+
+class _ThrowAnimationPageState extends State<ThrowAnimationPage> {
+  // 球心高度
+  double y = 70.0;
+  // Y 轴速度
+  double vy = -10.0;
+  // 重力
+  double gravity = 0.1;
+  // 地面反弹力
+  double bounce = -0.5;
+  // 球的半径
+  double radius = 50.0;
+  // 地面高度
+  final double height = 700;
+
+  // 下落方法
+  void _fall(_) {
+    y += vy;
+    vy += gravity;
+
+    // 如果球体接触到地面，根据地面反弹力改变球体的 Y 轴速度
+    if (y + radius > height) {
+      y = height - radius;
+      vy *= bounce;
+    } else if (y - radius < 0) {
+      y = 0 + radius;
+      vy *= bounce;
+    }
+
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // 使用一个 Ticker 在每次更新界面时运行球体下落方法
+    Ticker(_fall)..start();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      appBar: AppBar(title: Text('物理动画')),
+      body: Column(
+        children: <Widget>[
+          Container(
+            height: height,
+            child: Stack(
+              children: <Widget>[
+                Positioned(
+                  top: y - radius,
+                  left: screenWidth / 2 - radius,
+                  child: Container(
+                    width: radius * 2,
+                    height: radius * 2,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(child: Container(color: Colors.blue)),
+        ],
+      ),
+    );
+  }
+}
+
+```
+
 
 ## 动画原理
 
