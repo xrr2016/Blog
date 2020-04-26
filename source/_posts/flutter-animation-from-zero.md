@@ -12,7 +12,7 @@ date: 2020-04-20 10:00:00
 
 ## 前言
 
-动画本质是在一段时间内不断改变屏幕上显示的内容，从而让人产生[视觉暂留](https://zh.wikipedia.org/wiki/%E8%A6%96%E8%A6%BA%E6%9A%AB%E7%95%99) 现象。
+动画本质是在一段时间内不断改变屏幕上显示的内容，从而让人产生[视觉暂留](https://zh.wikipedia.org/wiki/%E8%A6%96%E8%A6%BA%E6%9A%AB%E7%95%99)现象。
 
 动画一般可分为两类：
 
@@ -91,7 +91,7 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
 
 `Animation`
 
-Flutter 中的动画系统基于 `Animation` 对象， 它是一个抽象类，保存了当前动画的值和状态（开始、暂停、前进、倒退），但不记录屏幕上显示的内容。UI 元素通过读取 `Animation` 对象的值和监听状态变化，然后运行 `build` 函数渲染到屏幕上形成动画效果。
+Flutter 中的动画系统基于 `Animation` 对象， 它是一个抽象类，保存了当前动画的值和状态（开始、暂停、前进、倒退），但不记录屏幕上显示的内容。UI 元素通过读取 `Animation` 对象的值和监听状态变化运行 `build` 函数，然后渲染到屏幕上形成动画效果。
 
 一个 `Animation` 对象在一段时间内会持续生成介于两个值之间的值，比较常见的类型是 `Animation<double>`，除 `double` 类型之外还有 `Animation<Color>` 或者 `Animation<Size>` 等。
 
@@ -103,20 +103,30 @@ abstract class Animation<T> extends Listenable implements ValueListenable<T> {
 
 `AnimationController`
 
-带有控制方法的 `Animation` 对象，用来控制动画的启动，暂停，结束，设定动画运行时间。
+带有控制方法的 `Animation` 对象，用来控制动画的启动，暂停，结束，设定动画运行时间等。
 
 ```dart
 class AnimationController extends Animation<double>
   with AnimationEagerListenerMixin, AnimationLocalListenersMixin, AnimationLocalStatusListenersMixin {
   /// ...
 }
+
+AnimationController controller = AnimationController(
+  vsync: this,
+  duration: Duration(seconds: 10),
+);
 ```
 
 `Tween`
 
-用来生成不同类型和范围的动画值。
+用来生成不同类型和范围的动画取值。
 
 ```dart
+class Tween<T extends dynamic> extends Animatable<T> {
+  Tween({ this.begin, this.end });
+  /// ...
+}
+
 // double 类型
 Tween<double> tween = Tween<double>(begin: -200, end: 200);
 
@@ -132,9 +142,13 @@ BorderRadiusTween radiusTween = BorderRadiusTween(
 
 `Curved`
 
-Flutter 动画的默认运动过程是匀速的，线性的, 使用 `CurvedAnimation` 可以将时间曲线定义为非线性曲线。
+Flutter 动画的默认动画过程是匀速的，使用 `CurvedAnimation` 可以将时间曲线定义为非线性曲线。
 
 ```dart
+class CurvedAnimation extends Animation<double> with AnimationWithParentMixin<double> {
+  /// ...
+}
+
 Animation animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
 ```
 
@@ -144,19 +158,10 @@ Animation animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
 
 ```dart
 class Ticker {
-  /// Creates a ticker that will call the provided callback once per frame while
-  /// running.
-  ///
-  /// An optional label can be provided for debugging purposes. That label
-  /// will appear in the [toString] output in debug builds.
-  Ticker(this._onTick, { this.debugLabel }) {
-    assert(() {
-      _debugCreationStack = StackTrace.current;
-      return true;
-    }());
-  }
   /// ...
 }
+
+Ticker ticker = Ticker(callback);
 ```
 
 ## 隐式动画
@@ -164,8 +169,6 @@ class Ticker {
 隐式动画使用 Flutter 框架内置的动画部件创建，通过设置动画的起始值和最终值来触发。当使用 `setState` 方法改变部件的动画属性值时，框架会自动计算出一个从旧值过渡到新值的动画。
 
 比如 `AnimatedOpacity` 部件，改变它的 `opacity` 值就可以触发动画。
-
-
 
 <img src="./images/flutter-animation-from-zero/opacity-toggle.gif" alt="opacity-toggle" style="width: 240px;" width="240">
 
@@ -180,6 +183,7 @@ class OpacityChangePage extends StatefulWidget {
 class _OpacityChangePageState extends State<OpacityChangePage> {
   double _opacity = 1.0;
 
+  // 改变目标值
   void _toggle() {
     _opacity = _opacity > 0 ? 0.0 : 1.0;
     setState(() {});
@@ -191,6 +195,7 @@ class _OpacityChangePageState extends State<OpacityChangePage> {
       appBar: AppBar(title: Text('隐式动画')),
       body: Center(
         child: AnimatedOpacity(
+          // 传入目标值
           opacity: _opacity,
           duration: Duration(seconds: 1),
           child: Container(
@@ -214,15 +219,93 @@ class _OpacityChangePageState extends State<OpacityChangePage> {
 
 ## 显式动画
 
-显式动画是需要定义 `AnimationController` 的动画
+显式动画指的是需要手动控制动画的开始和结束，指定动画时间，运动曲线，动画取值范围，使用一个`AnimationController` 控制的动画。
+
+<img src="./images/flutter-animation-from-zero/explicit-animation.gif" alt="explicit-animation" style="width: 240px;" width="240">
+
+```dart
+import 'dart:math';
+import 'package:flutter/material.dart';
+
+class RotationAinmationPage extends StatefulWidget {
+  @override
+  _RotationAinmationPageState createState() => _RotationAinmationPageState();
+}
+
+class _RotationAinmationPageState extends State<RotationAinmationPage>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+  Animation<double> _turns;
+  bool _playing = false;
+
+  // 控制动画运行状态
+  void _toggle() {
+    if (_playing) {
+      _playing = false;
+      _controller.stop();
+    } else {
+      _controller.forward()..whenComplete(() => _controller.reverse());
+      _playing = true;
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // 初始化动画控制器，设置动画时间
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 10),
+    );
+
+    // 设置动画取值范围和时间曲线
+    _turns = Tween(begin: 0.0, end: pi * 2).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeIn),
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('显示动画')),
+      body: Center(
+        child: RotationTransition(
+          // 传入动画值
+          turns: _turns,
+          child: Container(
+            width: 200,
+            height: 200,
+            child: Image.asset(
+              'assets/images/fan.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _toggle,
+        child: Icon(_playing ? Icons.pause : Icons.play_arrow),
+      ),
+    );
+  }
+}
+
+```
+
+
 
 ## Hero 动画
 
 Hero 动画指的是在页面切换时一个元素从旧页面运动到新页面的动画。Hero 动画需要使用两个 `Hero` 控件实现：一个用来在旧页面中，另一个在新页面。两个 `Hero` 控件需要使用相同的 `tag` 属性，并且不能与其他`tag`重复。
 
 <img src="./images/flutter-animation-from-zero/hero-animation.gif" alt="hero-animation" style="width: 240px;" width="240">
-
-代码如下
 
 ```dart
 // 页面 1
@@ -237,6 +320,7 @@ class HeroAnimationPage1 extends StatelessWidget {
   GestureDetector buildRowItem(context, String image) {
     return GestureDetector(
       onTap: () {
+        // 跳转到页面 2
         Navigator.of(context).push(
           MaterialPageRoute(builder: (ctx) {
             return HeroAnimationPage2(image: image);
@@ -247,6 +331,7 @@ class HeroAnimationPage1 extends StatelessWidget {
         width: 100,
         height: 100,
         child: Hero(
+          // 设置 Hero 的 tag 属性
           tag: image,
           child: ClipOval(child: Image.asset(image)),
         ),
@@ -294,6 +379,7 @@ class HeroAnimationPage2 extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
               background: Hero(
+                // 使用从页面 1 传入的 tag 值
                 tag: image,
                 child: Container(
                   decoration: BoxDecoration(
@@ -324,9 +410,9 @@ class HeroAnimationPage2 extends StatelessWidget {
 
 ## 交织动画
 
-交织动画是由一系列的小动画组成的动画。每个小动画可以是连续或间断的，也可以相互重叠。其关键点在于使用 `Interval` 部件给每个小动画设置一个时间间隔，以及为每个动画的设置一个取值范围 `Tween`。最后使用一个 `AnimationController` 控制总体的动画状态。
+交织动画是由一系列的小动画组成的动画。每个小动画可以是连续或间断的，也可以相互重叠。其关键点在于使用 `Interval` 部件给每个小动画设置一个时间间隔，以及为每个动画的设置一个取值范围 `Tween`，最后使用一个 `AnimationController` 控制总体的动画状态。
 
-`Interval` 继承至 `Curve` 类，通过设置属性 `begin` 和 `end` 来确定
+`Interval` 继承至 `Curve` 类，通过设置属性 `begin` 和 `end` 来确定这个小动画的运行范围。
 
 ```dart
 class Interval extends Curve {
@@ -344,15 +430,11 @@ class Interval extends Curve {
 
 ```
 
-一个例子
-
 <img src="./images/flutter-animation-from-zero/staggered-animation.gif" alt="staggered-animation" style="width: 240px;" width="240">
 
 这是一个由 5 个小动画组成的交织动画，宽度，高度，颜色，圆角，边框，每个动画都有自己的动画区间。
 
 ![staggered-animation-timeline](./images/flutter-animation-from-zero/staggered-animation-timeline.png)
-
-代码如下
 
 ```dart
 import 'package:flutter/material.dart';
