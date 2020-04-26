@@ -28,6 +28,7 @@ category_dir: categories
 music_dir: music
 # friends_dir: friends
 project_dir: projects
+activity_dir: activity
 code_dir: code
 i18n_dir: :lang
 skip_render:
@@ -102,7 +103,7 @@ sns:
   github: xrr2016
   zhihu: coldstoe
   juejin: 576666b7207703006b1e0f09
-  segmentfault: taqianzhan
+  # segmentfault: taqianzhan
 
 # page stat
 track:
