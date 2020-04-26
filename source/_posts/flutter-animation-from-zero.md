@@ -8,11 +8,13 @@ tags:
 date: 2020-04-20 10:00:00
 ---
 
+![cover](./images/flutter-animation-from-zero/cover.png)
+
 <!--more-->
 
 ## 前言
 
-动画本质是在一段时间内不断改变屏幕上显示的内容，从而让人产生[视觉暂留](https://zh.wikipedia.org/wiki/%E8%A6%96%E8%A6%BA%E6%9A%AB%E7%95%99)现象。
+动画本质是在一段时间内不断改变屏幕上显示的内容，从而产生[视觉暂留](https://zh.wikipedia.org/wiki/%E8%A6%96%E8%A6%BA%E6%9A%AB%E7%95%99)现象。
 
 动画一般可分为两类：
 
@@ -22,7 +24,7 @@ date: 2020-04-20 10:00:00
 
 ## Flutter 中的动画
 
-Flutter 中有多种类型的动画，先从一个简单的例子开始，使用一个 `AnimatedContainer` 控件，然后设置动画时长 `duration`，最后调用 `setState` 方法改变需要动画的属性值，一个动画就创建了。
+Flutter 中有多种类型的动画，先从一个简单的例子开始，使用一个 `AnimatedContainer` 控件，然后设置动画时长 `duration`，最后调用 `setState` 方法改变需要变化的属性值，一个动画就创建了。
 
 <img src="./images/flutter-animation-from-zero/animated-container.gif" alt="animated-container" style="width: 240px;" width="240">
 
@@ -87,7 +89,9 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
 
 这是一个隐式动画，除此之外还有显式动画，Hreo 动画，交织动画。
 
-## Flutter 动画基本概念
+## 基础概念
+
+Flutter 动画是建立在以下的概念之上。
 
 `Animation`
 
@@ -140,7 +144,7 @@ BorderRadiusTween radiusTween = BorderRadiusTween(
 );
 ```
 
-`Curved`
+`Curve`
 
 Flutter 动画的默认动画过程是匀速的，使用 `CurvedAnimation` 可以将时间曲线定义为非线性曲线。
 
@@ -219,7 +223,7 @@ class _OpacityChangePageState extends State<OpacityChangePage> {
 
 ## 显式动画
 
-显式动画指的是需要手动控制动画的开始和结束，指定动画时间，运动曲线，动画取值范围，使用一个`AnimationController` 控制的动画。
+显式动画指的是需要手动设置动画的时间，运动曲线，取值范围的动画。将值传递给动画部件如: `RotationTransition`，最后使用一个`AnimationController` 控制动画的开始和结束。
 
 <img src="./images/flutter-animation-from-zero/explicit-animation.gif" alt="explicit-animation" style="width: 240px;" width="240">
 
@@ -299,7 +303,7 @@ class _RotationAinmationPageState extends State<RotationAinmationPage>
 
 ```
 
-
+除了 `RotationTransition` 外，还有其他的显示动画部件如：`FadeTransition`, `ScaleTransition`, `SizeTransition`, `SlideTransition` 等。
 
 ## Hero 动画
 
@@ -570,13 +574,9 @@ class _StaggeredAnimationPageState extends State<StaggeredAnimationPage>
 
 ```
 
-
-
-
-
 ## 物理动画
 
-物理动画是模拟现实世界物体运动的动画。需要建立物体的运动模型，以一个物体下落为例，这个运动受到物体的下落高度，重力加速度，地面的反作用力等因素的影响。
+物理动画是一种模拟现实世界物体运动的动画。需要建立物体的运动模型，以一个物体下落为例，这个运动受到物体的下落高度，重力加速度，地面的反作用力等因素的影响。
 
 <img src="./images/flutter-animation-from-zero/throw-animation.gif" alt="throw-animation" style="width: 240px;" width="240">
 
@@ -663,39 +663,33 @@ class _ThrowAnimationPageState extends State<ThrowAnimationPage> {
 
 ```
 
+## 总结
 
-## 动画原理
-
-Flutter 中的动画系统基于类型化的 Animation 对象。Widgets 既可以通过读取当前值和监听状态变化直接合并动画到 build 函数，也可以作为传递给其他 widgets 的更精细动画的基础。
-
-
-Ticker run every frame
-
-SchedulerBinding 是一个暴露出 Flutter 调度原语的单例类。
-
-
-在这一节，关键原语是帧回调。每当一帧需要在屏幕上显示时，Flutter 的引擎会触发一个 “开始帧” 回调，调度程序会将其多路传输给所有使用 scheduleFrameCallback() 注册的监听器。所有这些回调不管在任意状态或任意时刻都可以收到这一帧的绝对时间戳。由于所有回调收到时间戳都相同，因此这些回调触发的任何动画看起来都是完全同步的，即使它们需要几毫秒才能执行。
-
-运行器
-Ticker 类挂载在调度器的 scheduleFrameCallback() 的机制上，来达到每次运行都会触发回调的效果。
-
-一个 Ticker 可以被启动和停止. 启动时，它会返回一个 Future，这个 Future 在 Ticker 停止时会被改为完成状态。
-
-每次运行, Ticker 都会为回调函数提供从 Ticker 开始运行到现在的持续时间。
-
-因为运行器总是会提供在自它们开始运行以来的持续时间，所以所有运行器都是同步的。如果你在两帧之间的不同时刻启动三个运行器，它们都会被同步到相同的开始时间，并随后同步运行。
-
-## 总结一下
-
-Flutter 中的动画有
+本文介绍了 Flutter 中多种类型的动画，分别是
 
 - 隐式动画
 - 显式动画
 - Hero 动画
 - 交织动画
+- 基于物理的动画
+
+一个动画的主要因素有
+
+- `Animation` 动画对象
+- `AnimationController` 动画控制器
+- `Tween`     动画取值范围
+- `Curve`     动画运动曲线
+
+Flutter 动画基于类型化的 `Animation` 对象，`Widgets` 通过读取动画对象的当前值和监听状态变化重新运行 `build` 函数，不断变化 UI 形成动画效果。
 
 ## 参考
 
+[Flutter animation basics with implicit animations](https://medium.com/flutter/flutter-animation-basics-with-implicit-animations-95db481c5916)
+
+[Directional animations with built-in explicit animations](https://medium.com/flutter/directional-animations-with-built-in-explicit-animations-3e7c5e6fbbd7)
+
 [动画效果介绍](https://flutter.cn/docs/development/ui/animations)
+
+[Flutter动画简介](https://book.flutterchina.club/chapter9/intro.html)
 
 [在 Flutter 应用里实现动画效果](https://flutter.cn/docs/development/ui/animations/tutorial)
