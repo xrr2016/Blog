@@ -5,7 +5,7 @@ categories:
 tags:
   - Flutter
   - Animation
-date: 2020-04-20 10:00:00
+date: 2020-04-26 20:00:00
 ---
 
 ![cover](./images/flutter-animation-from-zero/cover.png)
