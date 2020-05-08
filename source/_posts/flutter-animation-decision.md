@@ -26,4 +26,7 @@ Flutter 团队推出了一个关于 [如何在 Flutter 中选择合适的动画 
 ![animation-decision-tree-zh](./images/flutter-animation-decision/animation-decision-tree-zh.png)
 
 
+## 参考
 
+[How to Choose Which Flutter Animation Widget is Right for You?
+](https://medium.com/flutter/how-to-choose-which-flutter-animation-widget-is-right-for-you-79ecfb7e72b5)
