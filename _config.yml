@@ -4,10 +4,9 @@
 
 # Site
 title: 冷石
-subtitle: 孑然一身，傲立于世
-description: 冷石的博客偶尔更新
+description: Keep calm and carry on! ❤️小玲
 keywords: "冷石, 前端, 面试，Web, Js, CSS, Node.js, Frontend, Flutter, Docker, Dart, Mysql, Egg.js"
-author: Cold Stone
+author: ColdStone
 language: zh
 timezone: Asia/Shanghai
 
@@ -123,4 +122,4 @@ feed:
   icon: avatar.png
   autodiscovery: true
 
-all_minifier: true
+all_minifier: false
