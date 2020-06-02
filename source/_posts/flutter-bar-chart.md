@@ -13,9 +13,11 @@ date: 2020-05-31 22:00:00
 
 ## 前言
 
-本将讲解如何使用 [Flutter](https://flutter.dev/) （Google 开源的 UI 工具包，帮助开发者通过一套代码库高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台。） 绘制一个带有动画效果的柱状图表，最终效果如下图。要绘制这样的图表普通的 Widget 比较难以实现，这时就需要 `CustomPaint` 和 `CustomPainter` 出场了，它们类似于 Web 里面的 `canvas` 元素，`CustomPaint` 也提供了一个绘制区域，而 `CustomPainter` 提供了具体绘制的方法。
+本将讲解如何使用 [Flutter](https://flutter.dev/) （Google 开源的 UI 工具包，帮助开发者通过一套代码库高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台。） 绘制一个带有动画效果的柱状图表，最终效果如下图。
 
 <img src="./images/flutter-bar-chart/bar-chart.gif" width="568" style="width: 240px;">
+
+要绘制这样的图表普通的 Widget 比较难以实现，这时就需要 `CustomPaint` 和 `CustomPainter` 出场了，它们类似于 Web 里面的 `canvas` 元素，`CustomPaint` 也提供了一个绘制区域，而 `CustomPainter` 提供了具体绘制的方法。
 
 ## CustomPaint 和 CustomPainter
 
