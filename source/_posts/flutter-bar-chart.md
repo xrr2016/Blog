@@ -423,7 +423,15 @@ class _BarChartState extends State<BarChart> with TickerProviderStateMixin {
 
 ```
 
-至此整个柱状图的绘制就完成了 🎉🎉🎉
+至此整个柱状图的绘制就完成了，传入数据即可使用 🎉🎉🎉
+
+```dart
+BarChart(
+  data: [180.0, 98.0, 126.0, 64.0, 118.0],
+  xAxis: ['一月', '二月', '三月', '四月', '五月'],
+);
+```
+
 完整代码地址：[bar_chart.dart](https://github.com/xrr2016/flutter-charts/blob/master/lib/charts/bar_chart.dart)
 
 ## 总结
