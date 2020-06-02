@@ -122,4 +122,4 @@ feed:
   icon: avatar.png
   autodiscovery: true
 
-all_minifier: false
+all_minifier: true
