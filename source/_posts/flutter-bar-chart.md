@@ -13,15 +13,15 @@ date: 2020-05-31 22:00:00
 
 ## 前言
 
-本将讲解如何使用 [Flutter](https://flutter.dev/) （Google 开源的 UI 工具包，帮助开发者通过一套代码库高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台。） 绘制一个带有动画效果的柱状图表，最终效果如下图。
+本将讲解如何使用 [Flutter](https://flutter.dev/) （Google 开源的 UI 工具包，帮助开发者通过一套代码库高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台） 绘制一个带有动画效果的柱状图表，最终效果如下图。
 
 <img src="./images/flutter-bar-chart/bar-chart.gif" width="568" style="width: 240px;">
 
-要绘制这样的图表普通的 Widget 比较难以实现，这时就需要 `CustomPaint` 和 `CustomPainter` 出场了，它们类似于 Web 里面的 `canvas` 元素，`CustomPaint` 也提供了一个绘制区域，而 `CustomPainter` 提供了具体绘制的方法。
+要绘制这样的图表普通的 Widget 难以实现，这时就需要 `CustomPaint` 和 `CustomPainter` 出场了，它们类似于 Web 里面的 `<canvas>` 元素，`CustomPaint` 提供了一个绘制区域，而 `CustomPainter` 拥有具体的绘制方法。
 
 ## CustomPaint 和 CustomPainter
 
-`CustomPaint` 是用来提供画布的控件，它使用一个传入画笔 `painter` 绘制图形于 `child` 控件之后，`foregroundPainter` 画笔绘制在 `child` 控件之前。`size` 属性控制画布的大小，假入传入子控件 `child`，那么画布的大小将由子控件的大小决定，`size` 属性被忽略。
+`CustomPaint` 是用来提供画布的控件，它使用传入画笔 `painter` 在 `child` 控件后面绘制图形, ，`foregroundPainter` 画笔绘制在 `child` 控件之前。`size` 属性控制画布的大小，假如定义了子控件 `child`，那么画布的大小将由子控件的大小决定，`size` 属性被忽略。
 
 ```dart
 class CustomPaint extends SingleChildRenderObjectWidget {
@@ -37,7 +37,7 @@ class CustomPaint extends SingleChildRenderObjectWidget {
 }
 ```
 
-`CustomPainter` 是一个抽象类，是实现绘制图形的控件，要在画布上绘制图形需要实现它的 `paint` 方法，`paint` 方法有两个参数，`Canvas canvas` 和 `Size size`。`Size` 对象表示画布的尺寸，`Canvas` 对象上是具体的绘制图形的方法。
+`CustomPainter` 是一个抽象类，是实现绘制图形的控件，要在画布上绘制图形需要实现它的 `paint` 方法。`paint` 方法有两个参数，`Canvas canvas` 和 `Size size`。`Size` 对象表示画布的尺寸，`Canvas` 对象上是具体的绘制图形的方法。
 
 ```dart
 abstract class CustomPainter extends Listenable {
@@ -47,7 +47,7 @@ abstract class CustomPainter extends Listenable {
 }
 ```
 
-`Canvas canvas` 主要绘制图形的方法有
+`Canvas canvas` 对象主要的绘制图形方法有
 
 | 方法名 | 参数 | 效果 |
 | :-- | :-- | :-- |
@@ -63,7 +63,7 @@ abstract class CustomPainter extends Listenable {
 | `drawImage` | `Image image`, `Offset p`, `Paint paint` | 绘制图像 |
 | `drawPoints` | `PointMode pointMode`, `List<Offset> points`, `Paint paint` | 绘制多个点 |
 
-要将图形绘制到画布上需要先创建一个继承 `CustomPainter` 的自定义画笔，例如绘制一个矩形需要实现一个绘制矩形的画笔 `RectanglePainter`，然后在画布 `CustomPaint` 上应用。
+要将图形绘制到画布上需要先创建一个继承至 `CustomPainter` 的自定义画笔，例如绘制一个矩形需要实现一个绘制矩形的画笔 `RectanglePainter`，然后在画布 `CustomPaint` 上应用它。
 
 ```dart
 class RectanglePainter extends CustomPainter {
@@ -115,7 +115,7 @@ class Rectangle extends StatelessWidget {
 
 ## 绘制柱状图表
 
-介绍完毕，下面开始绘制柱状图表，第一步创建 `BarChart` 控件代表柱状图，它有两个构造参数一个是 `data` 用来接收图表数据和 `xAxis` 表示图表横坐标。
+介绍完毕，下面开始绘制柱状图表，第一步创建 `BarChart` 控件代表柱状图，它有两个构造参数一个是 `data` 用来接收图表数据，以及 `xAxis` 表示图表横轴标识。
 
 ```dart
 class BarChart extends StatefulWidget {
@@ -150,7 +150,7 @@ class _BarChartState extends State<BarChart> with TickerProviderStateMixin {
 }
 ```
 
-然后创建一个用来绘制的 `BarChartPainter()`。
+然后创建一个用来绘制的自定义画笔 `BarChartPainter`。
 
 ```dart
 class BarChartPainter extends CustomPainter {
@@ -273,7 +273,7 @@ void paint(Canvas canvas, Size size) {
 
 ### 绘制数据矩形
 
-定义一个 `_darwBars` 方法将具体矩形和横轴标识绘制出来。
+然后定义一个 `_darwBars` 方法将具体矩形和横轴标识绘制出来。
 
 ```dart
 List<Color> colors = [
@@ -423,7 +423,7 @@ class _BarChartState extends State<BarChart> with TickerProviderStateMixin {
 
 ```
 
-至此就完成了整个柱状图的绘制 🎉🎉🎉
+至此整个柱状图的绘制就完成了 🎉🎉🎉
 完整代码地址：[bar_chart.dart](https://github.com/xrr2016/flutter-charts/blob/master/lib/charts/bar_chart.dart)
 
 ## 总结
