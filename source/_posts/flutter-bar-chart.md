@@ -15,7 +15,7 @@ date: 2020-05-31 22:00:00
 
 本文讲解如何使用 [Flutter](https://flutter.dev/) （Google 开源的 UI 工具包，帮助开发者通过一套代码库高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台） 绘制一个带有动画效果的柱状图表，最终效果如下图。
 
-<img src="./images/flutter-bar-chart/bar-chart.gif" width="568" style="width: 240px;">
+<img src="./images/flutter-bar-chart/bar-chart.gif" width="568" style="width: 250px;">
 
 要绘制这样的图表普通的 Widget 难以实现，这时就需要 `CustomPaint` 和 `CustomPainter` 出场了，它们类似于 Web 里面的 `<canvas>` 元素，`CustomPaint` 提供了一个绘制区域，而 `CustomPainter` 拥有具体的绘制方法。
 
@@ -111,7 +111,7 @@ class Rectangle extends StatelessWidget {
 
 效果如图
 
-<img src="./images/flutter-bar-chart/rect.png" width="520" style="width: 240px;">
+<img src="./images/flutter-bar-chart/rect.png" width="520" style="width: 250px;">
 
 ## 绘制柱状图表
 
@@ -209,7 +209,7 @@ void paint(Canvas canvas, Size size) {
 
 效果如下
 
-<img src="./images/flutter-bar-chart/chart-axis.png" width="508" style="width: 240px;" alt="chart-axis">
+<img src="./images/flutter-bar-chart/chart-axis.png" width="508" style="width: 250px;" alt="chart-axis">
 
 ### 绘制标识
 
@@ -269,7 +269,7 @@ void paint(Canvas canvas, Size size) {
 
 效果如下
 
-<img src="./images/flutter-bar-chart/chart-yaxis.png" width="520" style="width: 240px;" alt="chart-yaxis">
+<img src="./images/flutter-bar-chart/chart-yaxis.png" width="520" style="width: 250px;" alt="chart-yaxis">
 
 ### 绘制数据矩形
 
@@ -357,7 +357,7 @@ void paint(Canvas canvas, Size size) {
 
 效果如下
 
-<img src="./images/flutter-bar-chart/chart-data.png" width="520" style="width: 240px;" alt="chart-data">
+<img src="./images/flutter-bar-chart/chart-data.png" width="520" style="width: 250px;" alt="chart-data">
 
 ### 添加运动动画
 
