@@ -17,14 +17,9 @@ date: 2020-06-09 14:08:00
 
 <img src="./images/flutter-pie-chart/pie.gif" width="524" style="width: 260px">
 
-```dart
-PieChart(
-  datas: [60.0, 50.0, 40.0, 30.0, 90.0],
-  legends: ['一月', '二月', '三月', '四月', '五月'],
-);
-```
+[在线查看](https://dartpad.dartlang.org/b8a2b88647fa75df5d31445a93cb390f)
 
-## 定义 PieChart 类和 PiePart 类
+## 定义 PieChart & PiePart
 
 第一步定义 `PieChart` 和 `PiePart` 类。`PieChart` 是整个饼状图控件，有 `datas` 和 `legends` 两个属性，表示饼图的数据和每部分的标识。`PiePart` 是表示饼图的一部分，有 `color`, `startAngle`, `sweepAngle` 三个属性，分别表示颜色，起始弧度值，占据的弧度值。`PeiChartPainter` 类实现了具体的绘制方法。
 
@@ -322,17 +317,139 @@ void paint(Canvas canvas, Size size) {
 
 <img src="./images/flutter-pie-chart/part.png" width="520" style="width: 260px">
 
-
 ## 添加动画
 
+最后给饼图添加一个数据不断增长的动画效果，在 `_PieChartState` 添加动画的控制器 `_controller` 和保存动画数据的 `_animateDatas` 数组。在 `initState` 中初始化动画控制器和填充 `_animateDatas` 数组。然后创建两个 `double` 类型的补间动画，将动画值传给 `PeiChartPainter` 使用即可。
+
+```dart
+class _PieChartState extends State<PieChart> with TickerProviderStateMixin {
+  double _total = 0.0;
+  AnimationController _controller;
+  List<double> _animateDatas = [];
+  final List<PiePart> _parts = <PiePart>[];
+
+  @override
+  void initState() {
+    super.initState();
+    // 初始化动画控制器
+    _controller = AnimationController(
+      duration: Duration(milliseconds: 3000),
+      vsync: this,
+    );
+
+    List<double> datas = widget.datas;
+    // 计算出数据总和
+    _total = datas.reduce((a, b) => a + b);
+    // 设置一个起始变量
+    double startAngle = 0.0;
+
+    for (int i = 0; i < datas.length; i++) {
+      // 填充动画数组
+      _animateDatas.add(0.0);
+      final data = datas[i];
+      // 计算出每个数据所占的弧度值
+      final angle = (data / _total) * -math.pi * 2;
+      PiePart peiPart;
+
+      if (i > 0) {
+        // 下一个数据的起始弧度值等于之前的弧度值相加
+        double lastSweepAngle = _parts[i - 1].sweepAngle;
+        startAngle += lastSweepAngle;
+        peiPart = PiePart(startAngle, angle, colors[i]);
+      } else {
+        // 第一个数据的起始弧度为 0.0
+        peiPart = PiePart(0.0, angle, colors[i]);
+      }
+      // 添加到数组中
+      _parts.add(peiPart);
+
+      CurvedAnimation curvedAnimation = CurvedAnimation(
+        parent: _controller,
+        curve: Curves.ease,
+      );
+
+      // 创建弧形的补间动画
+      final partTween = Tween<double>(begin: 0.0, end: peiPart.sweepAngle);
+      Animation<double> animation = partTween.animate(curvedAnimation);
+
+      // 创建文字的补间动画
+      final percentTween = Tween<double>(begin: 0.0, end: data);
+      Animation<double> percentAnimation =
+          percentTween.animate(curvedAnimation);
+
+      // 在动画启动后不断改变数据值
+      _controller.addListener(() {
+        _parts[i].sweepAngle = animation.value;
+        _animateDatas[i] =
+            double.parse(percentAnimation.value.toStringAsFixed(1));
+        setState(() {});
+      });
+      // 开始动画
+      _controller.forward();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: 300,
+          height: 300,
+          child: CustomPaint(
+            // 将数据传给 PeiChartPainter
+            painter: PeiChartPainter(
+              total: _total,
+              parts: _parts,
+              datas: _animateDatas,
+              legends: widget.legends,
+            ),
+          ),
+        ),
+        SizedBox(height: 80),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            shape: BoxShape.circle,
+          ),
+          child: IconButton(
+            color: Colors.white,
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              _controller.reset();
+              _controller.forward();
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+```
+
+至此整个饼状图的绘制就完成了，传入数据即可使用 🎉🎉🎉
+
+```dart
+PieChart(
+  datas: [60.0, 50.0, 40.0, 30.0, 90.0],
+  legends: ['一月', '二月', '三月', '四月', '五月'],
+);
+```
+
+完整代码地址：[pie_chart.dart](https://github.com/xrr2016/flutter-charts/blob/master/lib/charts/pie_chart.dart)
+
 ## 总结
+
+本文说明了如何使用 Flutter 绘制一个饼状图，使用了一点三角函数，关键点在于计算出每个数据占据整个圆形的弧度值，以及数据的起始弧度值。
+数值增长的动画效果使用一个 `AnimationController` 在开始动画后不断的更新绘制使用的数据，在将数据传递给 `PeiChartPainter` 使用即可实现。
 
 ## 附言
 
 准备写一系列关于用 Flutter 画图表的文章，用来分享这方面的知识，这篇文章是这个系列的第二篇，预计 6 篇。
 
 1. [使用 Flutter 绘制图表（一）柱状图📊](https://coldstone.fun/post/2020/05/31/flutter-bar-chart/)
-2. [使用 Flutter 绘制图表（二）饼状图🍪](https://coldstone.fun/post/2020/05/31/flutter-bar-chart/)（本文）
+2. [使用 Flutter 绘制图表（二）饼状图🍪](https://coldstone.fun/post/2020/05/31/flutter-pie-chart/)（本文）
 3. 使用 Flutter 绘制图表（三）折线图📈
 4. 使用 Flutter 绘制图表（四）雷达图🎯
 5. 使用 Flutter 绘制图表（五）环状图🍩
