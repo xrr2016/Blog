@@ -84,7 +84,7 @@ theme: cold-stone
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:xrr2016/xrr2016.github.io.git
+  repo: https://github.com/xrr2016/blog
 
 # blog config
 seo_title: 冷石的博客
