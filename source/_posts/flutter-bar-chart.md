@@ -19,7 +19,7 @@ date: 2020-05-31 22:00:00
 
 要绘制这样的图表普通的 Widget 难以实现，这时就需要 `CustomPaint` 和 `CustomPainter` 出场了，它们类似于 Web 里面的 `<canvas>` 元素，`CustomPaint` 提供了一个绘制区域，而 `CustomPainter` 拥有具体的绘制方法。
 
-## CustomPaint 和 CustomPainter
+## CustomPaint 是什么
 
 `CustomPaint` 是用来提供画布的控件，它使用传入画笔 `painter` 在 `child` 控件后面绘制图形, ，`foregroundPainter` 画笔绘制在 `child` 控件之前。`size` 属性控制画布的大小，假如定义了子控件 `child`，那么画布的大小将由子控件的大小决定，`size` 属性被忽略。
 
@@ -37,7 +37,7 @@ class CustomPaint extends SingleChildRenderObjectWidget {
 }
 ```
 
-`CustomPainter` 是一个抽象类，是实现绘制图形的控件，要在画布上绘制图形需要实现它的 `paint` 方法。`paint` 方法有两个参数，`Canvas canvas` 和 `Size size`。`Size` 对象表示画布的尺寸，`Canvas` 对象上是具体的绘制图形的方法。
+而 `CustomPainter` 是实现绘制图形的控件，要在画布上绘制图形需要实现它的 `paint` 方法。`paint` 方法有两个参数，`Canvas canvas` 和 `Size size`。`Size` 对象表示画布的尺寸，`Canvas` 对象上是具体的绘制图形的方法。
 
 ```dart
 abstract class CustomPainter extends Listenable {
