@@ -4,7 +4,7 @@
 
 # Site
 title: 冷石
-description: ❤️小玲，可是小玲不 ❤️我
+description: 孑然一身，傲立于世
 keywords: "冷石, 前端, 面试，Web, Js, CSS, Node.js, Frontend, Flutter, Docker, Dart, Mysql, Egg.js"
 author: ColdStone
 language: zh
@@ -90,7 +90,8 @@ deploy:
 seo_title: 冷石的博客
 
 # user config
-avatar: avatar.jpeg
+avatar: avatar.jpg
+zanshang: zanshang.jpg
 
 # Utteranc comment system
 comment:
