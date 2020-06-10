@@ -13,7 +13,7 @@ date: 2020-06-09 14:08:00
 
 ## 前言
 
-接上文，本文讲解如何使用 Flutter 绘制饼状图，最终的效果如图
+接上文，本文讲解如何使用 Flutter 绘制饼状图，最终效果如图
 
 <img src="./images/flutter-pie-chart/pie.gif" width="524" style="width: 260px">
 
@@ -21,7 +21,8 @@ date: 2020-06-09 14:08:00
 
 ## 定义 PieChart & PiePart
 
-第一步定义 `PieChart` 和 `PiePart` 类。`PieChart` 是整个饼状图控件，有 `datas` 和 `legends` 两个属性，表示饼图的数据和每部分的标识。`PiePart` 是表示饼图的一部分，有 `color`, `startAngle`, `sweepAngle` 三个属性，分别表示颜色，起始弧度值，占据的弧度值。`PeiChartPainter` 类实现了具体的绘制方法。
+第一步定义 `PieChart` 和 `PiePart` 类。`PieChart` 是整个饼状图控件，有 `datas` 和 `legends` 两个属性，表示饼图的数据和每部分的标识。
+`PiePart` 表示饼图的一部分，有 `color`, `startAngle`, `sweepAngle` 三个属性，分别表示颜色，起始弧度值，占据圆形的弧度值。`PeiChartPainter` 类实现了具体的绘制方法。
 
 ```dart
 class PiePart {
@@ -50,6 +51,9 @@ class PieChart extends StatefulWidget {
 }
 
 class _PieChartState extends State<PieChart> with TickerProviderStateMixin {
+  double _total = 0.0;
+  final List<PiePart> _parts = <PiePart>[];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -75,13 +79,14 @@ class _PieChartState extends State<PieChart> with TickerProviderStateMixin {
 class PeiChartPainter extends CustomPainter {
   final double total;
   final List<double> datas;
+  final List<PiePart> parts;
   final List<String> legends;
 
   PeiChartPainter({
     @required this.total,
     @required this.datas,
-    @required this.legends,
     @required this.parts,
+    @required this.legends,
   });
 
   @override
@@ -128,11 +133,11 @@ void paint(Canvas canvas, Size size) {
 
 ## 绘制标识
 
-在 PeiChartPainter 上添加 `drawLegends` 方法，在圆框的外围绘制每部分对应的标识。这一步需要先在 `_PieChartState` 里面进行数据的初始化，然后绘制每个数据对应的标识，分以下几步进行
+这一步需要先在 `_PieChartState` 里面进行数据的初始化，然后绘制每个数据对应的标识，分以下几步进行
 
 1. 计算出每个数据占总和的占比
-2. 根据占比计算数据占据的的弧度值
-3. 根据之前数据占据圆形的弧度值计算出下一个个数据的起始弧度值
+2. 根据占比计算数据占据圆的弧度值
+3. 根据之前数据占据圆形的弧度值计算出下一个数据的起始弧度值
 4. 根据计算出的起始弧度值和占据弧度值创建 `PiePart` 对象
 5. 使用 `PiePart` 对象绘制标识
 
@@ -158,7 +163,7 @@ class _PieChartState extends State<PieChart> with TickerProviderStateMixin {
       PiePart peiPart;
 
       if (i > 0) {
-        // 下一个数据的起始弧度值等于之前的弧度值相加
+        // 下一个数据的起始弧度值等于之前的数据弧度值之和
         double lastSweepAngle = _parts[i - 1].sweepAngle;
         startAngle += lastSweepAngle;
         peiPart = PiePart(startAngle, angle, colors[i]);
@@ -194,6 +199,7 @@ class _PieChartState extends State<PieChart> with TickerProviderStateMixin {
   }
 }
 ```
+在 PeiChartPainter 上添加 `drawLegends` 方法，在圆框的外围绘制每部分对应的标识。
 
 ```dart
 void drawLegends(Canvas canvas, Size size) {
@@ -242,7 +248,7 @@ void paint(Canvas canvas, Size size) {
 
 <img src="./images/flutter-pie-chart/legend.png" width="520" style="width: 260px">
 
-计算位置用到的的三角函数是
+计算文字位置用到的的三角函数是
 
 ![angle](./images/flutter-pie-chart/angle.png)
 

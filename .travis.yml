@@ -9,14 +9,14 @@ before_script:
   - rm -rf public || exit 0
 
 install:
-  - yarn
+  - npm install
 
 script:
   - hexo clean
   - hexo generate
   - echo 'coldstone.fun' > public/CNAME
 
-cache: yarn
+cache: npm
 
 deploy:
   cleanup: true
