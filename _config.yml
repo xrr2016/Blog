@@ -85,7 +85,6 @@ theme: cold-stone
 deploy:
   type: git
   repo: git@github.com:xrr2016/xrr2016.github.io.git
-  branch: gh-pages
 
 # blog config
 seo_title: 冷石的博客
