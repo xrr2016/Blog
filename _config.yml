@@ -86,9 +86,9 @@ deploy:
   - type: git
     repo: https://github.com/xrr2016/blog
     branch: gh-pages
-  - type: git
-    repo: https://e.coding.net/coldstonestudio/blog.git
-    branch: coding-pages
+  # - type: git
+  #   repo: https://e.coding.net/coldstonestudio/blog.git
+  #   branch: coding-pages
 
 # blog config
 seo_title: 冷石的博客
