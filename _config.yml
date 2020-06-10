@@ -84,7 +84,7 @@ theme: cold-stone
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/xrr2016/blog
+  repo: git@github.com:xrr2016/xrr2016.github.io.git
   branch: gh-pages
 
 # blog config
