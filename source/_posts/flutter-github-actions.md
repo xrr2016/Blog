@@ -146,7 +146,6 @@ git push --tag
 
 ![workflow](./images/github-workflow.jpg)
 
-
 ## 总结
 
 总结一下就是以下 4 个步骤
@@ -157,3 +156,23 @@ git push --tag
 4. 推送一个版本标签🏷️，触发工作流程
 
 之后就可以在每次发布标签后自动发布了
+
+## 更新
+
+构建 Web 应用，发布到 Gihub Pages
+
+
+```yml
+# 启用 Flutter web
+- name: Enable flutter web
+  run: flutter config --enable-web
+# 构建 web 应用
+- name: Build Web App
+  run: flutter build web
+# 部署到 Github Pages
+- name: deploy
+  uses: peaceiris/actions-gh-pages@v3
+  with:
+    github_token: ${{ secrets.TOKEN }}
+    publish_dir: ./build/web
+```
