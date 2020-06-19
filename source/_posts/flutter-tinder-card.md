@@ -51,11 +51,11 @@ Stack(
 
 ## 布局思路
 
-实现这个卡片布局的大致思路如下
+要使用 `Stack` 实现这个卡片布局的大致思路如下
 
 1. 首先需要前，中，后三个子控件，使用 `Align` 控件定位在容器中。
 2. 需要一个手势监听器 `GestureDetector` 监听手指滑动。
-3. 根据手指在屏幕上滑动时更新最前面卡片的位置。
+3. 监听手指在屏幕上滑动同时更新最前面卡片的位置。
 4. 判断移动的横轴距离进行卡片位置变换动画或者卡片回弹动画。
 5. 如果运行了卡片位置变换动画在动画结束后更新卡片的索引值。
 
@@ -125,10 +125,9 @@ class _MyAppState extends State<MyApp> {
 
 <img src="./images/flutter-tinder-card/stack.png" width="560" style="width: 280px">
 
-2. 对子控件定位并设置其尺寸
+2. 对子控件分别定位并设置其尺寸
 
-定位需要设置 `Align` 控件的 alignment 属性，传入一个 `Alignment(x, y)` 进行设置。
-设置尺寸需要使用 `LayoutBuilder` 获取当前容器的尺寸，然后根据容器尺寸进行计算。
+定位需要设置 `Align` 控件的 alignment 属性，传入一个 `Alignment(x, y)` 进行设置。设置尺寸需要使用 `LayoutBuilder` 获取当前父容器的尺寸，然后根据容器尺寸进行计算。
 
 ```dart
 class _MyAppState extends State<MyApp> {
@@ -138,6 +137,7 @@ class _MyAppState extends State<MyApp> {
       alignment: Alignment(0.0, -0.5),
       // 使用 SizedBox 确定卡片尺寸
       child: SizedBox.fromSize(
+        // 计算卡片尺寸，相对于父容器
         size: Size(constraints.maxWidth * 0.9, constraints.maxHeight * 0.9),
         child: Container(
           color: Colors.blue,
@@ -151,6 +151,7 @@ class _MyAppState extends State<MyApp> {
     return Align(
       alignment: Alignment(0.0, 0.0),
       child: SizedBox.fromSize(
+        // 计算卡片尺寸，相对于父容器
         size: Size(constraints.maxWidth * 0.85, constraints.maxHeight * 0.9),
         child: Container(
           color: Colors.red,
@@ -164,6 +165,7 @@ class _MyAppState extends State<MyApp> {
     return Align(
       alignment: Alignment(0.0, 0.5),
       child: SizedBox.fromSize(
+        // 计算卡片尺寸，相对于父容器
         size: Size(constraints.maxWidth * 0.8, constraints.maxHeight * .9),
         child: Container(
           color: Colors.green,
@@ -292,6 +294,8 @@ class _MyAppState extends State<MyApp> {
 <img src="./images/flutter-tinder-card/pan.gif" width="260" style="width: 280px">
 
 ## 卡片动画
+
+这个布局有三种动画，最前面卡片移开的动画；后面两张卡片位置和尺寸变化的动画；最前面卡片回到原位的动画。
 
 1. 判断卡片横轴移动距离
 
@@ -500,7 +504,7 @@ class CardAnimations {
 }
 ```
 
-动画运行时在卡片上应用动画值，否则使用卡片默认的位置和尺寸。使用一个 `AnimationController` 控制动画运行。
+使用一个 `AnimationController` 控制动画运行，动画运行时在卡片上应用以上的动画值，否则使用卡片默认的位置和尺寸。
 
 ```dart
 class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
@@ -646,7 +650,8 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
 ## 数据更新
 
 可以看到动画运行之后三张卡片都恢复了默认的位置和尺寸，而需要的效果是当卡片换位动画完成后三张卡片的数据会改变，所以还需要在动画之后进行数据处理。
-首先创建一个数组保存全部子项目，使用一个索引更新最前面卡片的子项索引，在卡片换位动画结束后索引值加一。
+
+创建一个数组保存全部子项目，使用一个索引更新最前面卡片的子项索引，在卡片换位动画结束后索引值加一。
 
 ```dart
 List<String> images = [
@@ -686,6 +691,7 @@ List<Widget> cards = List.generate(
 );
 
 void main() {
+  // 使用生成的卡片数组
   runApp(MyApp(cards: cards));
 }
 
@@ -773,80 +779,36 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TCards demo',
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: SizedBox(
-            width: 360,
-            height: 520,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                // 使用 LayoutBuilder 获取容器的尺寸，传个子项计算卡片尺寸
-                final Size size = MediaQuery.of(context).size;
-                // 移动的速度
-                final double speed = 10.0;
-                // 卡片横轴距离限制
-                final double limit = 10.0;
+ // 省略...
 
-                return Stack(
-                  children: [
-                    // 后面的子项会显示在上面，所以前面的卡片放在最后
-                    _backCard(constraints),
-                    _middleCard(constraints),
-                    _frontCard(constraints),
-                    // 使用一个占满父元素的 GestureDetector 监听手指移动
-                    // 如果动画在运行中就不在响应手势
-                    _cardChangeController.status != AnimationStatus.forward
-                        ? SizedBox.expand(
-                            child: GestureDetector(
-                              onPanDown: (DragDownDetails details) {},
-                              onPanUpdate: (DragUpdateDetails details) {
-                                // 手指移动就更新最前面卡片的 alignment 属性
-                                _frontCardAlignment += Alignment(
-                                  details.delta.dx / (size.width / 2) * speed,
-                                  details.delta.dy / (size.height / 2) * speed,
-                                );
-                                // 设置最前面卡片的旋转角度
-                                _frontCardRotation = _frontCardAlignment.x;
-                                setState(() {});
-                              },
-                              onPanEnd: (DragEndDetails details) {
-                                // 如果最前面的卡片横轴移动距离超过限制就运行换位动画，否则运行回弹动画
-                                if (_frontCardAlignment.x > limit ||
-                                    _frontCardAlignment.x < -limit) {
-                                  _runChangeOrderAnimation();
-                                } else {
-                                  _runReboundAnimation(
-                                    details.velocity.pixelsPerSecond,
-                                    size,
-                                  );
-                                }
-                              },
-                            ),
-                          )
-                        : IgnorePointer(),
-                  ],
-                );
-              },
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+return Stack(
+  children: [
+    // 省略...
+
+    // 使用一个占满父元素的 GestureDetector 监听手指移动
+    // 如果动画在运行中就不在响应手势
+    _cardChangeController.status != AnimationStatus.forward
+        ? SizedBox.expand(
+            child: GestureDetector(
+              // 省略...
+            )
+          )
+        : IgnorePointer(),
+  ],
 }
 
 ```
 
+至此整个布局就实现了 🎉
 
 ## 总结
 
+这个布局的关键点在于
+1. 三张卡片的定位
+2. 监听手势更新最前面卡片的位置
+3. 卡片的换位动画和回弹动画
 
-插件地址 https://pub.dev/packages/tcard
+作者已经封装了这个插件，地址是 https://pub.dev/packages/tcard 欢迎使用。
 
 ## 参考
 
