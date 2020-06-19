@@ -13,17 +13,15 @@ date: 2020-06-18 12:22:08
 
 ## 前言
 
-前几天写了一个 Fluter 插件 [tcard](https://pub.dev/packages/tcard)，用来实现类似于探探卡片的布局。效果如下
+前几天写了一个 Fluter 插件 [tcard](https://github.com/xrr2016/tcard)，用来实现类似于探探卡片的布局。效果如下，本文讲解如何使用 `Stack` 控件实现这个布局。
 
-<img src="./images/flutter-tinder-card/colors.gif" width="520" style="width: 260px">
+<img src="./images/flutter-tinder-card/images.gif" width="900" style="width: 500px">
 
-本文讲解如何使用 `Stack` 控件实现这个布局。
-
-[在线查看]()
+[在线查看](https://dartpad.dev/efe152273d6835af5cec6d8f40ab0c58)
 
 ## 初识 Stack
 
-`Stack` 是一个有多子项的控件，它会将子项相对于自身边缘进行定位，后面的子项会覆盖前面的子项。通常用来实现将一个控件覆盖于另一个控件之上的布局，比如在一张图片上显示一些文字。子项的默认位置在 `Stack` 左上角，也可以用 `Align` 或者 `Positioned` 控件分别进行定位。
+`Stack` 是一个有多子项的控件，它会将自己的子项相对于自身边缘进行定位，后面的子项会覆盖前面的子项。通常用来实现将一个控件覆盖于另一个控件之上的布局，比如在一张图片上显示一些文字。子项的默认位置在 `Stack` 左上角，也可以用 `Align` 或者 `Positioned` 控件分别进行定位。
 
 <img src="https://flutter.github.io/assets-for-api-docs/assets/widgets/stack.png" style="width: 520px">
 
@@ -645,12 +643,210 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
 
 <img src="./images/flutter-tinder-card/foward.gif" width="260" style="width: 280px">
 
+## 数据更新
 
-## 动画之后
+可以看到动画运行之后三张卡片都恢复了默认的位置和尺寸，而需要的效果是当卡片换位动画完成后三张卡片的数据会改变，所以还需要在动画之后进行数据处理。
+首先创建一个数组保存全部子项目，使用一个索引更新最前面卡片的子项索引，在卡片换位动画结束后索引值加一。
+
+```dart
+List<String> images = [
+  'https://gank.io/images/5ba77f3415b44f6c843af5e149443f94',
+  'https://gank.io/images/02eb8ca3297f4931ab64b7ebd7b5b89c',
+  'https://gank.io/images/31f92f7845f34f05bc10779a468c3c13',
+  'https://gank.io/images/b0f73f9527694f44b523ff059d8a8841',
+  'https://gank.io/images/1af9d69bc60242d7aa2e53125a4586ad',
+];
+
+// 生成卡片数组
+List<Widget> cards = List.generate(
+  images.length,
+  (int index) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.0),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 17),
+            blurRadius: 23.0,
+            spreadRadius: -13.0,
+            color: Colors.black54,
+          )
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16.0),
+        child: Image.network(
+          images[index],
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  },
+);
+
+void main() {
+  runApp(MyApp(cards: cards));
+}
+
+class MyApp extends StatefulWidget {
+  final List<Widget> cards;
+
+  const MyApp({@required this.cards});
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
+  // 卡片列表
+  final List<Widget> _cards = [];
+  // 最前面卡片的索引
+  int _frontCardIndex = 0;
+
+  // 省略...
+
+  //  前面的卡片，使用 Align 定位
+  Widget _frontCard(BoxConstraints constraints) {
+    // 判断是否还有卡片
+    Widget card =
+        _frontCardIndex < _cards.length ? _cards[_frontCardIndex] : Container();
+    bool forward = _cardChangeController.status == AnimationStatus.forward;
+
+    // 使用 Transform.rotate 旋转卡片
+    Widget rotate = Transform.rotate(
+      angle: (pi / 180.0) * _frontCardRotation,
+      // 使用 SizedBox 确定卡片尺寸
+      child: SizedBox.fromSize(
+        size: CardSizes.front(constraints),
+        // 使用数组中的子项
+        child: card,
+      ),
+    );
+
+   // 省略...
+  }
+
+  // 中间的卡片，使用 Align 定位
+  Widget _middleCard(BoxConstraints constraints) {
+    // 判断是否还有两张卡片
+    Widget card = _frontCardIndex < _cards.length - 1
+        ? _cards[_frontCardIndex + 1]
+        : Container();
+    // 省略...
+  }
+
+  // 后面的卡片，使用 Align 定位
+  Widget _backCard(BoxConstraints constraints) {
+    // 判断数组中是否还有三张卡片
+    Widget card = _frontCardIndex < _cards.length - 2
+        ? _cards[_frontCardIndex + 2]
+        : Container();
+    // 省略...
+  }
+
+  // 省略...
+
+  @override
+  void initState() {
+    super.initState();
+    // 初始化卡片数组
+    _cards.addAll(widget.cards);
+
+    // 省略...
+
+    // 初始化卡片换位动画控制器
+    _cardChangeController = AnimationController(
+      duration: Duration(milliseconds: 1000),
+      vsync: this,
+    )
+      ..addListener(() => setState(() {}))
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          // 动画结束后将最前面卡片的索引向前移动一位
+          _frontCardIndex++;
+          // 动画运行结束后重置位置和旋转
+          _frontCardRotation = 0.0;
+          _frontCardAlignment = CardAlignments.front;
+          setState(() {});
+        }
+      });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'TCards demo',
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: SizedBox(
+            width: 360,
+            height: 520,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                // 使用 LayoutBuilder 获取容器的尺寸，传个子项计算卡片尺寸
+                final Size size = MediaQuery.of(context).size;
+                // 移动的速度
+                final double speed = 10.0;
+                // 卡片横轴距离限制
+                final double limit = 10.0;
+
+                return Stack(
+                  children: [
+                    // 后面的子项会显示在上面，所以前面的卡片放在最后
+                    _backCard(constraints),
+                    _middleCard(constraints),
+                    _frontCard(constraints),
+                    // 使用一个占满父元素的 GestureDetector 监听手指移动
+                    // 如果动画在运行中就不在响应手势
+                    _cardChangeController.status != AnimationStatus.forward
+                        ? SizedBox.expand(
+                            child: GestureDetector(
+                              onPanDown: (DragDownDetails details) {},
+                              onPanUpdate: (DragUpdateDetails details) {
+                                // 手指移动就更新最前面卡片的 alignment 属性
+                                _frontCardAlignment += Alignment(
+                                  details.delta.dx / (size.width / 2) * speed,
+                                  details.delta.dy / (size.height / 2) * speed,
+                                );
+                                // 设置最前面卡片的旋转角度
+                                _frontCardRotation = _frontCardAlignment.x;
+                                setState(() {});
+                              },
+                              onPanEnd: (DragEndDetails details) {
+                                // 如果最前面的卡片横轴移动距离超过限制就运行换位动画，否则运行回弹动画
+                                if (_frontCardAlignment.x > limit ||
+                                    _frontCardAlignment.x < -limit) {
+                                  _runChangeOrderAnimation();
+                                } else {
+                                  _runReboundAnimation(
+                                    details.velocity.pixelsPerSecond,
+                                    size,
+                                  );
+                                }
+                              },
+                            ),
+                          )
+                        : IgnorePointer(),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+```
+
 
 ## 总结
 
-插件地址 https://github.com/xrr2016/tcard
+
+插件地址 https://pub.dev/packages/tcard
 
 ## 参考
 
