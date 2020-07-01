@@ -58,6 +58,23 @@ body {
   overflow-x: hidden;
 }
 
+body:active::after {
+  transform: translate(-50%, -100%);
+  opacity: 0.5;
+  transition: 0s;
+  left: -999px;
+}
+body::after {
+  content: "你好，陌生人";
+  position: fixed;
+  z-index: 999;
+  left: calc(var(--clientx, -999) * 1px);
+  top: calc(var(--clienty, -999) * 1px);
+  transform: translate(-50%, calc(-100% - 100px));
+  opacity: 0;
+  transition: transform 2s, opacity 0.5s;
+}
+
 h1 {
   font-size: 1.8rem;
 }
