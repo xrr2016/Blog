@@ -15,7 +15,33 @@ date: 2020-06-28 09:59:37
 
 [在线查看](https://dartpad.dartlang.org/b8a2b88647fa75df5d31445a93cb390f)
 
+## Path 对象
+
+开始之前先来了解一下 `Path` 对象
+
 ## 绘制坐标轴
+
+```dart
+void _drawAxis(Canvas canvas, Size size) {
+  final double sw = size.width;
+  final double sh = size.height;
+
+  // 设置绘制属性
+  final paint = Paint()
+    ..color = Colors.black87
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 1.0
+    ..isAntiAlias = true;
+
+  // 创建一个 Path 对象，并规定它的路线
+  final Path path = Path()
+    ..moveTo(0.0, 0.0)
+    ..lineTo(0.0, sh)
+    ..lineTo(sw, sh);
+  // 绘制路径
+  canvas.drawPath(path, paint);
+}
+```
 
 ## 绘制圆点
 
@@ -23,9 +49,8 @@ date: 2020-06-28 09:59:37
 
 ## 绘制折线
 
-## Path 对象
 
-## 折线动画
+## 折线动画(核心点)
 
 ## 附言
 
