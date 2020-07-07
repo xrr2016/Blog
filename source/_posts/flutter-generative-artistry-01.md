@@ -200,6 +200,7 @@ class TiledLines extends StatelessWidget {
     List<BoxShadow> shadows = [];
     double opacity = 0.1;
 
+    // 添加画布阴影
     for (double i = 1; i <= 16; i++) {
       opacity -= 0.01;
       opacity = opacity > 0.01 ? opacity : 0.01;
@@ -220,6 +221,7 @@ class TiledLines extends StatelessWidget {
           width: 320.0,
           height: 320.0,
           decoration: BoxDecoration(
+            // 添加画布边框
             border: Border.all(
               color: Colors.black,
               width: 20.0,
@@ -251,6 +253,7 @@ class TiledLinesPainter extends CustomPainter {
     double width,
     double height,
   ) {
+    // 创建随机性
     final bool isLeftToRight = Random().nextBool();
 
     final Paint paint = Paint()
@@ -260,6 +263,7 @@ class TiledLinesPainter extends CustomPainter {
     Offset p1;
     Offset p2;
 
+    // 设置线条的起始点和终止点
     if (isLeftToRight) {
       p1 = Offset(x, y);
       p2 = Offset(x + width, y + height);
@@ -273,6 +277,7 @@ class TiledLinesPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    // 使用 step 分割画布，创建小的绘制方格
     for (double x = 0; x < size.width; x += step) {
       for (double y = 0; y < size.height; y += step) {
         _drawLine(canvas, x, y, step, step);
