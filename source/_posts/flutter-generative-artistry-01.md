@@ -1,5 +1,5 @@
 ---
-title: Flutter 绘制 Tiled Lines
+title: Flutter 绘制瓷砖线 Tiled Lines
 categories:
   - 技术
 tags:
@@ -22,7 +22,7 @@ date: 2020-07-07 16:20:50
 ## 创建画布
 
 首先使用一个 `Container` 控件创建一个 `320*320` 大小的绘制区域，添加 `CustomPaint` 画布和一个继承 `CustomPainter`
-的画笔 `TiledLinesPainter`。关于 `CustomPaint` 和 `CustomPainter` 的知识可以查阅这篇文章 [使用 Flutter 绘制图表（一）柱状图📊](https://coldstone.fun/post/2020/05/31/flutter-bar-chart)。
+的画笔 `TiledLinesPainter`。关于 `CustomPaint` 和 `CustomPainter` 的知识可以查阅这篇文章 [使用 Flutter 绘制图表（一）柱状图 📊](https://coldstone.fun/post/2020/05/31/flutter-bar-chart)。
 
 ```dart
 import 'package:flutter/material.dart';
