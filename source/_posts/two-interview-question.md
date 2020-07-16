@@ -2,7 +2,7 @@
 title: 分享两道面试题
 date: 2019-11-15 10:33:15
 categories:
-  - 技术
+  - 面试
 tags:
   - Interview
 ---
