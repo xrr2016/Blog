@@ -9,7 +9,7 @@ tags:
 date: 2020-02-03 22:36:16
 ---
 
-<img src="https://blog.codemagic.io/uploads/2019/01/FB-build-test-publish-100.fdfb1baaca70728207ad87f5a7e36350d8c8e0693eff9616cc6758134c5542e0.jpg" alt="Codemagic" width="672" >
+![cicd](./images/flutter-cicd/cicd.png)
 
 <!--more-->
 
@@ -27,7 +27,7 @@ date: 2020-02-03 22:36:16
 
 ## 为什么使用 `Codemagic`
 
-好的 `CI/CD` 有助于更快地构建，测试以及部署发布应用。在 `Flutter` 的官方文档 [Flutter 里的持续部署](https://flutter.cn/docs/deployment/cd) 里介绍了使用 `fastlane` 工具进行本地部署以及如何将 `fastlane` 整合到 `Travis`，`Cirrus`，`Bitrise` 等持续交付的服务中，但是对于 `Flutter` 项目来说最方便的 `CI/CD`  服务应该还是 `Codemagic`，它可以直接在网页上就配置出完整的应用交付流程。
+好的 `CI/CD` 有助于更快地构建，测试以及部署发布应用。在 `Flutter` 的官方文档 [Flutter 里的持续部署](https://flutter.cn/docs/deployment/cd) 里介绍了使用 `fastlane` 工具进行本地部署以及如何将 `fastlane` 整合到 `Travis`，`Cirrus`，`Bitrise` 等持续交付的服务中，但是对于 `Flutter` 项目来说最方便的 `CI/CD` 服务应该还是 `Codemagic`，它可以直接在网页上就配置出完整的应用交付流程。
 
 ## 如何使用
 
@@ -52,7 +52,7 @@ date: 2020-02-03 22:36:16
 
 ![caching](https://docs.codemagic.io/uploads/2019/04/caching_enabled.PNG)
 
-4. `Test`  --> 执行应用的单元，集成和部件测试，以及静态代码分析
+4. `Test` --> 执行应用的单元，集成和部件测试，以及静态代码分析
 
 ![code-test](./images/code-test.jpg)
 
@@ -95,6 +95,7 @@ Google Play responded with: APK specifies a version code that has already been u
 搜索一番后发现问题是应用构建的版本号重复，需要更新 `pubspec.yaml` 文件的 `version` 字段的值，详细说明可以查阅这篇文章 [更新应用版本号](https://flutter.cn/docs/deployment/android#updating-the-apps-version-number)
 
 3. 上传 `Google Play` 需要添加一个环境变量 `FCI_KEYSTORE_FILE`，这个变量需要用 base64 encode 一下，需要用到的命令是
+
 ```sh
 base64 input-file-path -o output.txt
 ```
@@ -107,9 +108,11 @@ base64 input-file-path -o output.txt
 2. 配置构建流程
 3. 进行代码签名
 4. 创建 Service Account
-4. 触发构建
+5. 触发构建
 
 ## 参考
+
+[封面图片地址](https://blog.codemagic.io/getting-started-with-codemagic/)
 
 [Flutter 里的持续部署](https://flutter.cn/docs/deployment/cd)
 
