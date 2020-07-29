@@ -40,7 +40,7 @@ jobs:
   publishing:
     runs-on: ubuntu-latest
     steps:
-      # 拉去仓库代码
+      # 拉取仓库代码
       - name: "Checkout"
         uses: actions/checkout@v2
       # 发布插件
