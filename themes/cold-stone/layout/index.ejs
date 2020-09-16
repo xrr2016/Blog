@@ -23,8 +23,7 @@ layout: layout
                 </p>
             </li>
         </ul> -->
-        <ul class="index-list list-unstyled animate-list"
-            uk-scrollspy="target: > li; cls: uk-animation-slide-top-small;">
+        <ul class="index-list list-unstyled animate-list">
             <% page.posts.each(function(post) { %>
             <li class="animate-list__item card card-hover">
                 <a class="index-post-link uk-link-reset" href="<%- config.root %><%- post.path %>">
