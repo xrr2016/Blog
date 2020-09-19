@@ -1,7 +1,7 @@
 ---
 title: Flutter 绘制瓷砖线 Tiled Lines
 categories:
-  - 技术
+  - 教程
 tags:
   - Flutter
   - Generative artistry

@@ -1,7 +1,7 @@
 ---
 title: Flutter 绘制三角网格 Triangular mesh
 categories:
-  - 技术
+  - 教程
 tags:
   - Flutter
   - Generative artistry
