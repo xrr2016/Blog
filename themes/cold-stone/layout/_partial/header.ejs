@@ -1,6 +1,5 @@
 <header class="header" uk-sticky="top: 100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
   <nav class="wrapper header-content">
-    <div class="nav-overlay uk-navbar-left">
       <h1 class="title nav-list-item uk-logo" data-link="<%= url_for(config.root) %>">
         <% if(config.title) { %>
         <a href="<%= config.root %>" data-link="<%= config.root %>"><%= config.title %></a>
@@ -34,9 +33,8 @@
         </li>
         <% } %>
       </ul>
-    </div>
 
-    <% if (is_post()) { %>
+    <!-- <% if (is_post()) { %>
     <div class="uk-navbar-right translate-x">
       <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
     </div>
@@ -44,12 +42,12 @@
     <div class="uk-navbar-right">
       <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
     </div>
-    <% } %>
+    <% } %> -->
   </nav>
   <div class="header-bar"></div>
 </header>
 
-<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+<!-- <div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
   <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
     <button class="uk-modal-close-full" type="button" uk-close></button>
     <form class="uk-search uk-search-large search-form" action="//google.com/search" method="get" accept-charset="UTF-8"
@@ -59,4 +57,4 @@
       <input type="hidden" name="sitesearch" value="<%= config.url %>">
     </form>
   </div>
-</div>
+</div> -->
