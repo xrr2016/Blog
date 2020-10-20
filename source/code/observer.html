@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Observer Pattern</title>
+    <style>
+      body {
+        margin: 0;
+        margin-top: 80px;
+      }
+      .persons {
+        display: flex;
+        margin-top: 80px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <label for="breakfast">早餐吃什么</label>
+    <select name="breakfasts" id="breakfast">
+      <option value="">请选择</option>
+      <option value="bread">面包</option>
+      <option value="noodles">炒面</option>
+      <option value="gruel">白粥</option>
+    </select>
+
+    <div class="persons">
+      <div class="person" id="xiaoming">
+        <p class="mood"></p>
+        <p class="name">小明</p>
+      </div>
+
+      <div class="person" id="xiaohong">
+        <p class="mood"></p>
+        <p class="name">小红</p>
+      </div>
+
+      <div class="person" id="xiaoan">
+        <p class="mood"></p>
+        <p class="name">小安</p>
+      </div>
+    </div>
+    <script>
+      class Subject {
+        constructor() {
+          this.observers = []
+        }
+
+        attach(observer) {
+          const isExist = this.observers.includes(observer)
+
+          if (isExist) {
+            console.log('观察者已添加')
+            return
+          }
+
+          this.observers.push(observer)
+        }
+
+        detach(observer) {
+          const index = this.observers.indexOf(observer)
+
+          if (index < 0) {
+            console.log('观察者不存在')
+            return
+          }
+
+          this.observers.splice(index, 1)
+        }
+
+        notify() {
+          for (const observer of this.observers) {
+            observer.update(this)
+          }
+        }
+      }
+
+      class Observer {
+        update(subject) {}
+      }
+
+      class Breakfast extends Subject {
+        constructor(element) {
+          super()
+          this.value = ''
+          this.element = element
+
+          this.element.addEventListener('change', (event) => {
+            this.value = this.element.value
+            this.notify()
+          })
+        }
+      }
+
+      class Person extends Observer {
+        constructor(element) {
+          super()
+          this.mood = ''
+          this.element = element
+        }
+
+        update(subject) {}
+      }
+
+      class Xiaoming extends Person {
+        update(subject) {
+          switch (subject.value) {
+            case 'bread':
+              this.mood = '开心'
+              break
+            case 'noodles':
+              this.mood = '喜悦'
+              break
+            case 'gruel':
+              this.mood = '讨厌'
+              break
+            default:
+              this.mood = ''
+              break
+          }
+          this.element.querySelector('.mood').innerHTML = this.mood
+        }
+      }
+
+      class Xiaohong extends Person {
+        update(subject) {
+          switch (subject.value) {
+            case 'bread':
+              this.mood = '讨厌'
+              break
+            case 'noodles':
+              this.mood = '开心'
+              break
+            case 'gruel':
+              this.mood = '还可以'
+              break
+            default:
+              this.mood = ''
+              break
+          }
+          this.element.querySelector('.mood').innerHTML = this.mood
+        }
+      }
+
+      class Xiaoan extends Person {
+        update(subject) {
+          switch (subject.value) {
+            case 'bread':
+              this.mood = '不喜欢'
+              break
+            case 'noodles':
+              this.mood = '还可以'
+              break
+            case 'gruel':
+              this.mood = '开心'
+              break
+            default:
+              this.mood = ''
+              break
+          }
+          this.element.querySelector('.mood').innerHTML = this.mood
+        }
+      }
+
+      const breakfast = new Breakfast(document.getElementById('breakfast'))
+      const xiaoming = new Xiaoming(document.getElementById('xiaoming'))
+      const xiaohong = new Xiaohong(document.getElementById('xiaohong'))
+      const xiaoan = new Xiaoan(document.getElementById('xiaoan'))
+
+      breakfast.attach(xiaoming)
+      breakfast.attach(xiaohong)
+      breakfast.attach(xiaoan)
+    </script>
+  </body>
+</html>
