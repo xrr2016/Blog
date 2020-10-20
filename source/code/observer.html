@@ -8,22 +8,51 @@
       body {
         margin: 0;
         margin-top: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       .persons {
+        width: 800px;
+        margin: 0 auto;
         display: flex;
+        justify-content: space-around;
         margin-top: 80px;
+      }
+
+      .person {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        text-align: center;
+        border: 1px solid grey;
+      }
+
+      .mood {
+        font-size: 24px;
+        min-height: 33px;
+        margin-top: 0;
+      }
+
+      .name {
+        font-size: 14px;
       }
     </style>
   </head>
 
   <body>
-    <label for="breakfast">早餐吃什么</label>
-    <select name="breakfasts" id="breakfast">
-      <option value="">请选择</option>
-      <option value="bread">面包</option>
-      <option value="noodles">炒面</option>
-      <option value="gruel">白粥</option>
-    </select>
+    <div class="breakfast">
+      <label for="breakfast">早餐吃什么</label>
+      <select name="breakfasts" id="breakfast">
+        <option value="">请选择</option>
+        <option value="bread">面包</option>
+        <option value="noodles">炒面</option>
+        <option value="gruel">白粥</option>
+      </select>
+    </div>
 
     <div class="persons">
       <div class="person" id="xiaoming">
@@ -91,6 +120,12 @@
             this.notify()
           })
         }
+
+        notify() {
+          for (const observer of this.observers) {
+            observer.update(this.value)
+          }
+        }
       }
 
       class Person extends Observer {
@@ -103,9 +138,9 @@
         update(subject) {}
       }
 
-      class Xiaoming extends Person {
-        update(subject) {
-          switch (subject.value) {
+      class Person1 extends Person {
+        update(value) {
+          switch (value) {
             case 'bread':
               this.mood = '开心'
               break
@@ -123,9 +158,9 @@
         }
       }
 
-      class Xiaohong extends Person {
-        update(subject) {
-          switch (subject.value) {
+      class Person2 extends Person {
+        update(value) {
+          switch (value) {
             case 'bread':
               this.mood = '讨厌'
               break
@@ -143,9 +178,9 @@
         }
       }
 
-      class Xiaoan extends Person {
-        update(subject) {
-          switch (subject.value) {
+      class Person3 extends Person {
+        update(value) {
+          switch (value) {
             case 'bread':
               this.mood = '不喜欢'
               break
@@ -164,13 +199,15 @@
       }
 
       const breakfast = new Breakfast(document.getElementById('breakfast'))
-      const xiaoming = new Xiaoming(document.getElementById('xiaoming'))
-      const xiaohong = new Xiaohong(document.getElementById('xiaohong'))
-      const xiaoan = new Xiaoan(document.getElementById('xiaoan'))
+      const xiaoming = new Person1(document.getElementById('xiaoming'))
+      const xiaohong = new Person2(document.getElementById('xiaohong'))
+      const xiaoan = new Person3(document.getElementById('xiaoan'))
 
       breakfast.attach(xiaoming)
       breakfast.attach(xiaohong)
       breakfast.attach(xiaoan)
+
+      // breakfast.detach(xiaoan)
     </script>
   </body>
 </html>

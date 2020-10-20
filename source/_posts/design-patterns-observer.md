@@ -4,176 +4,202 @@ categories:
   - 设计模式
 tags:
   - Design Patterns
-date: 2020-10-08 12:30:00
+date: 2020-10-20 22:00:00
+cover: ./images/design-patterns-observer/cover.png
 ---
+
+![Observer](./images/design-patterns-observer/cover.png)
 
 <!--more-->
 
-1. 什么是观察者模式
+## 什么是观察者模式
 
-   观察者模式是一种行为设计模式， 允许你定义一种订阅机制， 可在对象事件发生时通知多个 “观察” 该对象的其他对象。
+观察者模式是一种行为设计模式，允许你定义一种订阅机制，可在对象事件发生时通知多个 “观察” 该对象的对象。
 
-   拥有一些值得关注的状态的对象通常被称为目标， 由于它要将自身的状态改变通知给其他对象， 我们也将其称为发布者 （publisher）。 所有希望关注发布者状态变化的其他对象被称为订阅者 （subscribers）。
+有值得关注的状态的对象通常被称为目标，由于它要将自身的状态改变通知给其他对象，我们也将其称为发布者 （publisher），所有希望关注发布者状态变化的其他对象被称为订阅者（subscribers）。
 
-   无论何时发生了重要的发布者事件， 它都要遍历订阅者并调用其对象的特定通知方法。
+当发布者发布了事件，它要遍历订阅者并调用其对象的特定通知方法。
 
-2. 观察者模式的运作方式
+举例说明观察者模式类似于明星与粉丝的关系，粉丝关注明星，当明星发布消息的时候，粉丝会对这个消息做出反应。
 
-   当新事件发生时， 发送者会遍历订阅列表并调用每个订阅者对象的通知方法。 该方法是在订阅者接口中声明的。
+## 观察者模式适用场景
 
-   订阅者 （Subscriber） 接口声明了通知接口。 在绝大多数情况下， 该接口仅包含一个 update 更新方法。 该方法可以拥有多个参数， 使发布者能在更新时传递事件的详细信息。
+当一个对象状态的改变需要改变其他对象，可使用观察者模式。
 
-   具体订阅者 （Concrete Subscribers） 可以执行一些操作来回应发布者的通知。 所有具体订阅者类都实现了同样的接口， 因此发布者不需要与具体类相耦合。
+当一些对象必须观察其他对象时，可使用观察者模式。
 
-   订阅者通常需要一些上下文信息来正确地处理更新。 因此， 发布者通常会将一些上下文数据作为通知方法的参数进行传递。 发布者也可将自身作为参数进行传递， 使订阅者直接获取所需的数据。
+## 实现观察者模式
 
-3. 观察者模式的适用场景
+```js
+// 目标
+class Subject {
+  constructor() {
+    this.observers = []
+  }
 
-   当一个对象状态的改变需要改变其他对象， 或实际对象是事先未知的或动态变化的时， 可使用观察者模式。
+  // 添加观察者
+  attach(observer) {
+    const isExist = this.observers.includes(observer)
 
-4. 观察者模式实现方式
+    if (isExist) {
+      console.log('观察者已添加')
+      return
+    }
 
-   1. 仔细检查你的业务逻辑，  试着将其拆分为两个部分：  独立于其他代码的核心功能将作为发布者；  其他代码则将转化为一组订阅类。
-   2. 声明订阅者接口。  该接口至少应声明一个  `update`方法。
-   3. 声明发布者接口并定义一些接口来在列表中添加和删除订阅对象。  记住发布者必须仅通过订阅者接口与它们进行交互。
-   4. 确定存放实际订阅列表的位置并实现订阅方法。  通常所有类型的发布者代码看上去都一样，  因此将列表放置在直接扩展自发布者接口的抽象类中是显而易见的。  具体发布者会扩展该类从而继承所有的订阅行为。
+    this.observers.push(observer)
+  }
 
-      但是，  如果你需要在现有的类层次结构中应用该模式，  则可以考虑使用组合的方式：  将订阅逻辑放入一个独立的对象，  然后让所有实际订阅者使用该对象。
+  // 移除观察者
+  detach(observer) {
+    const index = this.observers.indexOf(observer)
 
-   5. 创建具体发布者类。  每次发布者发生了重要事件时都必须通知所有的订阅者。
-   6. 在具体订阅者类中实现通知更新的方法。  绝大部分订阅者需要一些与事件相关的上下文数据。  这些数据可作为通知方法的参数来传递。
+    if (index < 0) {
+      console.log('观察者不存在')
+      return
+    }
 
-      但还有另一种选择。  订阅者接收到通知后直接从通知中获取所有数据。  在这种情况下，  发布者必须通过更新方法将自身传递出去。  另一种不太灵活的方式是通过构造函数将发布者与订阅者永久性地连接起来。
+    this.observers.splice(index, 1)
+  }
 
-   7. 客户端必须生成所需的全部订阅者，  并在相应的发布者处完成注册工作。
+  // 通知观察者
+  notify() {
+    for (const observer of this.observers) {
+      observer.update(this)
+    }
+  }
+}
 
-5. 观察者模式实战
+// 观察者
+class Observer {
+  // 接收发布事件
+  update(subject) {}
+}
+```
 
-   ```jsx
-   /**
-    * The Subject interface declares a set of methods for managing subscribers.
-    */
-   interface Subject {
-       // Attach an observer to the subject.
-       attach(observer: Observer): void;
+## 一个例子
 
-       // Detach an observer from the subject.
-       detach(observer: Observer): void;
+小明，小红，小安都会留意早餐吃什么，不同的早餐会使他们产生不同的情绪，因此早餐是目标，三人是观察者。
 
-       // Notify all observers about an event.
-       notify(): void;
-   }
+```js
+// 继承目标类
+class Breakfast extends Subject {
+  constructor(element) {
+    super()
+    this.value = ''
+    this.element = element
 
-   /**
-    * The Subject owns some important state and notifies observers when the state
-    * changes.
-    */
-   class ConcreteSubject implements Subject {
-       /**
-        * @type {number} For the sake of simplicity, the Subject's state, essential
-        * to all subscribers, is stored in this variable.
-        */
-       public state: number;
+    this.element.addEventListener('change', (event) => {
+      this.value = this.element.value
+      this.notify()
+    })
+  }
 
-       /**
-        * @type {Observer[]} List of subscribers. In real life, the list of
-        * subscribers can be stored more comprehensively (categorized by event
-        * type, etc.).
-        */
-       private observers: Observer[] = [];
+  notify() {
+    for (const observer of this.observers) {
+      observer.update(this.value)
+    }
+  }
+}
 
-       /**
-        * The subscription management methods.
-        */
-       public attach(observer: Observer): void {
-           const isExist = this.observers.includes(observer);
-           if (isExist) {
-               return console.log('Subject: Observer has been attached already.');
-           }
+// 继承观察者类
+class Person extends Observer {
+  constructor(element) {
+    super()
+    this.mood = ''
+    this.element = element
+  }
 
-           console.log('Subject: Attached an observer.');
-           this.observers.push(observer);
-       }
+  update(subject) {}
+}
 
-       public detach(observer: Observer): void {
-           const observerIndex = this.observers.indexOf(observer);
-           if (observerIndex === -1) {
-               return console.log('Subject: Nonexistent observer.');
-           }
+// 类型一
+class Person1 extends Person {
+  update(value) {
+    switch (value) {
+      case 'bread':
+        this.mood = '开心'
+        break
+      case 'noodles':
+        this.mood = '喜悦'
+        break
+      case 'gruel':
+        this.mood = '讨厌'
+        break
+      default:
+        this.mood = ''
+        break
+    }
+    this.element.querySelector('.mood').innerHTML = this.mood
+  }
+}
 
-           this.observers.splice(observerIndex, 1);
-           console.log('Subject: Detached an observer.');
-       }
+// 类型二
+class Person2 extends Person {
+  update(value) {
+    switch (value) {
+      case 'bread':
+        this.mood = '讨厌'
+        break
+      case 'noodles':
+        this.mood = '开心'
+        break
+      case 'gruel':
+        this.mood = '还可以'
+        break
+      default:
+        this.mood = ''
+        break
+    }
+    this.element.querySelector('.mood').innerHTML = this.mood
+  }
+}
 
-       /**
-        * Trigger an update in each subscriber.
-        */
-       public notify(): void {
-           console.log('Subject: Notifying observers...');
-           for (const observer of this.observers) {
-               observer.update(this);
-           }
-       }
+// 类型三
+class Person3 extends Person {
+  update(value) {
+    switch (value) {
+      case 'bread':
+        this.mood = '不喜欢'
+        break
+      case 'noodles':
+        this.mood = '还可以'
+        break
+      case 'gruel':
+        this.mood = '开心'
+        break
+      default:
+        this.mood = ''
+        break
+    }
+    this.element.querySelector('.mood').innerHTML = this.mood
+  }
+}
 
-       /**
-        * Usually, the subscription logic is only a fraction of what a Subject can
-        * really do. Subjects commonly hold some important business logic, that
-        * triggers a notification method whenever something important is about to
-        * happen (or after it).
-        */
-       public someBusinessLogic(): void {
-           console.log('\nSubject: I\'m doing something important.');
-           this.state = Math.floor(Math.random() * (10 + 1));
+// 创建目标“早餐”
+const breakfast = new Breakfast(document.getElementById('breakfast'))
+// 创建观察者小明
+const xiaoming = new Person1(document.getElementById('xiaoming'))
+// 创建观察者小红
+const xiaohong = new Person2(document.getElementById('xiaohong'))
+// 创建观察者小安
+const xiaoan = new Person3(document.getElementById('xiaoan'))
 
-           console.log(`Subject: My state has just changed to: ${this.state}`);
-           this.notify();
-       }
-   }
+// 添加观察者
+breakfast.attach(xiaoming)
+breakfast.attach(xiaohong)
+breakfast.attach(xiaoan)
 
-   /**
-    * The Observer interface declares the update method, used by subjects.
-    */
-   interface Observer {
-       // Receive update from subject.
-       update(subject: Subject): void;
-   }
+// 取消观察
+// breakfast.detach(xiaoan)
+```
 
-   /**
-    * Concrete Observers react to the updates issued by the Subject they had been
-    * attached to.
-    */
-   class ConcreteObserverA implements Observer {
-       public update(subject: Subject): void {
-           if (subject instanceof ConcreteSubject && subject.state < 3) {
-               console.log('ConcreteObserverA: Reacted to the event.');
-           }
-       }
-   }
+当早餐发生变化时，不同类型的人会根据不同的早餐产生不同的情绪。
 
-   class ConcreteObserverB implements Observer {
-       public update(subject: Subject): void {
-           if (subject instanceof ConcreteSubject && (subject.state === 0 || subject.state >= 2)) {
-               console.log('ConcreteObserverB: Reacted to the event.');
-           }
-       }
-   }
+![breakfrast](./images/design-patterns-observer/breakfast.gif)
 
-   /**
-    * The client code.
-    */
-
-   const subject = new ConcreteSubject();
-
-   const observer1 = new ConcreteObserverA();
-   subject.attach(observer1);
-
-   const observer2 = new ConcreteObserverB();
-   subject.attach(observer2);
-
-   subject.someBusinessLogic();
-   subject.someBusinessLogic();
-
-   subject.detach(observer2);
-
-   subject.someBusinessLogic();
-   ```
+<p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="js,result" data-user="xrr2016" data-slug-hash="xxOEqJK" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Observer Pattern">
+  <span>See the Pen <a href="https://codepen.io/xrr2016/pen/xxOEqJK">
+  Observer Pattern</a> by Cold Stone (<a href="https://codepen.io/xrr2016">@xrr2016</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
