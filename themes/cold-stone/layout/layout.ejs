@@ -7,15 +7,7 @@
 
   <main class="main wrapper"><%- body %></main>
 
-  <% if (!is_post()) { %>
   <%- partial('_partial/footer', null, {cache: false}) %>
-  <% } %>
-
-  <% if (is_current('about', false)) { %>
-  <%- partial('_partial/bubble', null, {cache: true}) %>
-  <% } %>
-
-  <%- partial('_partial/script', null, {cache: false}) %>
 </body>
 
 </html>
