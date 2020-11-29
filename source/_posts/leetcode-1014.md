@@ -7,6 +7,8 @@ tags:
 date: 2020-06-17 14:19:00
 ---
 
+![best_of_you](./images/best_of_you.png)
+
 <!--more-->
 
 [LeetCode 1014. 最佳观光组合](https://leetcode-cn.com/problems/best-sightseeing-pair/)

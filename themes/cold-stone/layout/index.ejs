@@ -2,90 +2,137 @@
 layout: layout
 ---
 
-<section class="index-content">
-    <div class="index-post-list">
-        <ul class="index-list list-unstyled animate-list">
-            <% page.posts.each(function(post) { %>
-            <li class="animate-list__item card card-hover">
-                <a class="index-post-link uk-link-reset" href="<%- config.root %><%- post.path %>">
-                    <span class="uk-text-lead animate-list__title"><%- post.title %></span>
-                    <p class="index-post-excerpt"><%- post.excerpt %></p>
-                </a>
-                <p class="animate-list__desc">
-                    <span class="post-info">
-                        <span><%= __('post.postTime') %>&#58;</span>
-                        <time class="post-time"
-                            datetime="<%= post.date.format(config.date_format) _%>"><%= post.date.format(config.date_format) _%></time>&nbsp;
-                        <span><%= __('post.wordCount') %>&#58; <%= wordcount(post.more) %></span>&nbsp;
-                        <% if (post.tags) { %>
-                        <span><%= __('post.tags') _%>&#58; </span>
-                        <span class="meta-tags">
-                            <% post.tags.forEach(function(tag){ %>
-                            <a class="meta-tag" href="<%= config.root %>tags/#<%= tag.name %>"
-                                title="<%= tag.name %>"><%= tag.name %></a>
-                            <% }) %>
-                        </span>
-                        <% } %>
-                    </span>
-                </p>
-            </li>
-            <% }); %>
-        </ul>
+<section class="index-post my-24">
+  <ul class="index-post-list grid grid-cols-2 gap-8">
+    <% page.posts.each(function(post, index) { %>
+    <li
+      class="index-post-list-item text-sm shadow-2xl h-96 rounded overflow-hidden <% if (index === 0) { %> col-span-full <% } %>"
+    >
+      <a
+        class="block h-full p-12 relative"
+        title="<%- post.title %>"
+        href="<%- config.root %><%- post.path %>"
+      >
+        <div>
+          <time
+            class="text-xs italic"
+            datetime="<%- post.date.format(config.date_format) %>"
+            ><%- post.date.format(config.date_format)%></time
+          >
 
-        <% if(page.total > 2) { %>
-        <nav class="paginator">
-            <%- paginator({
-                prev_text: '←',
-                next_text: '→'
-            }) %>
-        </nav>
-        <% } else { %>
-        <ul class="list-unstyled pager">
-            <li class="left">
-                <% if (page.prev){ %>
-                <a href="<%- config.root %><%- page.prev_link %>">&larr; <%= __('page.previous') %></a>
-                <% } else { %>
-                <a class="link-disabled">&larr; <%= __('page.previous') %></a>
-                <% } %>
-            </li>
-            <li class="right">
-                <% if (page.next){ %>
-                <a href="<%- config.root %><%- page.next_link %>"><%= __('page.next') %> &rarr;</a>
-                <% } else { %>
-                <a class="link-disabled"><%= __('page.next') %> &rarr;</a>
-                <% } %>
-            </li>
-        </ul>
-        <% } %>
-    </div>
-
-    <aside class="index-aside">
-        <div class="card aside-tags">
-            <ul class="tags list-unstyled" uk-sortable="handle: .tag-item">
-                <% site.tags.map(function(tag){  %>
-                <li class="tag-item"><a href="<%= config.root %>tags/#<%= tag.name %>" title="<%= tag.name %>"
-                        rel="<%= tag.length %>">#<%= tag.name %></a></li>
-                <% }) %>
-            </ul>
+          <span class="text-xs italic"
+            ><%- __('post.wordCount') %>&#58;&nbsp;<%- wordcount(post.more)
+            %></span
+          >
         </div>
 
-        <div class="card">
-            <%- list_archives({
-                class: 'archive-tag',
-                order: -1,
-                format: 'YYYY-MM',
-            }) %>
-        </div>
+        <p
+          class="index-post-list-title pt-10 pb-10 lg:text-3xl text-xl capitalize tracking-wide"
+        >
+          <%- post.title %>
+        </p>
 
-        <div class="card">
-            <ul class="uk-list uk-margin-remove-bottom">
-                <li><a class="friend-link" href="https://kalasearch.cn/blog" target="_blank">卡拉搜索</a></li>
-                <li><a class="friend-link" href="https://blog.inmind.ltd/" target="_blank">Mind's blog</a></li>
-                <li><a class="friend-link" href="https://oldchen.top/flutter-blog/#/" target="_blank">老晨子</a></li>
-                <li><a class="friend-link" href="https://evila.me/" target="_blank">evillt</a></li>
-                <li> <a class="friend-link" href="https://www.v2fy.com/" target="_blank">猫爪导航🐱</a></li>
-                <li> <a class="friend-link" href="https://wxsm.space" target="_blank">wxsm's space</a></li>
-            </ul>
+        <%- post.excerpt %>
+
+        <div class="block mt-12">
+          <% post.tags.forEach(function(tag){ %>
+          <span
+            class="text-xs p-1.5 text-white bg-purple-400 rounded"
+            title="<%- tag.name %>"
+            ><%- tag.name %></span
+          >
+          <% }) %>
         </div>
-    </aside>
+      </a>
+    </li>
+    <% }) %>
+  </ul>
 </section>
+
+<!-- 
+<aside class="index-aside">
+  <div class="card aside-tags">
+    <ul class="tags list-unstyled" uk-sortable="handle: .tag-item">
+      <% site.tags.map(function(tag){ %>
+      <li class="tag-item">
+        <a
+          href="<%= config.root %>tags/#<%= tag.name %>"
+          title="<%= tag.name %>"
+          rel="<%= tag.length %>"
+          >#<%= tag.name %></a
+        >
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <div class="card">
+    <%- list_archives({ class: 'archive-tag', order: -1, format: 'YYYY-MM', })
+    %>
+  </div>
+
+  <div class="card">
+    <ul class="uk-list uk-margin-remove-bottom">
+      <li>
+        <a class="friend-link" href="https://kalasearch.cn/blog" target="_blank"
+          >卡拉搜索</a
+        >
+      </li>
+      <li>
+        <a class="friend-link" href="https://blog.inmind.ltd/" target="_blank"
+          >Mind's blog</a
+        >
+      </li>
+      <li>
+        <a
+          class="friend-link"
+          href="https://oldchen.top/flutter-blog/#/"
+          target="_blank"
+          >老晨子</a
+        >
+      </li>
+      <li>
+        <a class="friend-link" href="https://evila.me/" target="_blank"
+          >evillt</a
+        >
+      </li>
+      <li>
+        <a class="friend-link" href="https://www.v2fy.com/" target="_blank"
+          >猫爪导航🐱</a
+        >
+      </li>
+      <li>
+        <a class="friend-link" href="https://wxsm.space" target="_blank"
+          >wxsm's space</a
+        >
+      </li>
+    </ul>
+  </div>
+</aside> -->
+
+<!-- <% if(page.total > 2) { %>
+  <nav class="paginator">
+    <%- paginator({ prev_text: '←', next_text: '→' }) %>
+  </nav>
+  <% } else { %>
+  <ul class="list-unstyled pager">
+    <li class="left">
+      <% if (page.prev){ %>
+      <a href="<%- config.root %><%- page.prev_link %>"
+        >&larr; <%= __('page.previous') %></a
+      >
+      <% } else { %>
+      <a class="link-disabled">&larr; <%= __('page.previous') %></a>
+      <% } %>
+    </li>
+    <li class="right">
+      <% if (page.next){ %>
+      <a href="<%- config.root %><%- page.next_link %>"
+        ><%= __('page.next') %> &rarr;</a
+      >
+      <% } else { %>
+      <a class="link-disabled"><%= __('page.next') %> &rarr;</a>
+      <% } %>
+    </li>
+  </ul>
+  <% } %> -->

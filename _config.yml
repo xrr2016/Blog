@@ -5,10 +5,12 @@
 # Site
 title: 冷石
 description: 孑然一身，傲立于世
-keywords: "冷石, 前端, 面试，Web, Js, CSS, Node.js, Frontend, Flutter, Docker, Dart, Mysql, Egg.js"
+keywords: '冷石, 前端, 面试，Web, Js, CSS, Node.js, Frontend, Flutter, Docker, Dart, Mysql, Egg.js'
 author: ColdStone
 language: zh
 timezone: Asia/Shanghai
+# blog config
+seo_title: 冷石的博客
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -24,10 +26,6 @@ public_dir: public
 tag_dir: tags
 archive_dir: archives
 category_dir: categories
-music_dir: music
-# friends_dir: friends
-project_dir: projects
-activity_dir: activity
 code_dir: code
 i18n_dir: :lang
 skip_render:
@@ -42,21 +40,6 @@ filename_case: 0
 render_drafts: false
 post_asset_folder: false
 relative_link: false
-future: false
-highlight:
-  enable: false
-  line_number: false
-  auto_detect: false
-  tab_replace: false
-
-# Home page setting
-# path: Root path for your blogs index page. (default = '')
-# per_page: Posts displayed per page. (0 = disable pagination)
-# order_by: Posts order. (Order by date descending by default)
-index_generator:
-  path: ""
-  per_page: 12
-  order_by: -date
 
 # Category & Tag
 default_category: uncategorized
@@ -72,26 +55,13 @@ time_format: HH:mm:ss
 
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 10
+per_page: 21
 pagination_dir: page
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: cold-stone
-
-# Deployment
-## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  - type: git
-    repo: https://github.com/xrr2016/blog
-    branch: gh-pages
-  # - type: git
-  #   repo: https://e.coding.net/coldstonestudio/blog.git
-  #   branch: coding-pages
-
-# blog config
-seo_title: 冷石的博客
 
 # user config
 avatar: avatar.jpg
@@ -109,10 +79,6 @@ sns:
   leetcode: coldstone
   # segmentfault: taqianzhan
 
-# page stat
-track:
-  gaid: UA-119658292-2
-
 # RSS
 # rss: true
 feed:
@@ -122,9 +88,9 @@ feed:
   hub:
   content: true
   content_limit: 140
-  content_limit_delim: " "
+  content_limit_delim: ' '
   order_by: -date
   icon: avatar.png
   autodiscovery: true
 
-all_minifier: true
+all_minifier: false

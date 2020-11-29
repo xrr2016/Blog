@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="<%- config.language %>">
-<%- partial('_partial/head') %>
-
-<body>
-  <%- partial('_partial/header', null, {cache: false}) %>
-
-  <main class="main wrapper"><%- body %></main>
-
-  <%- partial('_partial/footer', null, {cache: false}) %>
-</body>
-
+  <%- partial('_partial/head') %>
+  <body class="font-mono subpixel-antialiased">
+    <%- partial('_partial/header', null, {cache: false}) %>
+    <main class="container mx-auto"><%- body %></main>
+    <%- partial('_partial/footer', null, {cache: false}) %>
+  </body>
 </html>

@@ -1,0 +1,23 @@
+.index-post-list-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 0;
+  object-fit: cover;
+  filter: blur(2px);
+  opacity: 0.5;
+}
+
+@media all and (max-width: 1280px) {
+  .index-post-list-item img {
+    display: none;
+  }
+}
+
+.index-post-list-title {
+  text-shadow: 0 0 12px white;
+}
