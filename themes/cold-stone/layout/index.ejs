@@ -2,7 +2,7 @@
 layout: layout
 ---
 
-<section class="index-post my-24">
+<section class="index-post pt-24 pb-24">
   <ul class="index-post-list grid grid-cols-2 gap-8">
     <% page.posts.each(function(post, index) { %>
     <li
@@ -47,6 +47,10 @@ layout: layout
     </li>
     <% }) %>
   </ul>
+
+  <nav class="flex justify-center items-center pt-32">
+    <%- paginator({ prev_text: '←', next_text: '→' }) %>
+  </nav>
 </section>
 
 <!-- 
@@ -70,69 +74,4 @@ layout: layout
     <%- list_archives({ class: 'archive-tag', order: -1, format: 'YYYY-MM', })
     %>
   </div>
-
-  <div class="card">
-    <ul class="uk-list uk-margin-remove-bottom">
-      <li>
-        <a class="friend-link" href="https://kalasearch.cn/blog" target="_blank"
-          >卡拉搜索</a
-        >
-      </li>
-      <li>
-        <a class="friend-link" href="https://blog.inmind.ltd/" target="_blank"
-          >Mind's blog</a
-        >
-      </li>
-      <li>
-        <a
-          class="friend-link"
-          href="https://oldchen.top/flutter-blog/#/"
-          target="_blank"
-          >老晨子</a
-        >
-      </li>
-      <li>
-        <a class="friend-link" href="https://evila.me/" target="_blank"
-          >evillt</a
-        >
-      </li>
-      <li>
-        <a class="friend-link" href="https://www.v2fy.com/" target="_blank"
-          >猫爪导航🐱</a
-        >
-      </li>
-      <li>
-        <a class="friend-link" href="https://wxsm.space" target="_blank"
-          >wxsm's space</a
-        >
-      </li>
-    </ul>
-  </div>
 </aside> -->
-
-<!-- <% if(page.total > 2) { %>
-  <nav class="paginator">
-    <%- paginator({ prev_text: '←', next_text: '→' }) %>
-  </nav>
-  <% } else { %>
-  <ul class="list-unstyled pager">
-    <li class="left">
-      <% if (page.prev){ %>
-      <a href="<%- config.root %><%- page.prev_link %>"
-        >&larr; <%= __('page.previous') %></a
-      >
-      <% } else { %>
-      <a class="link-disabled">&larr; <%= __('page.previous') %></a>
-      <% } %>
-    </li>
-    <li class="right">
-      <% if (page.next){ %>
-      <a href="<%- config.root %><%- page.next_link %>"
-        ><%= __('page.next') %> &rarr;</a
-      >
-      <% } else { %>
-      <a class="link-disabled"><%= __('page.next') %> &rarr;</a>
-      <% } %>
-    </li>
-  </ul>
-  <% } %> -->

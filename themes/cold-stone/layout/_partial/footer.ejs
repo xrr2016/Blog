@@ -1,12 +1,5 @@
-<footer class="footer container mx-auto m-16">
-  <!-- <svg class="wave" id="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-    <path fill="#fff" fill-opacity="1"
-      d="M0,96L24,117.3C48,139,96,181,144,197.3C192,213,240,203,288,213.3C336,224,384,256,432,240C480,224,528,160,576,133.3C624,107,672,117,720,106.7C768,96,816,64,864,85.3C912,107,960,181,1008,202.7C1056,224,1104,192,1152,181.3C1200,171,1248,181,1296,154.7C1344,128,1392,64,1416,32L1440,0L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z">
-    </path>
-  </svg> -->
-
-  <div class="footer-content wrapper">
-    <!-- <div class="footer-toggle">
+<footer class="footer text-sm container mx-auto flex justify-between py-32">
+  <!-- <div class="footer-toggle">
       <button
         class="menu-button dark-btn"
         data-theme="dark"
@@ -59,25 +52,151 @@
         </svg>
       </button>
     </div> -->
-    <p class="footer-text">
-      Copyright &copy; <a href="<%= config.root %>"><%= config.author %></a>
+  <ul class="space-y-2">
+    <li>
+      <p>
+        Copyright&nbsp;&copy;&nbsp;<a href="<%- config.root %>"
+          ><%- config.author %></a
+        >
+      </p>
+    </li>
 
+    <li>
       <a
-        class="footer-text theme-link"
+        class=""
         rel="noopener"
         href="https://github.com/xrr2016/hexo-theme-cold-stone"
         target="_blank"
         >Theme Cold Stone</a
       >
-    </p>
-    <!-- <p class="footer-text"><%= __('blog.wordcount') %>&#58; <%= totalcount(site) %></p>
-    <p class="footer-text hide" id="busuanzi_container_site_uv">
-      <%= __('blog.visitcount') %>&#58; <span id="busuanzi_value_site_uv"></span>
-    </p>
-    <p class="footer-text hide" id="busuanzi_container_site_pv">
-      <%= __('blog.viewcount') %>&#58; <span id="busuanzi_value_site_pv"></span>
-    </p> -->
+    </li>
 
-    <!-- <a class="footer-text theme-link" href="<%= config.root %>atom.xml">RSS</a> -->
-  </div>
+    <li>
+      <p class="flex items-center">
+        <span class="mr-2"
+          ><%= __('blog.wordcount') %>&#58; <%= totalcount(site) %></span
+        >
+        <a class="" href="<%= config.root %>atom.xml">
+          <svg
+            class="w-4 h-4"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"
+            />
+          </svg>
+        </a>
+      </p>
+    </li>
+    <li>
+      <a
+        rel="license"
+        href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans"
+      >
+        <img
+          class="license-img"
+          alt="知识共享许可协议"
+          src="https://img.shields.io/badge/license-BY--NC--SA%204.0-green"
+        />
+      </a>
+    </li>
+  </ul>
+
+  <ul class="space-y-2">
+    <% if (config.sns.github) { %>
+    <li>
+      <a
+        class=""
+        target="_blank"
+        rel="noopener"
+        href="https://github.com/<%= config.sns.github %>"
+        >Github</a
+      >
+    </li>
+    <% } %> <% if (config.sns.juejin) { %>
+    <li>
+      <a
+        class=""
+        target="_blank"
+        rel="noopener"
+        href="https://juejin.im/user/<%= config.sns.juejin %>"
+        >掘金</a
+      >
+    </li>
+    <% } %> <% if (config.sns.segmentfault) { %>
+    <li>
+      <a
+        class=""
+        target="_blank"
+        rel="noopener"
+        href="https://segmentfault.com/u/<%= config.sns.segmentfault %>/articles"
+        >思否</a
+      >
+      <% } %>
+    </li>
+    <% if (config.sns.zhihu) { %>
+    <li>
+      <a
+        class="about-link"
+        target="_blank"
+        rel="noopener"
+        href="https://zhihu.com/people/<%= config.sns.zhihu %>/posts"
+        >知乎</a
+      >
+    </li>
+    <% } %> <% if (config.sns.leetcode) { %>
+    <li>
+      <a
+        class="about-link"
+        target="_blank"
+        rel="noopener"
+        href="https://leetcode-cn.com/u/<%= config.sns.leetcode %>"
+        >力扣</a
+      >
+    </li>
+    <% } %> <% if (config.sns.twitter) { %>
+    <li>
+      <a
+        class="about-link"
+        target="_blank"
+        rel="noopener"
+        href="https://twitter.com/<%= config.sns.twitter %>"
+        >Twitter</a
+      >
+      <% } %>
+    </li>
+  </ul>
+
+  <ul class="space-y-2">
+    <li>
+      <a class="friend-link" href="https://kalasearch.cn/blog" target="_blank"
+        >卡拉搜索</a
+      >
+    </li>
+    <li>
+      <a class="" href="https://blog.inmind.ltd/" target="_blank"
+        >Mind's blog</a
+      >
+    </li>
+    <li>
+      <a class="" href="https://oldchen.top/flutter-blog/#/" target="_blank"
+        >老晨子</a
+      >
+    </li>
+    <li>
+      <a class="" href="https://evila.me/" target="_blank">evillt</a>
+    </li>
+    <li>
+      <a class="" href="https://www.v2fy.com/" target="_blank">猫爪导航🐱</a>
+    </li>
+    <li>
+      <a class="" href="https://wxsm.space" target="_blank">wxsm's space</a>
+    </li>
+  </ul>
 </footer>

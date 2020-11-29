@@ -8,8 +8,7 @@
   height: 100%;
   line-height: 0;
   object-fit: cover;
-  filter: blur(2px);
-  opacity: 0.5;
+  filter: blur(2px) opacity(0.6);
 }
 
 @media all and (max-width: 1280px) {
@@ -20,4 +19,14 @@
 
 .index-post-list-title {
   text-shadow: 0 0 12px white;
+}
+
+.page-number {
+  padding: 0 2rem;
+  margin: 0 2rem;
+  font-weight: 300;
+}
+
+.page-number.current {
+  font-weight: 600;
 }

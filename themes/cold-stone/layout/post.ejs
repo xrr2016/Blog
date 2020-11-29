@@ -1,72 +1,49 @@
-<article class="prose">
-  <section class="article-header">
+<article class="prose prose-xl mx-auto">
+  <section class="pt-24">
     <% if (page.cover) { %>
-    <section class="article-cover uk-margin-bottom">
-      <img src="<%= page.cover %>" alt="cover" />
-    </section>
+    <img src="<%- page.cover %>" alt="cover" />
     <% } %>
-    <h1 class="article-title uk-article-title"><%= page.title %></h1>
-    <p class="article-meta uk-article-meta">
-      <span class="meta-info">
-        <span>
-          <%= __('post.updateTime') %>&#58;<time
-            class="post-time"
-            datetime="<%= page.updated.format(config.date_format) %>"
-            ><%= page.updated.format(config.date_format) %></time
-          >
-        </span>
-        <span
-          ><%= __('post.readingTime') %>&#58; <%= min2read(page.more) %>
-          min</span
-        >
-        <span class="hide" id="busuanzi_container_page_pv"
-          ><%= __('post.readed') %>&#58;
-          <span id="busuanzi_value_page_pv"></span
-        ></span>
-      </span>
-    </p>
-  </section>
-  <section class="article-content"><%- page.more %></section>
 
-  <hr />
-  <p class="article-license">
+    <h1 class="text-3xl"><%- page.title %></h1>
+
     <span>
-      本文采用<a
-        rel="license"
-        href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans"
-        target="_blank"
-        >知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a
-      >进行许可
+      <%= __('post.updateTime') %>&#58;&nbsp;<time
+        class="post-time"
+        datetime="<%= page.updated.format(config.date_format) %>"
+        ><%= page.updated.format(config.date_format) %></time
+      >
     </span>
-    <!-- <img class="license-img" alt="知识共享许可协议" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /> -->
-    <!-- <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans">
-      <img class="license-img" alt="知识共享许可协议" src="https://img.shields.io/badge/license-BY--NC--SA%204.0-green" />
-    </a> -->
-  </p>
+    <span class="px-6"
+      ><%= __('post.readingTime') %>&#58;&nbsp;<%- min2read(page.more) %>
+      min</span
+    >
+  </section>
+
+  <section class=""><%- page.more %></section>
+
+  <section class="flex justify-between mt-24 mb-24">
+    <% if (page.prev) { %>
+    <a
+      class=""
+      href="<%- config.root %><%- page.prev.path %>"
+      title="<%- page.prev.title %>"
+    >
+      &larr;&nbsp;<%- page.prev.title %>
+    </a>
+    <% } else { %>
+    <span class="text-gray">&larr; <%- __('post.notMore') %></span>
+    <% } %> <% if (page.next){ %>
+    <a
+      class=""
+      href="<%- config.root %><%- page.next.path %>"
+      title="<%- page.next.title %>"
+    >
+      <%- page.next.title %>&nbsp;&rarr;
+    </a>
+    <% } else { %>
+    <span class="text-gray"><%= __('post.notMore') %>&nbsp;&rarr;</span>
+    <% } %>
+  </section>
+
+  <section class="comment" id="utteranc"></section>
 </article>
-
-<%- partial('_partial/prev_next', null, {cache: false}) %>
-
-<section class="article-toc">
-  <div class="card"><%- toc(page.more, {list_number : false }) %></div>
-
-  <!-- <div class="card uk-inline-clip uk-padding-remove">
-    <img class="zanshang-img" src="<%= config.root %><%= config.zanshang %>" />
-  </div> -->
-</section>
-
-<section class="article slide-in-right">
-  <!-- <div class="loader" id="loader">
-    <svg viewBox="0 0 50 50">
-      <circle class="ring" cx="25" cy="25" r="20"></circle>
-      <circle class="ball" cx="25" cy="5" r="3.5"></circle>
-    </svg>
-  </div> -->
-
-  <div class="comment" id="utteranc"></div>
-  <noscript>Please activate JavaScript for normal use of comments</noscript>
-</section>
-
-<a class="card back-to-top" id="backTop">&UpArrow;</a>
-
-<!-- <div id="player"></div> -->

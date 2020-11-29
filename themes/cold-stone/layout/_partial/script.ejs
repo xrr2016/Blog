@@ -1,1 +1,21 @@
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
 
+<script>
+  const loader = document.getElementById('loader')
+  const utteranc = document.getElementById('utteranc')
+
+  if (utteranc) {
+    const uscript = document.createElement('script')
+
+    uscript.async = true
+    uscript.crossOrigin = 'anonymous'
+    uscript.src = 'https://utteranc.es/client.js'
+    uscript.setAttribute('repo', 'xrr2016/blog')
+    uscript.setAttribute('issue-term', 'pathname')
+    uscript.setAttribute('theme', 'github-light')
+    utteranc.appendChild(uscript)
+  }
+</script>
