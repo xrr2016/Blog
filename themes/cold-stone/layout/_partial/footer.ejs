@@ -76,35 +76,12 @@
         <span class="mr-2"
           ><%= __('blog.wordcount') %>&#58; <%= totalcount(site) %></span
         >
-        <a class="" href="<%= config.root %>atom.xml">
-          <svg
-            class="w-4 h-4"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"
-            />
-          </svg>
-        </a>
       </p>
     </li>
     <li>
-      <a
-        rel="license"
-        href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans"
-      >
-        <img
-          class="license-img"
-          alt="知识共享许可协议"
-          src="https://img.shields.io/badge/license-BY--NC--SA%204.0-green"
-        />
-      </a>
+      <p class="">
+        <%= __('blog.totalpost') %>&#58; <%= site.posts.length %> 篇
+      </p>
     </li>
   </ul>
 
@@ -170,6 +147,24 @@
         >Twitter</a
       >
       <% } %>
+    </li>
+    <li>
+      <a class="" href="<%= config.root %>atom.xml">
+        <svg
+          class="w-4 h-4"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"
+          />
+        </svg>
+      </a>
     </li>
   </ul>
 

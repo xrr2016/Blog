@@ -2,13 +2,12 @@
 title: 如何在 Egg.js 中使用 Sequelize 的事务 Transaction
 date: 2019-08-22 14:07:14
 tags:
-  - Egg
+  - Egg.js
 categories:
   - 技术
 ---
 
-在查了几遍 [Sequelize](https://sequelize.org/) 关于 [Transactions](https://sequelize.org/master/manual/transactions.html) 的文档，看了大佬同事的代码后，我终于弄懂怎么在 egg.js 框架里面使用事务了 😓
-
+Egg.js 框架使用事务
 <!--more-->
 
 ## 前言
