@@ -30,3 +30,21 @@
 .page-number.current {
   font-weight: 600;
 }
+
+.prose .highlight {
+  overflow: auto;
+}
+
+.prose .highlight table td {
+  padding: 0;
+}
+
+.prose .highlight .gutter pre {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.prose .highlight .code pre {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
