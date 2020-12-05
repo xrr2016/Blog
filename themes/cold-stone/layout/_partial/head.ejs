@@ -12,7 +12,9 @@
   <meta name="description" content="<%= config.description %>" />
   <title><%= config.seo_title %></title>
   <base href="/" />
+  <link rel="preconnect" href="//cdn.bootcdn.net" />
   <link rel="preconnect" href="//cdn.bootcss.com" />
+  <link rel="preconnect" href="//unpkg.com" />
   <link rel="shortcut icon" href="<%= config.root %>icons/icon-72x72.png" />
   <link
     rel="apple-touch-icon"
@@ -23,12 +25,12 @@
     rel="stylesheet"
   />
   <link
-    rel="stylesheet"
-    href="https://unpkg.com/@tailwindcss/typography@0.2.x/dist/typography.min.css"
+  href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-light.min.css"
+  rel="stylesheet"
   />
   <link
-    href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-light.min.css"
     rel="stylesheet"
+    href="https://unpkg.com/@tailwindcss/typography@0.2.x/dist/typography.min.css"
   />
   <%- css(['styles/theme.css']) %>
 </head>
