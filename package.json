@@ -6,6 +6,7 @@
     "version": "4.0.0"
   },
   "scripts": {
+    "new": "hexo new",
     "dev": "hexo server",
     "clean": "hexo clean",
     "build": "hexo clean && hexo generate"

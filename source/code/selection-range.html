@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selection And Range</title>
+  </head>
+  <body>
+    <div id="div">Hello <span>World</span><b>!</b></div>
+
+    <script>
+      document.addEventListener('selectionchange', (event) => {
+        const {
+          anchorNode,
+          anchorOffset,
+          focusNode,
+          focusOffset,
+        } = document.getSelection()
+
+        console.log('anchorNode: ', anchorNode)
+        console.log('anchorOffset: ', anchorOffset)
+        console.log('focusNode: ', focusNode)
+        console.log('focusOffset: ', focusOffset)
+        console.log('----------')
+      })
+    </script>
+  </body>
+</html>
