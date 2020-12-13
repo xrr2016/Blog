@@ -171,8 +171,6 @@ export const Transforms = {
 }
 ```
 
-####
-
 #### createEditor
 
 创建编辑器实例的方法，返回一个实现了 `Editor` 接口的编辑器实例对象。
@@ -366,8 +364,6 @@ export const withHistory = <T extends Editor>(editor: T) => {
 
 [slate-hyperscript](https://github.com/ianstormtaylor/slate/tree/main/packages/slate-hyperscript) 是一个使用  JSX  编写  Slate  文档的  hyperscript  工具
 
-##
-
 ## 插件机制
 
 Slate 的插件只是一个返回 `editor` 实例的函数，在这个函数中通过重写编辑器实例方法，修改编辑器行为。
@@ -395,8 +391,6 @@ const editor = myPlugin(createEditor())
 如此以来插件就能完全控制编辑器行为，正如 Slate 的官方介绍所说
 
 > Slate 是一个   完全   可定制的富文本编辑器框架。
-
-##
 
 ## 渲染机制
 
@@ -535,8 +529,6 @@ const renderElement = props => <Element {...props} />
   />
 </Slate>
 ```
-
-###
 
 ### 触发渲染
 
