@@ -1046,14 +1046,14 @@ const editor = useMemo(() => withEmojis(withReact(createEditor())), [])
 - 渲染层目前只有 React，要在其他框架中使用需要自行实现
 - 数据渲染分离，需要完全控制用户输入行为，否则可能导致数据和渲染不同步
 - 基于 contenteditable 无法突破浏览器的排版效果
-- 对中文输入支持不足，详见此 [链接]()
+- 对中文输入支持不足，详见此 [链接](https://www.zhihu.com/question/361228704/answer/937791493)
 - 社区驱动开发，问题可能得不到及时修复
 
 ## 总结
 
 Slate 是一个设计优秀的富文本编辑器开发框架，具有很高的可扩展性。
 如果需要一个能迅速接入并使用的富文本编辑器，那么可以使用 ckeditor4, tinymce, ueditor 这些提供开箱即用功能的编辑器。
-如果是要开发一款功能丰富，需要定制化的编辑器那么可以选择 draftjs, quill, prosemirror, ckeditor5 等，而 Slate 将是你的第一选择。
+如果是要开发一款功能丰富，需要定制化的编辑器那么 Slate 将是你的第一选择。
 
 ## 参考
 
