@@ -40,6 +40,10 @@
 }
 
 .prose .highlight .gutter pre {
+  padding-right: 0;
+}
+
+.prose .highlight .gutter pre {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
