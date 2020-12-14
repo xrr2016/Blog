@@ -14,7 +14,7 @@ date: 2020-12-13 22:21:01
 
 ## 介绍
 
-[Slate](https://github.com/ianstormtaylor/slate) 是一个使用 TypeScript 开发富文本编辑器开发框架，诞生于 2016 年，作者是 [Ian Storm Taylor](https://github.com/ianstormtaylor)。它吸收了 [Quill](quilljs)，[Prosemirror](http://prosemirror.net/)，[Draft.js](https://facebook.github.io/draft-js/) 的优点，核心数据模型十分精简，具有高度的可扩展性，最新版本为 [v0.60.1](https://github.com/ianstormtaylor/slate/releases/tag/v0.60.1)。
+[Slate](https://github.com/ianstormtaylor/slate) 是一个使用 TypeScript 开发富文本编辑器开发框架，诞生于 2016 年，作者是 [Ian Storm Taylor](https://github.com/ianstormtaylor)。它吸收了 [Quill](https://quilljs.com/)，[Prosemirror](http://prosemirror.net/)，[Draft.js](https://facebook.github.io/draft-js/) 的优点，核心数据模型十分精简，具有高度的可扩展性，最新版本为 [v0.60.1](https://github.com/ianstormtaylor/slate/releases/tag/v0.60.1)。
 
 ## 特点
 
