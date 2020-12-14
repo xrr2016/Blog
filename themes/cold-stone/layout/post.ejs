@@ -6,27 +6,29 @@
 
     <h1 class="text-3xl"><%- page.title %></h1>
 
-    <span>
-      <%= __('post.updateTime') %>&#58;&nbsp;<time
-        class="post-time"
-        datetime="<%= page.updated.format(config.date_format) %>"
-        ><%= page.updated.format(config.date_format) %></time
+    <p class="flex items-center">
+      <span>
+        <%= __('post.updateTime') %>&#58;&nbsp;<time
+          class="post-time"
+          datetime="<%= page.updated.format(config.date_format) %>"
+          ><%= page.updated.format(config.date_format) %></time
+        >
+      </span>
+      <span class="px-6"
+        ><%= __('post.readingTime') %>&#58;&nbsp;<%- min2read(page.more) %>
+        min</span
       >
-    </span>
-    <span class="px-6"
-      ><%= __('post.readingTime') %>&#58;&nbsp;<%- min2read(page.more) %>
-      min</span
-    >
-    <a
-      rel="license"
-      href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans"
-    >
-      <img
-        class="license-img"
-        alt="知识共享许可协议"
-        src="https://img.shields.io/badge/license-BY--NC--SA%204.0-green"
-      />
-    </a>
+      <a
+        rel="license"
+        href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans"
+      >
+        <img
+          class="license-img"
+          alt="知识共享许可协议"
+          src="https://img.shields.io/badge/license-BY--NC--SA%204.0-green"
+        />
+      </a>
+    </p>
   </section>
 
   <section class=""><%- page.more %></section>

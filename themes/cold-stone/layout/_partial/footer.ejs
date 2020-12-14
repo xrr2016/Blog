@@ -1,66 +1,17 @@
 <footer class="footer text-sm container mx-auto flex justify-between py-32">
-  <!-- <div class="footer-toggle">
-      <button
-        class="menu-button dark-btn"
-        data-theme="dark"
-        aria-label="Switch to dark mode"
-        title="Switch to dark mode"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-moon undefined"
-        >
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </button>
-
-      <button
-        class="menu-button light-btn"
-        data-theme="light"
-        aria-label="Switch to light mode"
-        title="Switch to light mode"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-sun undefined"
-        >
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-      </button>
-    </div> -->
   <ul class="space-y-2">
     <li>
-      <p>
-        Copyright&nbsp;&copy;&nbsp;<a href="<%- config.root %>"
-          ><%- config.author %></a
+      <p class="">
+        <%= __('blog.totalpost') %>&#58; <%= site.posts.length %> 篇
+      </p>
+    </li>
+    <li>
+      <p class="flex items-center">
+        <span class="mr-2"
+          ><%= __('blog.wordcount') %>&#58; <%= totalcount(site) %></span
         >
       </p>
     </li>
-
     <li>
       <a
         class=""
@@ -70,17 +21,11 @@
         >Theme Cold Stone</a
       >
     </li>
-
     <li>
-      <p class="flex items-center">
-        <span class="mr-2"
-          ><%= __('blog.wordcount') %>&#58; <%= totalcount(site) %></span
+      <p>
+        Copyright&nbsp;&copy;&nbsp;<a href="<%- config.root %>"
+          ><%- config.author %></a
         >
-      </p>
-    </li>
-    <li>
-      <p class="">
-        <%= __('blog.totalpost') %>&#58; <%= site.posts.length %> 篇
       </p>
     </li>
   </ul>
@@ -183,9 +128,6 @@
       <a class="" href="https://oldchen.top/flutter-blog/#/" target="_blank"
         >老晨子</a
       >
-    </li>
-    <li>
-      <a class="" href="https://evila.me/" target="_blank">evillt</a>
     </li>
     <li>
       <a class="" href="https://www.v2fy.com/" target="_blank">猫爪导航🐱</a>

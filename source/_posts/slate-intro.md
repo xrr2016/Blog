@@ -1044,8 +1044,7 @@ const editor = useMemo(() => withEmojis(withReact(createEditor())), [])
 ## 总结
 
 Slate 是一个设计优秀的富文本编辑器开发框架，具有很高的可扩展性。
-如果需要一个能迅速接入并使用的富文本编辑器，那么可以使用 ckeditor4, tinymce, ueditor 这些提供开箱即用功能的编辑器。
-如果是要开发一款功能丰富，需要定制化的编辑器那么 Slate 将是你的第一选择。
+如果需要一个能迅速接入并使用的富文本编辑器，那么可以使用 ckeditor4, tinymce, ueditor 这些提供开箱即用功能的编辑器。如果是要开发一款功能丰富，需要定制化的编辑器那么 Slate 将是你的第一选择。
 
 ## 参考
 
