@@ -23,7 +23,7 @@ date: 2020-12-13 22:21:01
 - 文档数据类似于 DOM 树，可嵌套
 - 具有原子化操作 API，理论上支持协同编辑
 - 使用 React 作为渲染层
-- 不可变数据结构 Immer
+- 不可变数据结构 [Immer](https://github.com/immerjs/immer)
 
 ## 架构图
 
@@ -591,7 +591,7 @@ const MyEditor = () => {
 export default MyEditor
 ```
 
-2. 创建编辑器对象 `editor` 和它的文档数据 `value`，将他们传递给 `<Slate />` 。
+2. 创建编辑器对象 `editor` 和文档数据 `value`，传递给 `<Slate />` 。
 
 ```javascript
 // ...
@@ -637,7 +637,7 @@ const MyEditor = () => {
 }
 ```
 
-4. 添加默认值编辑器的默认值，此时页面上应该会出现这行文本。
+4. 添加编辑器的默认值，此时页面上会出现这行文本。
 
 ```javascript
 /// ...
@@ -730,8 +730,7 @@ const MyToolbar = () => {
 }
 
 // ...
-
-;<Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
+<Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
   // 在此处使用
   <MyToolbar />
   <Editable
@@ -860,7 +859,7 @@ const MyToolbar = ({ editor }) => {
 
 ### 创建一个自定义树型元素
 
-Slate 的强大之处在于它的可扩展性，以下展示如何自定义一个树类型元素。
+Slate 的强大之处在于它的可扩展性，以下展示如何自定义一个树形元素。
 
 1. 定义树形元素
 
