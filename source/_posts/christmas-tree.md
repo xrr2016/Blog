@@ -14,8 +14,8 @@ date: 2020-12-23 08:49:20
 
 ## 初始化
 
+新建页面，添加一个 `canvas` 元素，引入 css, js 文件
 
-添加一个 `canvas` 元素，引入 css, js 文件
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +32,7 @@ date: 2020-12-23 08:49:20
 </html>
 
 ```
+
 ```css
 canvas {
   position: absolute;
@@ -43,6 +44,7 @@ canvas {
 }
 
 ```
+
 ```javascript
 const CANVAS_WIDTH = 360
 const CANVAS_HEIGHT = 620
@@ -64,8 +66,8 @@ window.addEventListener('load', main)
 
 ## 画树枝
 
+使用 `stroke` 方法绘制树枝，设置旋转角度绘制左右子树，保存状态，递归绘制子树。
 
-使用线条绘制树枝，每次绘制保存绘制转态，设置绘制旋转角度绘制左右子树，递归绘制。
 ```javascript
 function main() {
   const canvas = initCanvas('tree')
@@ -116,8 +118,8 @@ function drawBranches(canvas, start, angle, branchHeight, branchWidth) {
 
 ## 画树叶
 
+获取画布所有像素点 `alpha` 通道值，判断此处是否有图像，循环像素点数组绘制半圆。
 
-获取画布像素点 `alpha` 通道值，判断此处是否有图像，循环像素点数组绘制半圆。
 ```javascript
 function main() {
   const canvas = initCanvas('tree')
@@ -172,11 +174,13 @@ function drawLeaves(canvas) {
   }
 }
 ```
+
 ![leaves.png](https://cdn.nlark.com/yuque/0/2020/png/224563/1608734737527-08917a38-0a45-496d-9ec9-de9309fbfca0.png#align=left&display=inline&height=660&margin=%5Bobject%20Object%5D&name=leaves.png&originHeight=1320&originWidth=840&size=480606&status=done&style=none&width=420)
+
 ## 画礼物
 
+使用 `fillText` 和 `drawImage` 方法绘制文字和图片。
 
-余下的使用 `fillText` 和 `drawImage` 方法绘制即可。
 ```javascript
 function main() {
   const canvas = initCanvas('tree')
