@@ -82,9 +82,9 @@ function blob2Base64(blob, callback) {
 
 ## 拓展一下
 
-将远程图片转换为 Base64 格式，url ->  Image -> Canvas -> Base64
+将远程图片转换为 Base64 格式 url ->  Image -> Canvas -> Base64
 ```javascript
- function remoteImgTobase64(url, type, quality, callback) {
+ function remoteImageToBase64(url, callback) {
   const img = new Image()
   let canvas = document.createElement('canvas')
   let context = canvas.getContext('2d')
@@ -95,7 +95,7 @@ function blob2Base64(blob, callback) {
     context.drawImage(img, 0, 0)
 
     // 返回 Canvas 的 base64 数据
-    callback(canvas.toDataURL(type, quality))
+    callback(canvas.toDataURL('image/jpg', 1))
     canvas = null
   })
 
@@ -104,10 +104,20 @@ function blob2Base64(blob, callback) {
   img.crossOrigin = 'Anonymous'
 }
 
- remoteImgTobase64('https://game.gtimg.cn/images/lol/act/img/skin/big145014.jpg', (res) => {
+ remoteImageToBase64('https://game.gtimg.cn/images/lol/act/img/skin/big145014.jpg', (res) => {
    console.log('base64: ', res)
  })
 ```
+
+当然也可以使用 fetch 转为 Blob 类型
+
+```javascript
+async function remoteImageToBlob(url) {
+   const blob = await fetch(url).then((res) => res.blob())
+   
+   return blob
+ }
+ ````
 
 完
 
