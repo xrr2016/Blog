@@ -58,6 +58,8 @@ const isElementVisible = (el) => {
   ) {
     return false
   }
+
+  return true
 }
 
 ```
