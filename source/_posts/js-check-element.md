@@ -64,6 +64,8 @@ const isElementVisible = (el) => {
 
 ```
 
+`getBoundingClientRect` 方法会使浏览器发生回流和重绘，性能消耗稍大，但兼容性比 Intersection Observer 要好。
+
 ## 2. Intersection Observer 
 
 
