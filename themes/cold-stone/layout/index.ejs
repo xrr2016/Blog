@@ -1,77 +1,30 @@
----
-layout: layout
----
-
-<section class="index-post pt-24 pb-24">
-  <ul class="index-post-list grid lg:grid-cols-2 grid-cols-1 gap-8">
-    <% page.posts.each(function(post, index) { %>
-    <li
-      class="index-post-list-item text-sm shadow-2xl h-96 rounded overflow-hidden <% if (index === 0) { %> col-span-full <% } %>"
+<ul class="post-list">
+  <% page.posts.each(function(post, index) { %>
+  <li class="post-list-item">
+    <a
+      class="post-list-link"
+      title="<%- post.title %>"
+      href="<%- config.root %><%- post.path %>"
     >
-      <a
-        class="block h-full p-12 relative"
-        title="<%- post.title %>"
-        href="<%- config.root %><%- post.path %>"
-      >
-        <div>
-          <time
-            class="text-xs italic"
-            datetime="<%- post.date.format(config.date_format) %>"
+      <div
+        class="post-cover"
+        style="background-image: url(<%- post.cover %>)"
+      ></div>
+      <div class="post-content">
+        <h2 class="post-title"><%- post.title %></h2>
+        <sub class="post-excerpt"><%- post.excerpt %></sub>
+        <span class="post-date">
+          <time datetime="<%- post.date.format(config.date_format) %>"
             ><%- post.date.format(config.date_format)%></time
           >
-
-          <span class="text-xs italic"
-            ><%- __('post.wordCount') %>&#58;&nbsp;<%- wordcount(post.more)
-            %></span
-          >
-        </div>
-
-        <p
-          class="index-post-list-title pt-10 pb-10 lg:text-3xl text-xl capitalize tracking-wide"
-        >
-          <%- post.title %>
-        </p>
-
-        <%- post.excerpt %>
-
-        <div class="block mt-12">
-          <% post.tags.forEach(function(tag){ %>
-          <span
-            class="text-xs p-1.5 text-white capitalize bg-purple-400 rounded"
-            title="<%- tag.name %>"
-            ><%- tag.name %></span
-          >
-          <% }) %>
-        </div>
-      </a>
-    </li>
-    <% }) %>
-  </ul>
-
-  <nav class="flex justify-center items-center pt-32">
-    <%- paginator({ prev_text: '←', next_text: '→' }) %>
-  </nav>
-</section>
-
-<!-- 
-<aside class="index-aside">
-  <div class="card aside-tags">
-    <ul class="tags list-unstyled" uk-sortable="handle: .tag-item">
-      <% site.tags.map(function(tag){ %>
-      <li class="tag-item">
-        <a
-          href="<%= config.root %>tags/#<%= tag.name %>"
-          title="<%= tag.name %>"
-          rel="<%= tag.length %>"
-          >#<%= tag.name %></a
-        >
-      </li>
-      <% }) %>
-    </ul>
-  </div>
-
-  <div class="card">
-    <%- list_archives({ class: 'archive-tag', order: -1, format: 'YYYY-MM', })
-    %>
-  </div>
-</aside> -->
+        </span>
+        <!-- <div class="post-tags">
+              <% post.tags.forEach((tag) => { %>
+              <span class="post-tag" title="<%- tag.name %>"><%- tag.name %></span>
+              <% }) %>
+            </div> -->
+      </div>
+    </a>
+  </li>
+  <% }) %>
+</ul>

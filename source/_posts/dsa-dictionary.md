@@ -5,6 +5,7 @@ tags:
   - DSA
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2014/04/14/20/11/pink-324175_960_720.jpg
 ---
 
 字典是一种以键值对形式存储数据的数据结构，键用来查找，值用来保存数据

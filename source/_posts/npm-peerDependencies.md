@@ -5,6 +5,7 @@ categories:
 tags:
   - npm
 date: 2020-11-29 19:30:00
+cover: https://cdn.pixabay.com/photo/2020/11/26/07/38/rough-collie-5778136_960_720.jpg
 ---
 
 `package.json` 里面的 `peerDependencies` 是什么意思

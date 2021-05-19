@@ -5,9 +5,8 @@ categories:
 tags:
   - Flutter
 date: 2020-01-26 17:34:54
+cover: https://cdn.pixabay.com/photo/2021/01/21/15/54/books-5937716_960_720.jpg
 ---
-
-<img src="images/flutter_show_search.png" height="320" style="height: 340px; object-fit: cover;">
 
 使用 `SearchDelegate` 给 Flutter 应用添加搜索功能
 

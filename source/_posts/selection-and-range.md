@@ -5,7 +5,10 @@ categories:
 tags:
   - Web
 date: 2020-12-05 10:51:38
+cover: https://cdn.pixabay.com/photo/2021/04/19/16/09/white-flowers-6191822_960_720.jpg
 ---
+
+浏览器的 Range 和 Selection 对象
 
 <!--more-->
 
@@ -13,13 +16,13 @@ date: 2020-12-05 10:51:38
 
 DOM 文档对象模型中总共有 12 种节点类型，常见的有以下几种
 
-|          常量          | 值  |         类型          |
-| :---------------------- | :--- | :--------------------- |
-| ELEMENT_NODE           | 1   | 元素节点              |
-| TEXT_NODE              | 3   | 文本节点              |
-| COMMENT_NODE           | 8   | 注释节点              |
-| DOCUMENT_NODE          | 9   | Document 节点         |
-| DOCUMENT_FRAGMENT_NODE | 11  | DocumentFragment 节点 |
+| 常量                   | 值   | 类型                  |
+| :--------------------- | :--- | :-------------------- |
+| ELEMENT_NODE           | 1    | 元素节点              |
+| TEXT_NODE              | 3    | 文本节点              |
+| COMMENT_NODE           | 8    | 注释节点              |
+| DOCUMENT_NODE          | 9    | Document 节点         |
+| DOCUMENT_FRAGMENT_NODE | 11   | DocumentFragment 节点 |
 
 > https://wiki.developer.mozilla.org/zh-CN/docs/Web/API/Node/nodeType
 

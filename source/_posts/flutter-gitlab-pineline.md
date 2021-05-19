@@ -6,9 +6,8 @@ tags:
   - Flutter
   - Gitlib
 date: 2020-02-27 11:01:00
+cover: ./images/samuel-chenard.jpg
 ---
-
-![action](./images/samuel-chenard.jpg)
 
 本文介绍如何使用 Gitlib CI/CD 构建发布 Flutter 应用
 

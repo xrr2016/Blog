@@ -6,9 +6,10 @@ tags:
   - Flutter
   - Animation
 date: 2020-04-26 20:00:00
+cover: ./images/flutter-animation-from-zero/cover.png
 ---
 
-![cover](./images/flutter-animation-from-zero/cover.png)
+Flutter 中的动画
 
 <!--more-->
 

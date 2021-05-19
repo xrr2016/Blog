@@ -5,9 +5,10 @@ categories:
   - 技术
 tags:
   - FFmpeg
+cover: https://cdn.pixabay.com/photo/2021/02/21/14/37/little-bird-6036530_960_720.jpg
 ---
 
-用 B 站下载助手 下载下来的视频格式是 `flv`，用 QuickTime 看不了也不能导入 iMovie 进行编辑，所以需要转换一下视频格式。在搜索了很多视频格式转换工具后，发现它们大多底层是用 [FFmpeg](https://www.ffmpeg.org/) 这个开源工具进行转换的，所以为什么不直接用 `FFmpeg` 它本身呢
+用 B 站下载助手 下载下来的视频格式是 `flv`，用 QuickTime 看不了也不能导入 iMovie 进行编辑，所以需要转换一下视频格式
 
 <!--more-->
 

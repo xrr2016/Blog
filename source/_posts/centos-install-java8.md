@@ -6,9 +6,10 @@ tags:
   - Java
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2021/05/15/20/15/dandelion-6256593_960_720.jpg
 ---
 
-由于要在服务器上安装 [Jenkins](https://jenkins.io/zh/) 所以首先要安装 java
+由于要在服务器上安装 Jenkins 所以首先要安装 java
 
 <!--more-->
 

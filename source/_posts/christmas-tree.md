@@ -5,9 +5,10 @@ categories:
 tags:
   - Canvas
 date: 2020-12-23 08:49:20
+cover: ./images/christmas-tree/tree.png
 ---
 
-![cover](./images/christmas-tree/tree.png)
+JUST FOR FUN
 
 <!--more-->
 

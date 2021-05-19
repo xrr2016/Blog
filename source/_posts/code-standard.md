@@ -5,6 +5,7 @@ tags:
   - Standard
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2020/02/05/22/37/seagulls-4822595_960_720.jpg
 ---
 
 良好的代码规范有利于提高项目开发效率以及减少阅读代码的困难，本规范结合了(chaoxi)多个流行的代码规范以及前人的开发经验而成，参考规范进行开发提高代码质量

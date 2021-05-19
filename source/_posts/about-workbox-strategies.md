@@ -5,9 +5,10 @@ tags:
 categories:
   - 技术
 date: 2019-07-27T12:36:13+08:00
+cover: https://cdn.pixabay.com/photo/2021/05/13/15/20/plum-blossom-6251131_960_720.jpg
 ---
 
-要将自己的网站支持 PWA，需要注册一个 serviceWorker 到浏览器中，通常使用 Google 的 [Workbox](https://developers.google.com/web/tools/workbox/) 工具，Workbox 可以在浏览器请求资源的时候提供了几种不同的策略对请求响应，本文对几种策略进行说明
+要将自己的网站支持 PWA，需要注册一个 serviceWorker 到浏览器中，通常使用 Google 的 Workbox 工具，Workbox 可以在浏览器请求资源的时候提供了几种不同的策略对请求响应，本文对几种策略进行说明
 
 <!--more-->
 

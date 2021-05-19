@@ -5,6 +5,7 @@ categories:
   - 面试
 tags:
   - Interview
+cover: https://cdn.pixabay.com/photo/2020/04/13/22/55/sugar-5040276_960_720.jpg
 ---
 
 前几天遇到两个前端面试题，要写代码的那种，然后我都没做对...记录一下

@@ -8,7 +8,7 @@ date: 2020-10-20 22:00:00
 cover: ./images/design-patterns-observer/cover.png
 ---
 
-![Observer](./images/design-patterns-observer/cover.png)
+观察者模式是一种行为设计模式，允许你定义一种订阅机制，可在对象事件发生时通知多个 “观察” 该对象的对象。
 
 <!--more-->
 

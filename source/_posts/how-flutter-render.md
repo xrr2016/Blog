@@ -5,9 +5,10 @@ categories:
 tags:
   - Flutter
 date: 2020-04-03 12:40:04
+cover: ./images/how-flutter-render/cover.jpg
 ---
 
-![cover](./images/how-flutter-render/cover.jpg)
+总结一下关于 Flutter 渲染方面的知识
 
 <!--more-->
 

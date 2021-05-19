@@ -7,10 +7,10 @@ tags:
   - JS
   - Viewport
 date: 2021-04-13 10:50:51
+cover: ./images/js-check-element/cover.jpg
 ---
 
-
-![cover](./images/js-check-element/cover.jpg)
+分享两个监测元素是否在视口内的方法
 
 <!--more-->
 

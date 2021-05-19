@@ -5,6 +5,7 @@ tags:
   - DSA
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2021/05/13/12/34/peony-6250764_960_720.jpg
 ---
 
 哈希表是一种常用的数据结构，可以快速的插入和取用，但是查询数据效率低下

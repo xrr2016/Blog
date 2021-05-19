@@ -5,6 +5,7 @@ tags:
 date: 2019-07-24T13:34:17+08:00
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2021/05/14/21/50/elephant-6254558_960_720.jpg
 ---
 
 让用 Hugo 搭建的博客支持 PWA 很简单，只需 2 个步骤即可

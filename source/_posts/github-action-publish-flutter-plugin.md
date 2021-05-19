@@ -6,7 +6,7 @@ tags:
   - Flutter
   - Github
 date: 2020-07-28 14:49:16
-cover:
+cover: https://cdn.pixabay.com/photo/2020/04/06/13/37/coffee-5009730_960_720.png
 ---
 
 本文说明如何使用 Github Actions 自动发布 Flutter 插件到 pub.dev

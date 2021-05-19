@@ -5,6 +5,7 @@ tags:
   - DSA
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2021/04/24/05/41/beach-6203278_960_720.jpg
 ---
 
 栈是一种高效的数据结构，因为它只能在栈顶添加或删除，这样的操作很快，它是被称之为后入先出（LIFO，last in first out）的数据结构。可以将栈想象成一叠装菜的盘子，用的时候先拿最上面的，洗好的盘子又会放到最上面

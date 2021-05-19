@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="<%- config.language %>">
   <%- partial('_partial/head') %>
-  <body class="font-mono subpixel-antialiased">
+  <body>
     <%- partial('_partial/header', null, {cache: false}) %>
-    <main class="container mx-auto"><%- body %></main>
-    <%- partial('_partial/footer', null, {cache: false}) %> <%-
-    partial('_partial/script', null, {cache: false}) %>
+    <main class=""><%- body %></main>
   </body>
 </html>
+
+<!-- <%- partial('_partial/footer', null, {cache: false}) %> 
+    <%- partial('_partial/script', null, {cache: false}) %>  -->

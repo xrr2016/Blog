@@ -5,9 +5,10 @@ categories:
 tags:
   - Flutter
 date: 2020-06-18 12:22:08
+cover: ./images/flutter-tinder-card/cover.png
 ---
 
-![cards](./images/flutter-tinder-card/cover.png)
+前几天写了一个 Fluter 插件 tcard，用来实现类似于探探卡片的布局。
 
 <!--more-->
 

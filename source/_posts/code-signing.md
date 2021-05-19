@@ -6,6 +6,7 @@ tags:
 date: '2019-07-15T20:54:56+08:00'
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2020/04/03/07/26/eye-4997724_960_720.png
 ---
 
 Flutter 项目代码签名

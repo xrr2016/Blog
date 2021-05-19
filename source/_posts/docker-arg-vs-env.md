@@ -5,6 +5,7 @@ categories:
 date: 2019-10-25 14:12:19
 tags:
   - Docker
+cover: https://cdn.pixabay.com/photo/2021/05/14/08/44/running-6252827_960_720.jpg
 ---
 
 构建 Docker 镜像的的时候有两种环境变量 `ARG` 和 `ENV`, 一种是在运行 build 命令时通过 `--build-arg` 参数设置的 build-time variables 以及通过在 `dockerfile` 里面设置 `ENV` 指令配置的环境变量。

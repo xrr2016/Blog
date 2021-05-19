@@ -5,9 +5,10 @@ categories:
 tags:
   - Flutter
 date: 2020-05-31 22:00:00
+cover: ./images/flutter-bar-chart/cover.png
 ---
 
-![bar](./images/flutter-bar-chart/cover.png)
+本文讲解如何使用 Flutter 绘制一个带有动画效果的柱状图表
 
 <!--more-->
 
@@ -49,19 +50,19 @@ abstract class CustomPainter extends Listenable {
 
 `Canvas canvas` 对象主要的绘制图形方法有
 
-| 方法名 | 参数 | 效果 |
-| :-- | :-- | :-- |
-| `drawColor` | `Color color`, `BlendMode blendMode`    | 绘制颜色到画布上 |
-| `drawLine`  | `Offset p1`, `Offset p2`, `Paint paint`  | 两点之间画线 |
-| `drawPaint` | `Paint paint` | 使用 [Paint] 填充画布     |
-| `drawRect` | `Rect rect`, `Paint paint`  | 绘制矩形 |
-| `drawRRect` | `RRect rrect`, `Paint paint` | 绘制带圆角的矩形 |
-| `drawOval` | `Rect rect`, `Paint paint` | 绘制椭圆 |
-| `drawCircle` | `Offset c`, `double radius`, `Paint paint` | 绘制圆形 |
-| `drawArc` | `Rect rect`, `double startAngle`, `double sweepAngle`, `bool useCenter`, `Paint paint` |绘制弧形 |
-| `drawPath` | `Path path`, `Paint paint` | 绘制路径 |
-| `drawImage` | `Image image`, `Offset p`, `Paint paint` | 绘制图像 |
-| `drawPoints` | `PointMode pointMode`, `List<Offset> points`, `Paint paint` | 绘制多个点 |
+| 方法名       | 参数                                                                                   | 效果                  |
+| :----------- | :------------------------------------------------------------------------------------- | :-------------------- |
+| `drawColor`  | `Color color`, `BlendMode blendMode`                                                   | 绘制颜色到画布上      |
+| `drawLine`   | `Offset p1`, `Offset p2`, `Paint paint`                                                | 两点之间画线          |
+| `drawPaint`  | `Paint paint`                                                                          | 使用 [Paint] 填充画布 |
+| `drawRect`   | `Rect rect`, `Paint paint`                                                             | 绘制矩形              |
+| `drawRRect`  | `RRect rrect`, `Paint paint`                                                           | 绘制带圆角的矩形      |
+| `drawOval`   | `Rect rect`, `Paint paint`                                                             | 绘制椭圆              |
+| `drawCircle` | `Offset c`, `double radius`, `Paint paint`                                             | 绘制圆形              |
+| `drawArc`    | `Rect rect`, `double startAngle`, `double sweepAngle`, `bool useCenter`, `Paint paint` | 绘制弧形              |
+| `drawPath`   | `Path path`, `Paint paint`                                                             | 绘制路径              |
+| `drawImage`  | `Image image`, `Offset p`, `Paint paint`                                               | 绘制图像              |
+| `drawPoints` | `PointMode pointMode`, `List<Offset> points`, `Paint paint`                            | 绘制多个点            |
 
 要将图形绘制到画布上需要先创建一个继承至 `CustomPainter` 的自定义画笔，例如绘制一个矩形需要实现一个绘制矩形的画笔 `RectanglePainter`，然后在画布 `CustomPaint` 上应用它。
 

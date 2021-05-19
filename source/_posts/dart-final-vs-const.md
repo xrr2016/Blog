@@ -5,6 +5,7 @@ tags:
 date: '2019-07-16T17:23:06+08:00'
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2021/05/14/15/18/path-6253670_960_720.jpg
 ---
 
 在 Dart 中有 `final` 和 `const` 两个关键字，貌似都是表示常量的，但是它们还是有区别的

@@ -5,7 +5,10 @@ categories:
 tags:
   - Interview
 date: 2020-08-31 17:00:00
+cover: https://cdn.pixabay.com/photo/2021/04/27/15/04/wagtail-6211745_960_720.jpg
 ---
+
+前段时间做了三道阿里的在线面试题，分享一下
 
 <!--more-->
 

@@ -6,9 +6,11 @@ tags:
   - Flutter
   - Generative artistry
 date: 2020-07-07 16:20:50
+cover: ./images/flutter-generative-artistry-01/cover.png
 ---
 
-![tiled-lines](./images/flutter-generative-artistry-01/cover.png)
+
+前几天发现了一个使用 `<canvas>` 绘制图形的教程 generative artistry 感觉很有意思，尝试用 Flutter 实现。本文实现第一篇教程的图形 Tiled Lines 效果如下。
 
 <!--more-->
 

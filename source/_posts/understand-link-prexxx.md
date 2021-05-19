@@ -5,6 +5,7 @@ tags:
   - HTML
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2021/05/06/16/05/clouds-6233856_960_720.jpg
 ---
 
 在 HTML 中 <link> 标签指定了当前文档与外部资源之间的关系，本文说明 <link> 标签的 rel 属性分别设置 dns-prefetch，preconnect，prefetch，preload，prerender 的时候有说明作用

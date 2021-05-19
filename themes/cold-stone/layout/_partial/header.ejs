@@ -1,24 +1,11 @@
-<header class="header py-4 sticky top-0 bg-white-100 shadow">
-  <div class="container mx-auto flex items-center justify-between">
-    <a class="inline-block w-12 h-12" href="/">
-      <img class="rounded-full" src="<%= config.root %><%= config.avatar %>" />
-    </a>
-
-    <form
-      class="inline-block h-full"
-      action="//google.com/search"
-      method="get"
-      accept-charset="UTF-8"
-      target="_blank"
-    >
-      <input
-        class="py-2 px-4 appearance-none"
-        name="q"
-        type="search"
-        autocomplete="off"
-        placeholder="Search..."
-      />
-      <input type="hidden" name="sitesearch" value="<%= config.url %>" />
-    </form>
-  </div>
+<header class="header">
+  <span class="logo">ColdStone's</span>
+  <h1 class="title">Welcome to your new site!</h1>
+  <p class="description">
+    Here you can add a little introduction about your site.
+  </p>
+  <nav class="nav">
+    <a class="nav-item" href="/about">about</a>
+    <a class="nav-item" href="/hello">hello</a>
+  </nav>
 </header>

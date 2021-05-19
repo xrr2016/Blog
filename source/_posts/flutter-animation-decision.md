@@ -6,9 +6,10 @@ tags:
   - Flutter
   - Animation
 date: 2020-05-07 10:04:58
+cover: ./images/flutter-animation-decision/level.png
 ---
 
-![level](./images/flutter-animation-decision/level.png)
+如何在 Flutter 中选择合适的动画 Widget 中文翻译
 
 <!--more-->
 

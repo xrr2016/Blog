@@ -5,9 +5,10 @@ categories:
 tags:
   - Flutter
 date: 2020-04-13 12:07:56
+cover: ./images/flutter-stream/stream.png
 ---
 
-![stream](./images/flutter-stream/stream.png)
+在 Flutter 中有两种处理异步操作的方式 `Future` 和 `Stream`，`Future` 用于处理单个异步操作，`Stream` 用来处理连续的异步操作
 
 <!--more-->
 

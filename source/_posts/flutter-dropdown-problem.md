@@ -5,7 +5,13 @@ categories:
 tags:
   - Flutter
 date: 2020-03-24 16:08:27
+cover: https://cdn.pixabay.com/photo/2020/06/15/09/30/butterfly-5301066_960_720.jpg
 ---
+
+记录两个关于 `DropdownButton` 的问题
+
+<!--more-->
+
 
 这几天在使用 `Flutter` 开发应用过程中遇到关于 `DropdownButton` 两个问题，记录一下。
 

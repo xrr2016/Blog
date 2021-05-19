@@ -5,9 +5,10 @@ tags:
   - JS
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2020/05/27/11/01/leaves-5226759_960_720.jpg
 ---
 
-平时项目中要对日期时间格式化通常会使用如 [dayjs](https://github.com/iamkun/dayjs)，[date-fns](https://github.com/date-fns/date-fns)，[moment](https://github.com/moment/moment) 这些第三方库，但是我们可能只需要某几个方法，却安装了一整个库，大大增加了项目的体积，具体可以看这篇文章的数据 [You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)。本文主要说明如何使用浏览器自带的 Intl 对象进行日期时间的格式化
+本文主要说明如何使用浏览器自带的 Intl 对象进行日期时间的格式化
 
 <!--more-->
 

@@ -9,7 +9,7 @@ date: 2020-09-17 21:28:44
 cover: ./images/flutter-generative-artistry-03/cover.png
 ---
 
-![Circle Packing](./images/flutter-generative-artistry-03/cover.png)
+本文讲解使用 Flutter 实现 Generative Artistry 教程里面的第六个图形 Circle Packing（圆形填充）
 
 <!--more-->
 

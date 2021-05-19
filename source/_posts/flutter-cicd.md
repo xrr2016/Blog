@@ -7,9 +7,10 @@ tags:
   - Codemagic
   - Google Play
 date: 2020-02-03 22:36:16
+cover: ./images/flutter-cicd/cicd.png
 ---
 
-![cicd](./images/flutter-cicd/cicd.png)
+Codemagic 持续部署 Flutter 应用
 
 <!--more-->
 

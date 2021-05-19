@@ -9,7 +9,7 @@ date: 2020-07-14 17:56:19
 cover: ./images/flutter-generative-artistry-02/cover.png
 ---
 
-![Triangular Mesh](./images/flutter-generative-artistry-02/cover.png)
+本文实现 Generative Artistry 教程的第 4 篇图形 Triangular mesh 效果如下
 
 <!--more-->
 

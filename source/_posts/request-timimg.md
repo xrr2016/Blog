@@ -5,6 +5,7 @@ tags:
   - Browser
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2021/05/12/17/00/holly-blue-6248753_960_720.jpg
 ---
 
 对于一个浏览器网络请求耗时阶段解释

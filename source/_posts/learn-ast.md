@@ -7,9 +7,10 @@ tags:
   - Babel
   - ESLint
 date: 2021-04-26 15:40:51
+cover: ./images/learn-ast/ast-cover.jpg
 ---
 
-![cover](./images/learn-ast/ast-cover.jpg)
+作为一个前端切图仔，工作中少不了用上 Babel，ESLint，Prettier 这些工具，但是这些工具背后的工作原理却不求甚解😅 
 
 <!--more-->
 

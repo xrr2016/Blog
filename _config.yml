@@ -55,17 +55,13 @@ time_format: HH:mm:ss
 
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 19
+per_page: 0
 pagination_dir: page
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: cold-stone
-
-# user config
-avatar: avatar.jpg
-zanshang: zanshang.jpg
 
 # Utteranc comment system
 comment:
@@ -77,14 +73,13 @@ sns:
   zhihu: needforchange
   juejin: 576666b7207703006b1e0f09
   leetcode: coldstone
-  # segmentfault: taqianzhan
 
 # RSS
 # rss: true
 feed:
   type: atom
   path: atom.xml
-  limit: 20
+  limit: 999
   hub:
   content: true
   content_limit: 140

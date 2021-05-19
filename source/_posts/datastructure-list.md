@@ -5,6 +5,7 @@ tags:
   - DSA
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2021/04/27/15/04/wagtail-6211745_960_720.jpg
 ---
 
 列表是一种常用的数据结构，如代办事项，十佳榜单等。当不需要在一个很长的序列中查找元素，或者对其排序时，列表显得尤其有用

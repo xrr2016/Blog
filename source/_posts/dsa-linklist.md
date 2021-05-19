@@ -5,6 +5,7 @@ tags:
   - DSA
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2015/10/09/00/55/lotus-978659_960_720.jpg
 ---
 
 链表是一组节点组成的集合，每个节点都使用一个对象的引用指向它的下一个节点，指向节点的引用叫做链

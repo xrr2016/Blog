@@ -5,9 +5,10 @@ categories:
 tags:
   - leetcode
 date: 2020-06-17 14:19:00
+cover: ./images/best_of_you.png
 ---
 
-![best_of_you](./images/best_of_you.png)
+LeetCode 1014 最佳观光组合
 
 <!--more-->
 

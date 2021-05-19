@@ -5,6 +5,7 @@ tags:
   - Flutter
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2021/04/07/17/13/sea-6159674_960_720.jpg
 ---
 
 Flutter 在打包安卓应用时有两种方式 `flutter build apk` 和 `flutter build appbundle`，本文说下这两种方式有什么区别

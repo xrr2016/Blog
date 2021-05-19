@@ -5,9 +5,10 @@ categories:
 tags:
   - Flutter
 date: 2020-06-09 14:08:00
+cover: ./images/flutter-pie-chart/cover.png
 ---
 
-![pie](./images/flutter-pie-chart/cover.png)
+本文讲解如何使用 Flutter 绘制饼状图
 
 <!--more-->
 

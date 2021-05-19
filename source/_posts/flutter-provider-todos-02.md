@@ -5,9 +5,10 @@ tags:
   - Flutter
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2021/05/15/19/25/greylag-geese-6256503_960_720.jpg
 ---
 
-紧接上篇，对于一个代办事项的新增，修改，删除功能都已经完成了，但是数据都是保存在内存中的，重新启动应用数据就重置了，为了存储数据可以将数据存到手机的存储里面或者存到远程服务器上，本文就实现如何使用 [dio](https://github.com/flutterchina/dio) 将数据存到服务器
+为了存储数据可以将数据存到手机的存储里面或者存到远程服务器上，本文就实现如何使用 dio 将数据存到服务器
 
 <!--more-->
 

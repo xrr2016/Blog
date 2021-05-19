@@ -6,9 +6,8 @@ tags:
   - Flutter
   - Github Actions
 date: 2020-02-27 01:59:06
+cover: ./images/flutter-action-sm.jpg
 ---
-
-![action](./images/flutter-action-sm.jpg)
 
 本文讲解如何使用 Github Actions 构建并发布 Flutter 应用
 

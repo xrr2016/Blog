@@ -1,33 +1,6 @@
-<script>
-  if (
-    !sessionStorage.getItem('_swa') &&
-    document.referrer.indexOf(location.protocol + '//' + location.host) !== 0
-  ) {
-    fetch(
-      'https://counter.dev/track?' +
-        new URLSearchParams({
-          referrer: document.referrer,
-          screen: screen.width + 'x' + screen.height,
-          user: 'coldstone',
-          utcoffset: '8',
-        })
-    )
-  }
-  sessionStorage.setItem('_swa', '1')
-</script>
-<script>
-  const loader = document.getElementById('loader')
-  const utteranc = document.getElementById('utteranc')
-
-  if (utteranc) {
-    const uscript = document.createElement('script')
-
-    uscript.async = true
-    uscript.crossOrigin = 'anonymous'
-    uscript.src = 'https://utteranc.es/client.js'
-    uscript.setAttribute('repo', 'xrr2016/blog')
-    uscript.setAttribute('issue-term', 'pathname')
-    uscript.setAttribute('theme', 'github-light')
-    utteranc.appendChild(uscript)
-  }
-</script>
+<!--
+ Copyright (c) 2021 Cold Stone
+ 
+ This software is released under the MIT License.
+ https://opensource.org/licenses/MIT
+-->

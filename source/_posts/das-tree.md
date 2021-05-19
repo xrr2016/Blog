@@ -5,6 +5,7 @@ categories:
 tags:
   - DSA
 date: 2020-03-15 11:05:00
+cover: https://cdn.pixabay.com/photo/2020/06/21/02/31/wine-5323009_960_720.jpg
 ---
 
 二叉树是一种非线性的数据结构，以分层的方式存储数据。在二叉树上进行添加，查找和删除数据非常快。

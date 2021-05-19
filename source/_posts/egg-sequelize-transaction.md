@@ -5,9 +5,11 @@ tags:
   - Egg.js
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2020/06/19/21/44/watermelon-5318938_960_720.jpg
 ---
 
-Egg.js 框架使用事务
+Egg.js 框架中使用事务
+
 <!--more-->
 
 ## 前言

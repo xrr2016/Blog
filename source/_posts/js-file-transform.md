@@ -8,15 +8,18 @@ tags:
   - Blob 
   - Base64
 date: 2021-04-01 17:52:22
+cover: ./images/js-file-transform/cover.jpg
 ---
 
-![cover](./images/js-file-transform/cover.jpg)
+
+最近需要将 base64 格式的图片转化成 JS 里的 File 对象进行上传，于是学习了一下这方面的知识
 
 <!--more-->
 
 ## 前言
 
 最近需要将 base64 格式的图片转化成 JS 里的 File 对象进行上传，于是学习了一下这方面的知识
+
 ## Base64 转 Blob
 
 1. 分割 Base64 数据，生成类文件对象，base64 -> Uint8Array -> Blob

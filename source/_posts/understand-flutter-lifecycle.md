@@ -5,6 +5,7 @@ tags:
   - Flutter
 categories:
   - 技术
+cover: https://cdn.pixabay.com/photo/2021/05/15/04/49/lake-6254899_960_720.jpg
 ---
 
 在 Flutter 里面部件以及应用本身都有自己的生命周期，本文分别说明它们的生命周期

@@ -5,9 +5,8 @@ categories:
 tags:
   - MySQL
 date: 2020-02-12 15:37:26
+cover: https://images.unsplash.com/photo-1489875347897-49f64b51c1f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80
 ---
-
-![mysql](https://images.unsplash.com/photo-1489875347897-49f64b51c1f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80)
 
 工作需求学习一下 MySQL 数据库
 
