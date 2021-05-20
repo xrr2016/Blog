@@ -1,12 +1,11 @@
-<article class="prose prose-xl mx-auto article">
-  <section class="pt-24">
-    <% if (page.cover) { %>
+<article class="container article">
+    <!-- <% if (page.cover) { %>
     <img src="<%- page.cover %>" alt="cover" />
-    <% } %>
+    <% } %> -->
 
-    <h1 class="text-3xl"><%- page.title %></h1>
+    <h1 class="article-title"><%- page.title %></h1>
 
-    <p class="flex items-center">
+    <p class="">
       <span>
         <%= __('post.updateTime') %>&#58;&nbsp;<time
           class="post-time"
@@ -14,7 +13,7 @@
           ><%= page.updated.format(config.date_format) %></time
         >
       </span>
-      <span class="px-6"
+      <span class=""
         ><%= __('post.readingTime') %>&#58;&nbsp;<%- min2read(page.more) %>
         min</span
       >
@@ -33,7 +32,7 @@
 
   <section class=""><%- page.more %></section>
 
-  <section class="flex justify-between mt-24 mb-24">
+  <section class="">
     <% if (page.prev) { %>
     <a
       class=""
@@ -43,7 +42,7 @@
       &larr;&nbsp;<%- page.prev.title %>
     </a>
     <% } else { %>
-    <span class="text-gray">&larr; <%- __('post.notMore') %></span>
+    <span class="">&larr; <%- __('post.notMore') %></span>
     <% } %> <% if (page.next){ %>
     <a
       class=""
@@ -53,9 +52,7 @@
       <%- page.next.title %>&nbsp;&rarr;
     </a>
     <% } else { %>
-    <span class="text-gray"><%= __('post.notMore') %>&nbsp;&rarr;</span>
+    <span class=""><%= __('post.notMore') %>&nbsp;&rarr;</span>
     <% } %>
   </section>
-
-  <section class="comment" id="utteranc"></section>
 </article>

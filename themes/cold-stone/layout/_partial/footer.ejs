@@ -1,40 +1,24 @@
-<footer class="footer text-sm container mx-auto flex justify-between py-32">
-  <ul class="space-y-2">
-    <li>
+<footer class="footer container">
+  <ul class="sns-list">
+    <li class="sns-list-item">
       <p class="">
         <%= __('blog.totalpost') %>&#58; <%= site.posts.length %> 篇
       </p>
     </li>
-    <li>
-      <p class="flex items-center">
-        <span class="mr-2"
+    <li class="sns-list-item">
+      <p class="">
+        <span class=""
           ><%= __('blog.wordcount') %>&#58; <%= totalcount(site) %></span
-        >
-      </p>
-    </li>
-    <li>
-      <a
-        class=""
-        rel="noopener"
-        href="https://github.com/xrr2016/hexo-theme-cold-stone"
-        target="_blank"
-        >Theme Cold Stone</a
-      >
-    </li>
-    <li>
-      <p>
-        Copyright&nbsp;&copy;&nbsp;<a href="<%- config.root %>"
-          ><%- config.author %></a
         >
       </p>
     </li>
   </ul>
 
-  <ul class="space-y-2">
+  <ul class="sns-list">
     <% if (config.sns.github) { %>
-    <li>
+    <li class="sns-list-item">
       <a
-        class=""
+        class="sns-list-link"
         target="_blank"
         rel="noopener"
         href="https://github.com/<%= config.sns.github %>"
@@ -42,30 +26,19 @@
       >
     </li>
     <% } %> <% if (config.sns.juejin) { %>
-    <li>
+    <li class="sns-list-item">
       <a
-        class=""
+        class="sns-list-link"
         target="_blank"
         rel="noopener"
         href="https://juejin.im/user/<%= config.sns.juejin %>"
         >掘金</a
       >
     </li>
-    <% } %> <% if (config.sns.segmentfault) { %>
-    <li>
+    <% } %> <% if (config.sns.zhihu) { %>
+    <li class="sns-list-item">
       <a
-        class=""
-        target="_blank"
-        rel="noopener"
-        href="https://segmentfault.com/u/<%= config.sns.segmentfault %>/articles"
-        >思否</a
-      >
-      <% } %>
-    </li>
-    <% if (config.sns.zhihu) { %>
-    <li>
-      <a
-        class="about-link"
+        class="sns-list-link"
         target="_blank"
         rel="noopener"
         href="https://zhihu.com/people/<%= config.sns.zhihu %>/posts"
@@ -75,28 +48,18 @@
     <% } %> <% if (config.sns.leetcode) { %>
     <li>
       <a
-        class="about-link"
+        class="sns-list-link"
         target="_blank"
         rel="noopener"
         href="https://leetcode-cn.com/u/<%= config.sns.leetcode %>"
         >力扣</a
       >
     </li>
-    <% } %> <% if (config.sns.twitter) { %>
-    <li>
-      <a
-        class="about-link"
-        target="_blank"
-        rel="noopener"
-        href="https://twitter.com/<%= config.sns.twitter %>"
-        >Twitter</a
-      >
-      <% } %>
-    </li>
-    <li>
-      <a class="" href="<%= config.root %>atom.xml">
+    <% } %>
+    <li class="sns-list-item">
+      <a class="rss-link" href="<%= config.root %>atom.xml">
         <svg
-          class="w-4 h-4"
+          class=""
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -113,27 +76,34 @@
     </li>
   </ul>
 
-  <ul class="space-y-2">
-    <li>
-      <a class="friend-link" href="https://kalasearch.cn/blog" target="_blank"
+  <ul class="sns-list">
+    <li class="sns-list-item">
+      <a class="sns-list-link" href="https://kalasearch.cn/blog" target="_blank"
         >卡拉搜索</a
       >
     </li>
-    <li>
-      <a class="" href="https://blog.inmind.ltd/" target="_blank"
+    <li class="sns-list-item">
+      <a class="sns-list-link" href="https://blog.inmind.ltd/" target="_blank"
         >Mind's blog</a
       >
     </li>
-    <li>
-      <a class="" href="https://oldchen.top/flutter-blog/#/" target="_blank"
+    <li class="sns-list-item">
+      <a
+        class="sns-list-link"
+        href="https://oldchen.top/flutter-blog/#/"
+        target="_blank"
         >老晨子</a
       >
     </li>
-    <li>
-      <a class="" href="https://www.v2fy.com/" target="_blank">猫爪导航🐱</a>
+    <li class="sns-list-item">
+      <a class="sns-list-link" href="https://www.v2fy.com/" target="_blank"
+        >猫爪导航🐱</a
+      >
     </li>
-    <li>
-      <a class="" href="https://wxsm.space" target="_blank">wxsm's space</a>
+    <li class="sns-list-item">
+      <a class="sns-list-link" href="https://wxsm.space" target="_blank"
+        >wxsm's space</a
+      >
     </li>
   </ul>
 </footer>
