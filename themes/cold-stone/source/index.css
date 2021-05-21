@@ -25,6 +25,7 @@ body {
   line-height: 25.5px;
   color: rgb(54, 50, 43);
   background-color: var(--bg-color);
+  padding: 0 12px;
   font-family: Source Sans, sans-serif;
 }
 
@@ -63,8 +64,8 @@ a {
 }
 
 .color {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   border: 1px solid #36322b;
   background-color: #fffaf0;
@@ -125,6 +126,23 @@ a {
   overflow: hidden;
 }
 
+@media screen and (max-width: 720px) {
+  .post-title {
+    font-size: 15px;
+    line-height: 20px;
+  }
+  .post-excerpt p {
+    font-size: 12px;
+  }
+  .post-date {
+    font-size: 10px;
+  }
+  .post-cover {
+    width: 100px;
+    height: 80px;
+  }
+}
+
 .post-date {
   font-size: 13px;
   color: #88847b;
@@ -156,9 +174,12 @@ a {
 .footer {
   display: flex;
   align-items: flex-start;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-bottom: 160px;
   margin-top: 160px;
+  max-width: 728px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sns-list {
@@ -168,6 +189,12 @@ a {
 .sns-list-link {
   color: #36322b;
   text-decoration: none;
+}
+
+@media screen and (max-width: 720px) {
+  .footer {
+    font-size: 12px;
+  }
 }
 
 .rss-link {
@@ -182,6 +209,7 @@ a {
   max-width: 728px;
   margin-left: auto;
   margin-right: auto;
+  overflow: hidden;
 }
 
 .article > *:first-child {
@@ -230,6 +258,11 @@ a {
 
 .article img {
   display: block;
+  max-width: 100%;
+  margin: 20px 0;
+}
+
+.article .highlight {
   margin: 20px 0;
 }
 
