@@ -1,10 +1,12 @@
 <article class="container article">
-    <!-- <% if (page.cover) { %>
-    <img class="article-cover" src="<%- page.cover %>" alt="cover" />
-    <% } %> -->
+    <% if (page.cover) { %>
+      <div class="article-cover">
+        <img decoding="async" loading="lazy" src="<%- page.cover %>" alt="cover" />
+      </div>
+    <% } %>
 
     <h1 class="article-title"><%- page.title %></h1>
-
+ 
     <p class="article-meta">
       <span class="article-meta-item">
         <%= __('post.updateTime') %>&#58;&nbsp;<time

@@ -6,10 +6,13 @@
       title="<%- post.title %>"
       href="<%- config.root %><%- post.path %>"
     >
-      <div
+      <img
         class="post-cover"
-        style="background-image: url(<%- post.cover %>)"
-      ></div>
+        src="<%- post.cover %>"
+        alt="cover"
+        decoding="async"
+        loading="lazy"
+      />
       <div class="post-content">
         <h2 class="post-title"><%- post.title %></h2>
         <sub class="post-excerpt"><%- post.excerpt %></sub>
