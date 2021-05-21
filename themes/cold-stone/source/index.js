@@ -22,3 +22,7 @@ document.getElementById('color').addEventListener('click', () => {
   console.log(index)
   root.style.setProperty('--bg-color', backgrounds[index])
 })
+
+document.querySelectorAll('.highlight').forEach((block) => {
+  hljs.highlightBlock(block)
+})

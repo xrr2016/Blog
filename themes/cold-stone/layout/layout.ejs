@@ -2,6 +2,7 @@
 <html lang="<%- config.language %>">
   <%- partial('_partial/head') %>
   <body>
+    <%- partial('_partial/header', null, {cache: false}) %>
     <main class=""><%- body %></main>
     <%- partial('_partial/footer', null, {cache: false}) %> <%-
     partial('_partial/script', null, {cache: false}) %>
