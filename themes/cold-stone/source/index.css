@@ -178,7 +178,7 @@ a {
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 160px;
-  margin-top: 160px;
+  margin-top: 100px;
   max-width: 728px;
   margin-left: auto;
   margin-right: auto;
@@ -288,4 +288,10 @@ a {
 .article-more {
   display: flex;
   justify-content: space-between;
+}
+
+/* Other */
+
+.hljs {
+  border: 1px solid #ddd;
 }

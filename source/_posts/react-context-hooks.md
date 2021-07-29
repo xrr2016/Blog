@@ -147,6 +147,7 @@ const AppBoy = () => {
 ### 修改 Context
 
 1. 对于 class 组件，使用 `setState` 方法更新组件的 `state`。
+
 ```javascript
 // AuthContext.js 
 
@@ -176,6 +177,7 @@ export class AuthContextProvider extends Component {
 ```
 
 2. 函数式组件使用 `useState`
+
 ```javascript
 // LanguageContext.js
 
