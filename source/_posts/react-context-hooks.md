@@ -146,7 +146,6 @@ const AppBoy = () => {
 
 ### 修改 Context
 
-
 1. 对于 class 组件，使用 `setState` 方法更新组件的 `state`。
 ```javascript
 // AuthContext.js 
@@ -176,7 +175,7 @@ export class AuthContextProvider extends Component {
 
 ```
 
-2. 函数式组件使用 `useState` Hook
+2. 函数式组件使用 `useState`
 ```javascript
 // LanguageContext.js
 
@@ -192,12 +191,12 @@ export const LanguageContextProvider = (props) => {
 }
 
 ```
+
 最终使用 Context 将应用中通用状态统一管理，无需再层层传递属性。
+
 ## 结论
 
-
-使用 Context 可以有效的避免 `Prop Drilling` 现象，将需要深层传递的属性和方法提取出来，达到共用的目的。应用 `Context` 的最佳时机是应用的一些全局性，不会频繁变化的数据。
-
+本文说明什么是 Context，以及使用 Context 的多种方式。使用 Context 可以有效的避免 `Prop Drilling` 现象，将需要深层传递的属性和方法提取出来，达到共用的目的。应用 `Context` 的最佳时机是应用的一些全局性，不会频繁变化的数据。
 
 ## 注意事项
 
