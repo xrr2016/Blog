@@ -19,23 +19,27 @@
         ><%= __('post.readingTime') %>&#58;&nbsp;<%- min2read(page.more) %>
         min</span
       >
-
+      <a
+        class="license-link article-meta-item"
+        rel="license"
+        href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans"
+      >
+        <img
+          class="license-img"
+          alt="知识共享许可协议"
+          src="https://img.shields.io/badge/license-BY--NC--SA%204.0-green"
+        />
+      </a>
     </p>
   </section>
 
+
+
   <section class=""><%- page.more %></section>
 
-  <a
-  class="license-link"
-  rel="license"
-  href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans"
->
-  <img
-    class="license-img"
-    alt="知识共享许可协议"
-    src="https://img.shields.io/badge/license-BY--NC--SA%204.0-green"
-  />
-</a>
+    <a class="coffee-link" href="https://dun.mianbaoduo.com/@coldstone" target="_blank">
+      <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;" >
+    </a>
 
   <section class="article-more">
     <% if (page.prev) { %>
@@ -60,4 +64,6 @@
     <span class=""><%= __('post.notMore') %>&nbsp;&rarr;</span>
     <% } %>
   </section>
+
+
 </article>

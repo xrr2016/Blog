@@ -232,6 +232,7 @@ a {
   align-items: center;
   color: #88847b;
   font-size: 13px;
+  margin-bottom: 1.5em;
 }
 
 .article-meta-item {
@@ -286,9 +287,22 @@ a {
 }
 
 .license-link {
+  margin-left: 20px;
+}
+
+.license-link > .license-img {
+  margin: 0;
+}
+
+.coffee-link {
   display: block;
   max-width: 728px;
   margin: 20px auto;
+  margin-bottom: 100px;
+}
+
+.coffee-link img {
+  margin: 0;
 }
 
 .article-more {
