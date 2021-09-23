@@ -9,17 +9,17 @@ date: 2021-09-23 20:30:19
 cover: ./images/about-neumorphism/cover.jpg
 ---
 
-前段时间发现了一种叫新拟物的 UI 设计 Neumorphism，感觉很新鲜。于是研究的一番，本文将分享关于新拟物设计相关知识。
+前段时间发现了一种叫新拟物的 UI 设计 Neumorphism，感觉很新鲜。于是研究的一番，本文将分享新拟物设计的相关知识。
 
 <!--more-->
 
 ## 前言
 
-前段时间发现了一种叫新拟物的 UI 设计 Neumorphism，感觉很新鲜。于是研究的一番，本文将分享关于新拟物设计相关知识。
+前段时间发现了一种叫新拟物的 UI 设计 Neumorphism，感觉很新鲜。于是研究的一番，本文将分享新拟物设计的相关知识。
 
 ## 新拟物设计是什么
 
-新拟物的前身是 Skeuomorphism（拟物设计），或是拟物化，即在界面中模仿现实物纹理材质的设计，让人们在使用界面时联想到现实物体的使用方式，由 Apple 公司最先提出。新拟物设计是拟物设计的一种新的思路，它的关注点不在于对现实世界和数字世界的对比和模拟，而是关键点在于色调，新拟物设计关注于整个屏幕的颜色，并为用户提供一个完全独特的体验。
+新拟物的前身是 Skeuomorphism（拟物设计），或叫拟物化，即在界面中模仿现实物纹理材质的设计，让人们在使用界面时联想到现实物体的使用方式，由 Apple 公司最先提出。新拟物设计是拟物设计的一种新的思路，它的关注点不在于对现实世界和数字世界的对比和模拟，而关键点在于色调，新拟物设计关注于整个屏幕的颜色，并为用户提供一个完全独特的体验。
 
 ![demo2.jpg](https://cdn.nlark.com/yuque/0/2021/jpeg/224563/1632382960768-60883e1d-baf9-4b1d-8399-692ff97e0160.jpeg#clientId=u1367e7e7-fd10-4&from=drop&height=576&id=u91b021b0&margin=%5Bobject%20Object%5D&name=demo2.jpg&originHeight=768&originWidth=1024&originalType=binary&ratio=1&size=24984&status=done&style=none&taskId=u448e82e3-db87-4c4d-a7fd-4072e61fdf2&width=768)
 
@@ -28,17 +28,17 @@ cover: ./images/about-neumorphism/cover.jpg
 
 ![uisdc-nw-20200630-8.jpeg](https://cdn.nlark.com/yuque/0/2021/jpeg/224563/1632388644117-04d5f235-305b-4d72-bab6-49035aff4ffd.jpeg#clientId=u1367e7e7-fd10-4&from=drop&height=355&id=ub948e55c&margin=%5Bobject%20Object%5D&name=uisdc-nw-20200630-8.jpeg&originHeight=473&originWidth=1080&originalType=binary&ratio=1&size=21040&status=done&style=none&taskId=u76805d77-8cad-4d4a-b68e-93330f2959b&width=810)
 
-拟物化风格的结构由背景色+高光色+阴影组成，掌握了基本规律，就可以通过改变按钮、卡片的参数进行调整变换。总体是纯色、低对比度以及适当的阴影效果，风格偏柔和。
+新拟物设计风格的结构由背景色+高光色+阴影色组成，掌握了基本规律，就可以通过改变按钮、卡片的参数进行调整变换。总体来说就是纯色、低对比度以及适当的阴影效果，风格偏柔和。
 
 ## 新拟物设计的对比
 
-![neumorphism-skeuomorphism-flat-compared.png.webp](https://cdn.nlark.com/yuque/0/2021/webp/224563/1632399579940-c7675001-8a98-4780-bf52-ffc42e7bec36.webp#clientId=u1367e7e7-fd10-4&from=drop&id=uac60eaac&margin=%5Bobject%20Object%5D&name=neumorphism-skeuomorphism-flat-compared.png.webp&originHeight=540&originWidth=750&originalType=binary&ratio=1&size=15784&status=done&style=none&taskId=u88c7f09f-3c5d-4319-93f5-c8b703862a7)
-
 新拟物设计是一种介于拟物与扁平之间的风格，简化了拟物设计中不必要的效果。
+
+![neumorphism-skeuomorphism-flat-compared.png.webp](https://cdn.nlark.com/yuque/0/2021/webp/224563/1632399579940-c7675001-8a98-4780-bf52-ffc42e7bec36.webp#clientId=u1367e7e7-fd10-4&from=drop&id=uac60eaac&margin=%5Bobject%20Object%5D&name=neumorphism-skeuomorphism-flat-compared.png.webp&originHeight=540&originWidth=750&originalType=binary&ratio=1&size=15784&status=done&style=none&taskId=u88c7f09f-3c5d-4319-93f5-c8b703862a7)
 
 ## 谁在使用新拟物设计
 
-几个使用了新拟物设计的实际 APP
+几个使用了新拟物设计的应用
 
 ### 谜底时钟
 
@@ -68,17 +68,17 @@ cover: ./images/about-neumorphism/cover.jpg
 <img src="https://cdn.nlark.com/yuque/0/2021/png/224563/1632392472721-5509c234-a267-4803-b4b2-618b4dd4427a.png#clientId=u1367e7e7-fd10-4&from=drop&height=448&id=u45f40f01&margin=%5Bobject%20Object%5D&name=fb1.PNG&originHeight=1792&originWidth=828&originalType=binary&ratio=1&size=1579559&status=done&style=none&taskId=uc64fcc11-5489-425c-a17c-4dd1d31769e&width=280" width="280" alt="fb1" style="display: inline;"  />
 <img src="https://cdn.nlark.com/yuque/0/2021/png/224563/1632392471542-c71816ae-f2c6-416f-afdd-6afd05bc53ad.png#clientId=u1367e7e7-fd10-4&from=drop&height=448&id=u3f2cb4e3&margin=%5Bobject%20Object%5D&name=fb2.PNG&originHeight=1792&originWidth=828&originalType=binary&ratio=1&size=1100292&status=done&style=none&taskId=u8bf60d82-b3ba-4e16-bf6b-a9bac5c4bcb&width=280" width="280" alt="fb2" style="display: inline;"  />
 
-## 拟物设计的实现原理
+## 新拟物设计的实现原理
+
+新拟物设计通过应用两种不同的阴影实现，一个高亮色，一个阴影色，元素的背景颜色不能是全黑或全白，需要使用一种中间色调，这样可以使阴影效果显示出来。
 
 ![6c9cb8deabc71b3bb158f6ab7ca653ff.webp](https://cdn.nlark.com/yuque/0/2021/webp/224563/1632388456859-a92a1671-7078-491d-848a-6dc90cd4b904.webp#clientId=u1367e7e7-fd10-4&from=drop&height=600&id=ue1a03760&margin=%5Bobject%20Object%5D&name=6c9cb8deabc71b3bb158f6ab7ca653ff.webp&originHeight=1200&originWidth=1600&originalType=binary&ratio=1&size=106980&status=done&style=none&taskId=u2eb6c82e-d90d-4ad7-b45a-dea8aa4925b&width=800)
 ![f9f1ad497f9778d196bae05e8122efb7.webp](https://cdn.nlark.com/yuque/0/2021/webp/224563/1632388464181-5cc9a4b4-1bdb-4add-b78a-df6f632665c7.webp#clientId=u1367e7e7-fd10-4&from=drop&height=600&id=u7d653031&margin=%5Bobject%20Object%5D&name=f9f1ad497f9778d196bae05e8122efb7.webp&originHeight=1200&originWidth=1600&originalType=binary&ratio=1&size=119266&status=done&style=none&taskId=u0605aa3d-120a-4fda-aa0b-d90dcb8ef15&width=800)
 ![neumorphic-cards.png.jpg](https://cdn.nlark.com/yuque/0/2021/jpeg/224563/1632297595384-901c5b03-0989-41c4-bbd0-ca86b69e4e29.jpeg#clientId=ucfb7b09a-b6b6-4&from=drop&id=u307e838c&margin=%5Bobject%20Object%5D&name=neumorphic-cards.png.jpg&originHeight=550&originWidth=750&originalType=binary&ratio=1&size=9135&status=done&style=stroke&taskId=u1f11aa03-5f63-4a9b-9e2d-bb9d3eb2b4b)
 
-新拟物设计通过应用两种不同的阴影实现，一个高亮色，一个阴影色，元素的背景颜色不能是全黑或全白，需要使用一种中间色调，这样可以使阴影效果显示出来。
-
 ## 使用 Flutter 实现新拟物设计
 
-对于开发来说，要实现这种效果，就是使用两层阴影，一层高亮阴影，一层暗色阴影，凸的时候亮影在左上，暗色在右下，凹时反过来。以下介绍如何使用 Flutter 框架实现这种效果，Web 端使用相同的原理实现。
+对于开发来说，要实现这种效果，就是使用两层阴影，一层高亮阴影，一层暗色阴影，以及设置元素的背景颜色。凸的时候高亮影在左上，暗色在右下，凹时反过来。以下介绍如何使用 Flutter 框架实现这种效果，Web 端使用相同的原理实现。
 
 1. 首先添加一个容器，用来放置具体的元素，设置背景颜色
 
@@ -135,7 +135,7 @@ decoration: BoxDecoration(
 
 ![Xnip2021-09-23_17-24-55.jpg](https://cdn.nlark.com/yuque/0/2021/jpeg/224563/1632389119671-3ae397cb-0ff1-4c0c-8fc2-b8cfce12e90c.jpeg#clientId=u1367e7e7-fd10-4&from=drop&id=ue971c282&margin=%5Bobject%20Object%5D&name=Xnip2021-09-23_17-24-55.jpg&originHeight=500&originWidth=800&originalType=binary&ratio=1&size=19917&status=done&style=none&taskId=u61bd0d22-f78d-4f6d-8878-638e4a56afd)
 
-这里可以使用一个便捷工具进行代码生成，以产生不同的效果
+这里可以使用一个便捷工具生成代码，以产生不同的效果
 
 [https://neumorphism.coldstone.fun](https://neumorphism.coldstone.fun)
 
@@ -145,7 +145,9 @@ decoration: BoxDecoration(
 ​
 ## 优点与缺点
 
-主要优点在于这种效果给予用户带来的新鲜感，同时它可以与其他风格混合使用。同时它的缺点在于，
+主要优点在于这种效果给予用户带来的新鲜感，同时它可以与其他风格混合使用。
+
+同时它的缺点在于
 
 1. 层次结构弱
 
