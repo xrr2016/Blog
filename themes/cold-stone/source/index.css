@@ -46,7 +46,7 @@ a {
   text-align: left;
   justify-content: space-between;
   margin-top: 48px;
-  margin-bottom: 128px;
+  margin-bottom: 64px;
   margin-left: auto;
   margin-right: auto;
   max-width: 728px;
@@ -99,8 +99,8 @@ a {
 }
 
 .post-cover {
-  width: 180px;
-  height: 135px;
+  width: 160px;
+  aspect-ratio: 4 / 3;
   margin-right: 16px;
   background-position: center;
   background-size: cover;
@@ -115,7 +115,7 @@ a {
 }
 
 .post-title {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 32px;
 }
 
@@ -185,6 +185,7 @@ a {
   padding-top: 100px;
   margin: 0 auto;
   max-width: 728px;
+  opacity: 0.8;
 }
 
 .sns-list {
@@ -275,9 +276,8 @@ a {
 
 .article-cover {
   width: 100%;
+  aspect-ratio: 4/ 3;
   max-width: 728px;
-  max-height: 500px;
-  margin-top: -80px;
   text-align: center;
   object-fit: cover;
 }
@@ -314,6 +314,7 @@ a {
 .article-more {
   display: flex;
   justify-content: space-between;
+  opacity: 0.8;
 }
 
 /* Other */
