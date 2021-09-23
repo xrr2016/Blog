@@ -1,20 +1,52 @@
 <footer class="footer">
   <ul class="sns-list">
-    <li class="sns-list-item">
-      <p class="">
-        <%= __('blog.totalpost') %>&#58; <%= site.posts.length %> 篇
-      </p>
+    <li>
+      <span>友链：</span>
     </li>
     <li class="sns-list-item">
-      <p class="">
-        <span class=""
-          ><%= __('blog.wordcount') %>&#58; <%= totalcount(site) %></span
-        >
-      </p>
+      <a class="sns-list-link" href="https://www.thosefree.com" target="_blank"
+        >那些免费的砖</a
+      >
+    </li>
+    <li class="sns-list-item">
+      <a
+        class="sns-list-link"
+        href="https://colmugx.github.io/blog"
+        target="_blank"
+        >colmugx</a
+      >
+    </li>
+    <li class="sns-list-item">
+      <a class="sns-list-link" href="https://kalasearch.cn/blog" target="_blank"
+        >卡拉搜索</a
+      >
+    </li>
+    <li class="sns-list-item">
+      <a class="sns-list-link" href="https://blog.inmind.ltd" target="_blank"
+        >Mind's blog</a
+      >
+    </li>
+    <li class="sns-list-item">
+      <a class="sns-list-link" href="https://oldchen.top" target="_blank"
+        >老晨子</a
+      >
+    </li>
+    <li class="sns-list-item">
+      <a class="sns-list-link" href="https://www.v2fy.com" target="_blank"
+        >猫爪导航🐱</a
+      >
+    </li>
+    <li class="sns-list-item">
+      <a class="sns-list-link" href="https://wxsm.space" target="_blank"
+        >wxsm's space</a
+      >
     </li>
   </ul>
 
   <ul class="sns-list">
+    <li>
+      <span>联系：</span>
+    </li>
     <% if (config.sns.github) { %>
     <li class="sns-list-item">
       <a
@@ -56,6 +88,24 @@
       >
     </li>
     <% } %>
+  </ul>
+
+  <ul class="sns-list">
+    <li>
+      <span>数据：</span>
+    </li>
+    <li class="sns-list-item">
+      <p class="">
+        <%= __('blog.totalpost') %>&#58; <%= site.posts.length %> 篇
+      </p>
+    </li>
+    <li class="sns-list-item">
+      <p class="">
+        <span class=""
+          ><%= __('blog.wordcount') %>&#58; <%= totalcount(site) %></span
+        >
+      </p>
+    </li>
     <li class="sns-list-item">
       <a class="rss-link" href="<%= config.root %>atom.xml">
         <svg
@@ -73,47 +123,6 @@
           />
         </svg>
       </a>
-    </li>
-  </ul>
-
-  <ul class="sns-list">
-    <li class="sns-list-item">
-      <a class="sns-list-link" href="https://www.thosefree.com" target="_blank"
-        >那些免费的砖</a
-      >
-    </li>
-    <li class="sns-list-item">
-      <a
-        class="sns-list-link"
-        href="https://colmugx.github.io/blog"
-        target="_blank"
-        >colmugx</a
-      >
-    </li>
-    <li class="sns-list-item">
-      <a class="sns-list-link" href="https://kalasearch.cn/blog" target="_blank"
-        >卡拉搜索</a
-      >
-    </li>
-    <li class="sns-list-item">
-      <a class="sns-list-link" href="https://blog.inmind.ltd" target="_blank"
-        >Mind's blog</a
-      >
-    </li>
-    <li class="sns-list-item">
-      <a class="sns-list-link" href="https://oldchen.top" target="_blank"
-        >老晨子</a
-      >
-    </li>
-    <li class="sns-list-item">
-      <a class="sns-list-link" href="https://www.v2fy.com" target="_blank"
-        >猫爪导航🐱</a
-      >
-    </li>
-    <li class="sns-list-item">
-      <a class="sns-list-link" href="https://wxsm.space" target="_blank"
-        >wxsm's space</a
-      >
     </li>
   </ul>
 </footer>

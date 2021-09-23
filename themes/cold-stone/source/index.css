@@ -115,7 +115,7 @@ a {
 }
 
 .post-title {
-  font-size: 29px;
+  font-size: 1.5rem;
   line-height: 32px;
 }
 
@@ -181,17 +181,22 @@ a {
 /* footer */
 
 .footer {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding-bottom: 160px;
+  padding-bottom: 80px;
   padding-top: 100px;
   margin: 0 auto;
   max-width: 728px;
 }
 
 .sns-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   list-style: none;
+  margin-bottom: 20px;
+}
+
+.sns-list-item {
+  margin-right: 1rem;
 }
 
 .sns-list-link {
@@ -207,8 +212,9 @@ a {
 
 .rss-link {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
+  transform: translateY(-1px);
 }
 
 /* article */
