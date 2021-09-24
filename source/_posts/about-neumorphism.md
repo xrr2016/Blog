@@ -56,7 +56,6 @@ cover: ./images/about-neumorphism/cover.jpg
 
 ![GitHubPreview.png](https://cdn.nlark.com/yuque/0/2021/png/224563/1632386230218-c6af1253-29da-4fa5-9dab-0294a793c5da.png#clientId=u1367e7e7-fd10-4&from=drop&height=480&id=u23661ea3&margin=%5Bobject%20Object%5D&name=GitHubPreview.png&originHeight=640&originWidth=1280&originalType=binary&ratio=1&size=271916&status=done&style=none&taskId=u5ae4011c-97ef-45ff-9490-8bf34c71396&width=960)
 
-
 <img src="https://cdn.nlark.com/yuque/0/2021/png/224563/1632386236813-a2266689-7519-411f-bcb1-b2ac64f39094.png#clientId=u1367e7e7-fd10-4&from=drop&height=368&id=ue22be91a&margin=%5Bobject%20Object%5D&name=home-dark.png&originHeight=1471&originWidth=728&originalType=binary&ratio=1&size=654058&status=done&style=none&taskId=u53575269-775b-4772-af60-c9805c661c7&width=280" width="280" alt="home-dark" style="display: inline;"  />
 <img src="https://cdn.nlark.com/yuque/0/2021/png/224563/1632386402468-ca59fff3-8281-44e6-95d0-c8107d70a162.png#clientId=u1367e7e7-fd10-4&from=drop&height=368&id=u34eb43a2&margin=%5Bobject%20Object%5D&name=player-dark.png&originHeight=1471&originWidth=728&originalType=binary&ratio=1&size=413125&status=done&style=none&taskId=uee5a8ab6-33d2-4c64-b48b-3ebda28a521&width=280" width="280" alt="player-dark" style="display: inline;"  />
 
@@ -147,7 +146,7 @@ decoration: BoxDecoration(
 
 主要优点在于这种效果给予用户带来的新鲜感，同时它可以与其他风格混合使用。
 
-同时它的缺点在于
+它的缺点在于
 
 1. 层次结构弱
 
